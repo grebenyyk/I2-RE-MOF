@@ -10,7 +10,7 @@ env=os.environ.copy()
 env["PATH"]=f"{MPI}/bin:{NVHPC}/compilers/bin:{env.get('PATH','')}"
 env["LD_LIBRARY_PATH"]=f"{MPI}/lib:{NVHPC}/compilers/lib:{NVHPC}/math_libs/13.0/lib64:{env.get('LD_LIBRARY_PATH','')}"
 T="/workspace/dimitry/calc/qe/i2_mof/qtaim/campaign/relax_442"
-QUEUE=["relax442_Gdst","relax442_Tbst","relax442_Gdact_yseed"]
+QUEUE=["relax442_Gdact_yseed"]
 def gpuram(i): return int(subprocess.run(f"nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -i {i}",shell=True,capture_output=True,text=True).stdout.strip() or 99999)
 def converged(tag):
     o=f"{T}/{tag}.out"
