@@ -1,0 +1,47 @@
+&CONTROL
+  calculation='scf'
+  prefix='dc_isubl_Yvc'
+  outdir='./tmp_dc_isubl_Yvc'
+  pseudo_dir='/workspace/qe-7.5/pseudo'
+  tprnfor=.true.
+/
+&SYSTEM
+  ibrav=0
+  nat=8
+  ntyp=1
+  ecutwfc=50
+  ecutrho=400
+  occupations='smearing'
+  smearing='mv'
+  degauss=0.02
+  nspin=1
+  vdw_corr='grimme-d3'
+  dftd3_version=4
+  input_dft='pbe'
+/
+&ELECTRONS
+  conv_thr=1.0d-6
+  diagonalization='david'
+  diago_david_ndim=2
+  mixing_mode='local-TF'
+  mixing_beta=0.05
+  mixing_ndim=24
+  electron_maxstep=300
+/
+ATOMIC_SPECIES
+  I    126.904  I.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+  8.7975400000 0.0000000000 0.0000000000
+  -1.4361734036 8.2028649827 0.0000000000
+  -4.1206622424 -0.9336085533 17.2148301270
+ATOMIC_POSITIONS crystal
+  I  0.5051980000 0.5866770000 0.0694900000
+  I  0.5543420000 0.7778590000 0.2476750000
+  I  0.8904990000 0.7827050000 0.2532740000
+  I  0.2250350000 0.8054750000 0.2470670000
+  I  0.4934330000 0.4160110000 0.9294600000
+  I  0.4436390000 0.2252290000 0.7523490000
+  I  0.1065530000 0.2217640000 0.7459300000
+  I  0.7722430000 0.1981460000 0.7527010000
+K_POINTS automatic
+  4 4 2 0 0 0

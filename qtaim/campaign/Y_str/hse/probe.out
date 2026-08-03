@@ -1,0 +1,591 @@
+
+     Program PWSCF v.7.5 starts on  7Jul2026 at 23:48:29 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI & OpenMP), running on     224 processor cores
+     Number of MPI processes:                 1
+     Threads/MPI process:                   224
+
+     MPI processes distributed on     1 nodes
+     95352 MiB available memory on the printing compute node when the environment starts
+ 
+     Reading input from scf_probe.in
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  4
+     file C.pbe-n-kjpaw_psl.1.0.0.UPF: wavefunction(s)  2S 2P renormalized
+     file Y.pbe-spn-kjpaw_psl.1.0.0.UPF: wavefunction(s)  4S 4P renormalized
+     file I.pbe-n-kjpaw_psl.1.0.0.UPF: wavefunction(s)  5S renormalized
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= HSE
+                           (   1   4  12   4   0   0   0)
+     EXX-fraction              =        0.25
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+     EXX fraction changed:   0.25
+     EXX Screening parameter changed:    0.1060000
+     Message from routine setup :
+     BEWARE: nonlinear core correction is not consistent with hybrid XC
+     Message from routine setup:
+     using ibrav=0 with symmetry is DISCOURAGED, use correct ibrav instead
+ 
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     a serial algorithm will be used
+
+     EXX: q-point mesh:     1    1    1
+     EXX: grid of k+q points same as grid of k-points
+ 
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum        9815    4895   1223              1305987   461613   57675
+ 
+     Using Slab Decomposition
+ 
+
+
+     bravais-lattice index     =            0
+     lattice parameter (alat)  =      16.8843  a.u.
+     unit-cell volume          =    9667.0372 (a.u.)^3
+     number of atoms/cell      =           80
+     number of atomic types    =            5
+     number of electrons       =       384.00
+     number of Kohn-Sham states=          230
+     kinetic-energy cutoff     =      50.0000  Ry
+     charge density cutoff     =     400.0000  Ry
+     cutoff for Fock operator  =     200.0000  Ry
+     scf convergence threshold =      1.0E-06
+     mixing beta               =       0.2000
+     number of iterations used =           16  local-TF  mixing
+     Exchange-correlation= HSE
+                           (   1   4  12   4   0   0   0)
+     EXX-fraction              =        0.25
+
+     GPU acceleration is ACTIVE.  1 visible GPUs per MPI rank
+
+
+     GPU used by master process:
+
+        Device Number: 0
+        Device name: NVIDIA L40S
+        Compute capability : 89
+        Ratio of single to double precision performance  : 64
+        Memory Clock Rate (KHz): 9001000
+        Memory Bus Width (bits): 384
+        Peak Memory Bandwidth (GB/s): 864.10
+
+     celldm(1)=  16.884325  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.000000   1.081255   0.000000 )  
+               a(3) = (  -0.421113   0.000000   1.857437 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000 -0.000000  0.226717 )  
+               b(2) = (  0.000000  0.924851 -0.000000 )  
+               b(3) = (  0.000000  0.000000  0.538376 )  
+
+
+     PseudoPot. # 1 for C  read from file:
+     /workspace/qe-7.5/pseudo/C.pbe-n-kjpaw_psl.1.0.0.UPF
+     MD5 check sum: 5f16ad9a65e90284d1d834d4ab3b0f7d
+     Pseudo is Projector augmented-wave + core cor, Zval =  4.0
+     Generated using &quot;atomic&quot; code by A. Dal Corso  v.6.3
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1073 points,  4 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 2 for H  read from file:
+     /workspace/qe-7.5/pseudo/H.pbe-kjpaw.UPF
+     MD5 check sum: a225a3f3a1be5237eb8f6a7e61cbb4ee
+     Pseudo is Projector augmented-wave, Zval =  1.0
+     Generated using "atomic" code by A. Dal Corso (espresso distribution)
+     Shape of augmentation charge: PSQ
+     Using radial grid of  929 points,  2 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 3 for O  read from file:
+     /workspace/qe-7.5/pseudo/O.pbe-kjpaw.UPF
+     MD5 check sum: c7f41d994d4e90c1781f5cd713c45011
+     Pseudo is Projector augmented-wave + core cor, Zval =  6.0
+     Generated using "atomic" code by A. Dal Corso (espresso distribution)
+     Shape of augmentation charge: BESSEL
+     Using radial grid of 1095 points,  4 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 4 for Y  read from file:
+     /workspace/qe-7.5/pseudo/Y.pbe-spn-kjpaw_psl.1.0.0.UPF
+     MD5 check sum: d52e8d8ffa9ef5a9f13bb13aaba2e897
+     Pseudo is Projector augmented-wave + core cor, Zval = 11.0
+     Generated using &quot;atomic&quot; code by A. Dal Corso  v.6.2.2
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1223 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 5 for I  read from file:
+     /workspace/qe-7.5/pseudo/I.pbe-n-kjpaw_psl.1.0.0.UPF
+     MD5 check sum: cd3d296c3308a581e1559a0c8a554cb5
+     Pseudo is Projector augmented-wave + core cor, Zval =  7.0
+     Generated using &quot;atomic&quot; code by A. Dal Corso  v.6.3
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1247 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     atomic species   valence    mass     pseudopotential
+     C                 4.00    12.01100     C ( 1.00)
+     H                 1.00     1.00800     H ( 1.00)
+     O                 6.00    15.99900     O ( 1.00)
+     Y                11.00    88.90600     Y ( 1.00)
+     I                 7.00   126.90400     I ( 1.00)
+
+      2 Sym. Ops., with inversion, found
+
+
+                                    s                        frac. trans.
+
+      isym =  1     identity                                     
+
+ cryst.   s( 1) = (     1          0          0      )
+                  (     0          1          0      )
+                  (     0          0          1      )
+
+ cart.    s( 1) = (  1.0000000  0.0000000 -0.0000000 )
+                  (  0.0000000  1.0000000  0.0000000 )
+                  (  0.0000000  0.0000000  1.0000000 )
+
+
+      isym =  2     inversion                                    
+
+ cryst.   s( 2) = (    -1          0          0      )
+                  (     0         -1          0      )
+                  (     0          0         -1      )
+
+ cart.    s( 2) = ( -1.0000000  0.0000000  0.0000000 )
+                  (  0.0000000 -1.0000000  0.0000000 )
+                  (  0.0000000  0.0000000 -1.0000000 )
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1        C      tau(   1) = (   0.3693081   0.0362221   0.0731830  )
+         2        C      tau(   2) = (  -0.0630421   0.0167595   0.9714394  )
+         3        C      tau(   3) = (   0.0050121   0.3740062   0.2769438  )
+         4        C      tau(   4) = (   0.0055325   0.4582360   0.1326210  )
+         5        C      tau(   5) = (   0.1400718   0.4935931   0.0570233  )
+         6        C      tau(   6) = (   0.8693081   0.5044056   0.0731830  )
+         7        C      tau(   7) = (   0.5048814   0.3997401   0.7353592  )
+         8        C      tau(   8) = (   0.3912887   0.4711029   0.8332461  )
+         9        C      tau(   9) = (   0.2388850   0.4864568   0.7860672  )
+        10        C      tau(  10) = (   0.4369579   0.5238682   0.9714394  )
+        11        C      tau(  11) = (   0.7388850   0.0541709   0.7860672  )
+        12        C      tau(  12) = (   0.5050121   0.1666214   0.2769438  )
+        13        C      tau(  13) = (   0.6400718   0.0470346   0.0570233  )
+        14        C      tau(  14) = (   0.5740057   0.9403677   1.1220775  )
+        15        C      tau(  15) = (   0.6875983   1.0117306   1.0241906  )
+        16        C      tau(  16) = (  -0.1599980   1.0270844   1.0713695  )
+        17        C      tau(  17) = (   0.6419291   1.0644959   0.8859973  )
+        18        C      tau(  18) = (   0.5738750   0.7072491   1.5804929  )
+        19        C      tau(  19) = (   0.5733545   0.6230193   1.7248157  )
+        20        C      tau(  20) = (   0.4388152   0.5876623   1.8004134  )
+        21        C      tau(  21) = (  -0.2904211   0.5768497   1.7842537  )
+        22        C      tau(  22) = (   0.5055325   0.0823917   0.1326210  )
+        23        C      tau(  23) = (  -0.1087113   0.0695247   0.8332461  )
+        24        C      tau(  24) = (   0.0048814   0.1408876   0.7353592  )
+        25        C      tau(  25) = (  -0.0611848   1.0342207   1.8004134  )
+        26        C      tau(  26) = (   0.0733545   0.9988637   1.7248157  )
+        27        C      tau(  27) = (   0.0738750   0.9146339   1.5804929  )
+        28        C      tau(  28) = (   0.1419291   0.5573871   0.8859973  )
+        29        C      tau(  29) = (   0.3400020   0.5947985   1.0713695  )
+        30        C      tau(  30) = (   0.1875983   0.6101524   1.0241906  )
+        31        C      tau(  31) = (   0.0740057   0.6815152   1.1220775  )
+        32        C      tau(  32) = (   0.2095789   1.0450333   1.7842537  )
+        33        H      tau(  33) = (   0.2816065   0.0621722   0.1225908  )
+        34        H      tau(  34) = (   0.2972805   1.0190831   1.7348459  )
+        35        H      tau(  35) = (  -0.1901861   0.9392865   1.6791228  )
+        36        H      tau(  36) = (   0.0365833   0.0290858   0.9991152  )
+        37        H      tau(  37) = (   0.7816065   0.4784555   0.1225908  )
+        38        H      tau(  38) = (   0.2690732   0.3986588   0.1783139  )
+        39        H      tau(  39) = (   0.5423037   1.0521695   0.8583215  )
+        40        H      tau(  40) = (   0.7690732   0.1419688   0.1783139  )
+        41        H      tau(  41) = (   0.0423037   0.5697134   0.8583215  )
+        42        H      tau(  42) = (  -0.2027195   0.6027998   1.7348459  )
+        43        H      tau(  43) = (   0.3098139   0.6825965   1.6791228  )
+        44        H      tau(  44) = (   0.5365833   0.5115419   0.9991152  )
+        45        O      tau(  45) = (  -0.0498754   0.9050107   1.5110248  )
+        46        O      tau(  46) = (   0.1121966   0.7563381   1.2372386  )
+        47        O      tau(  47) = (  -0.0640778   0.6595657   1.0977451  )
+        48        O      tau(  48) = (   0.3020482   0.6319937   1.7552777  )
+        49        O      tau(  49) = (  -0.3059235   0.7636906   1.5346142  )
+        50        O      tau(  50) = (   0.4501246   0.7168723   1.5110248  )
+        51        O      tau(  51) = (  -0.1104444   0.9817798   1.2056622  )
+        52        O      tau(  52) = (   0.4359222   0.9623172   1.0977451  )
+        53        O      tau(  53) = (   0.6121966   0.8655449   1.2372386  )
+        54        O      tau(  54) = (   0.3895556   0.6401031   1.2056622  )
+        55        O      tau(  55) = (   0.3848106   0.2230630   0.3228225  )
+        56        O      tau(  56) = (   0.7768388   0.0913661   0.1021590  )
+        57        O      tau(  57) = (   0.1893315   0.4411522   0.6517745  )
+        58        O      tau(  58) = (   0.6429648   0.4216896   0.7596916  )
+        59        O      tau(  59) = (   0.4666904   0.3249172   0.6201981  )
+        60        O      tau(  60) = (   0.2768388   0.4492616   0.1021590  )
+        61        O      tau(  61) = (   0.8848106   0.3175647   0.3228225  )
+        62        O      tau(  62) = (   0.1287624   0.3643830   0.3464119  )
+        63        O      tau(  63) = (   0.6893315   0.0994755   0.6517745  )
+        64        O      tau(  64) = (   0.1429648   0.1189381   0.7596916  )
+        65        O      tau(  65) = (  -0.0333096   0.2157104   0.6201981  )
+        66        O      tau(  66) = (  -0.1979518   0.9898892   1.7552777  )
+        67        O      tau(  67) = (   0.1940765   0.8581923   1.5346142  )
+        68        O      tau(  68) = (   0.6287624   0.1762446   0.3464119  )
+        69        Y      tau(  69) = (  -0.1598088   0.7670750   1.3241109  )
+        70        Y      tau(  70) = (   0.2386958   0.2264473   0.5333258  )
+        71        Y      tau(  71) = (   0.7386958   0.3141804   0.5333258  )
+        72        Y      tau(  72) = (   0.3401912   0.8548080   1.3241109  )
+        73        I      tau(  73) = (   0.1353607   0.0824497   1.3025545  )
+        74        I      tau(  74) = (   0.2774087   0.3728512   1.3880145  )
+        75        I      tau(  75) = (   0.6074006   0.3651136   1.3871999  )
+        76        I      tau(  76) = (  -0.0687665   0.4147546   1.4086220  )
+        77        I      tau(  77) = (   0.4435263   0.9988056   0.5548823  )
+        78        I      tau(  78) = (   0.3014784   0.7084041   0.4694222  )
+        79        I      tau(  79) = (  -0.0285136   0.7161417   0.4702368  )
+        80        I      tau(  80) = (   0.6476535   0.6665007   0.4488147  )
+
+   Crystallographic axes
+
+     site n.     atom                  positions (cryst. coord.)
+         1        C      tau(   1) = (  0.3859000  0.0335000  0.0394000  )
+         2        C      tau(   2) = (  0.1572000  0.0155000  0.5230000  )
+         3        C      tau(   3) = (  0.0678000  0.3459000  0.1491000  )
+         4        C      tau(   4) = (  0.0356000  0.4238000  0.0714000  )
+         5        C      tau(   5) = (  0.1530000  0.4565000  0.0307000  )
+         6        C      tau(   6) = (  0.8859000  0.4665000  0.0394000  )
+         7        C      tau(   7) = (  0.6716000  0.3697000  0.3959000  )
+         8        C      tau(   8) = (  0.5802000  0.4357000  0.4486000  )
+         9        C      tau(   9) = (  0.4171000  0.4499000  0.4232000  )
+        10        C      tau(  10) = (  0.6572000  0.4845000  0.5230000  )
+        11        C      tau(  11) = (  0.9171000  0.0501000  0.4232000  )
+        12        C      tau(  12) = (  0.5678000  0.1541000  0.1491000  )
+        13        C      tau(  13) = (  0.6530000  0.0435000  0.0307000  )
+        14        C      tau(  14) = (  0.8284000  0.8697000  0.6041000  )
+        15        C      tau(  15) = (  0.9198000  0.9357000  0.5514000  )
+        16        C      tau(  16) = (  0.0829000  0.9499000  0.5768000  )
+        17        C      tau(  17) = (  0.8428000  0.9845000  0.4770000  )
+        18        C      tau(  18) = (  0.9322000  0.6541000  0.8509000  )
+        19        C      tau(  19) = (  0.9644000  0.5762000  0.9286000  )
+        20        C      tau(  20) = (  0.8470000  0.5435000  0.9693000  )
+        21        C      tau(  21) = (  0.1141000  0.5335000  0.9606000  )
+        22        C      tau(  22) = (  0.5356000  0.0762000  0.0714000  )
+        23        C      tau(  23) = (  0.0802000  0.0643000  0.4486000  )
+        24        C      tau(  24) = (  0.1716000  0.1303000  0.3959000  )
+        25        C      tau(  25) = (  0.3470000  0.9565000  0.9693000  )
+        26        C      tau(  26) = (  0.4644000  0.9238000  0.9286000  )
+        27        C      tau(  27) = (  0.4322000  0.8459000  0.8509000  )
+        28        C      tau(  28) = (  0.3428000  0.5155000  0.4770000  )
+        29        C      tau(  29) = (  0.5829000  0.5501000  0.5768000  )
+        30        C      tau(  30) = (  0.4198000  0.5643000  0.5514000  )
+        31        C      tau(  31) = (  0.3284000  0.6303000  0.6041000  )
+        32        C      tau(  32) = (  0.6141000  0.9665000  0.9606000  )
+        33        H      tau(  33) = (  0.3094000  0.0575000  0.0660000  )
+        34        H      tau(  34) = (  0.6906000  0.9425000  0.9340000  )
+        35        H      tau(  35) = (  0.1905000  0.8687000  0.9040000  )
+        36        H      tau(  36) = (  0.2631000  0.0269000  0.5379000  )
+        37        H      tau(  37) = (  0.8094000  0.4425000  0.0660000  )
+        38        H      tau(  38) = (  0.3095000  0.3687000  0.0960000  )
+        39        H      tau(  39) = (  0.7369000  0.9731000  0.4621000  )
+        40        H      tau(  40) = (  0.8095000  0.1313000  0.0960000  )
+        41        H      tau(  41) = (  0.2369000  0.5269000  0.4621000  )
+        42        H      tau(  42) = (  0.1906000  0.5575000  0.9340000  )
+        43        H      tau(  43) = (  0.6905000  0.6313000  0.9040000  )
+        44        H      tau(  44) = (  0.7631000  0.4731000  0.5379000  )
+        45        O      tau(  45) = (  0.2927000  0.8370000  0.8135000  )
+        46        O      tau(  46) = (  0.3927000  0.6995000  0.6661000  )
+        47        O      tau(  47) = (  0.1848000  0.6100000  0.5910000  )
+        48        O      tau(  48) = (  0.7000000  0.5845000  0.9450000  )
+        49        O      tau(  49) = (  0.0420000  0.7063000  0.8262000  )
+        50        O      tau(  50) = (  0.7927000  0.6630000  0.8135000  )
+        51        O      tau(  51) = (  0.1629000  0.9080000  0.6491000  )
+        52        O      tau(  52) = (  0.6848000  0.8900000  0.5910000  )
+        53        O      tau(  53) = (  0.8927000  0.8005000  0.6661000  )
+        54        O      tau(  54) = (  0.6629000  0.5920000  0.6491000  )
+        55        O      tau(  55) = (  0.4580000  0.2063000  0.1738000  )
+        56        O      tau(  56) = (  0.8000000  0.0845000  0.0550000  )
+        57        O      tau(  57) = (  0.3371000  0.4080000  0.3509000  )
+        58        O      tau(  58) = (  0.8152000  0.3900000  0.4090000  )
+        59        O      tau(  59) = (  0.6073000  0.3005000  0.3339000  )
+        60        O      tau(  60) = (  0.3000000  0.4155000  0.0550000  )
+        61        O      tau(  61) = (  0.9580000  0.2937000  0.1738000  )
+        62        O      tau(  62) = (  0.2073000  0.3370000  0.1865000  )
+        63        O      tau(  63) = (  0.8371000  0.0920000  0.3509000  )
+        64        O      tau(  64) = (  0.3152000  0.1100000  0.4090000  )
+        65        O      tau(  65) = (  0.1073000  0.1995000  0.3339000  )
+        66        O      tau(  66) = (  0.2000000  0.9155000  0.9450000  )
+        67        O      tau(  67) = (  0.5420000  0.7937000  0.8262000  )
+        68        O      tau(  68) = (  0.7073000  0.1630000  0.1865000  )
+        69        Y      tau(  69) = (  0.1403900  0.7094300  0.7128700  )
+        70        Y      tau(  70) = (  0.3596100  0.2094300  0.2871300  )
+        71        Y      tau(  71) = (  0.8596100  0.2905700  0.2871300  )
+        72        Y      tau(  72) = (  0.6403900  0.7905700  0.7128700  )
+        73        I      tau(  73) = (  0.4306723  0.0762537  0.7012645  )
+        74        I      tau(  74) = (  0.5920955  0.3448318  0.7472742  )
+        75        I      tau(  75) = (  0.9219028  0.3376757  0.7468356  )
+        76        I      tau(  76) = (  0.2505925  0.3835862  0.7583688  )
+        77        I      tau(  77) = (  0.5693277  0.9237463  0.2987355  )
+        78        I      tau(  78) = (  0.4079045  0.6551682  0.2527258  )
+        79        I      tau(  79) = (  0.0780972  0.6623243  0.2531644  )
+        80        I      tau(  80) = (  0.7494075  0.6164138  0.2416312  )
+
+     number of k points=     1  Marzari-Vanderbilt smearing, width (Ry)=  0.0100
+                       cart. coord. in units 2pi/alat
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   2.0000000
+
+                       cryst. coord.
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   2.0000000
+
+     Dense  grid:  1305987 G-vectors     FFT dimensions: ( 108, 120, 216)
+
+     Smooth grid:   461613 G-vectors     FFT dimensions: (  80,  90, 150)
+
+     Dynamical RAM for                 wfc:     202.56 MB
+
+     Dynamical RAM for     wfc (w. buffer):     202.56 MB
+
+     Dynamical RAM for                 EXX:    3499.81 MB
+
+     Dynamical RAM for           str. fact:      99.64 MB
+
+     Dynamical RAM for           local pot:       0.00 MB
+
+     Dynamical RAM for          nlocal pot:     605.91 MB
+
+     Dynamical RAM for                qrad:       8.03 MB
+
+     Dynamical RAM for          rho,v,vnew:     123.86 MB
+
+     Dynamical RAM for               rhoin:      41.29 MB
+
+     Dynamical RAM for            rho*nmix:     637.69 MB
+
+     Dynamical RAM for           G-vectors:      78.25 MB
+
+     Dynamical RAM for          h,s,v(r/c):       9.69 MB
+
+     Dynamical RAM for          <psi|beta>:       2.41 MB
+
+     Dynamical RAM for                 psi:     405.11 MB
+
+     Dynamical RAM for                hpsi:     405.11 MB
+
+     Dynamical RAM for                spsi:     405.11 MB
+
+     Dynamical RAM for      wfcinit/wfcrot:     406.32 MB
+
+     Dynamical RAM for           addusdens:    4344.26 MB
+
+     Estimated static dynamical RAM per process >       4.77 GB
+
+     Estimated max dynamical RAM per process >       9.64 GB
+     EXX: ACE will be initialized later
+
+     Check: negative core charge=   -0.000002
+
+     Initial potential from superposition of free atoms
+
+     starting charge     383.9818, renormalised to     384.0000
+     Starting wfcs are  320 randomized atomic wfcs
+
+     total cpu time spent up to now is       20.6 secs
+
+     Self-consistent Calculation
+[tb_dev] Currently allocated     1.26E+01 Mbytes, locked:    0 /   3
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  1     ecut=    50.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          2091 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         93629 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 29197 / 16260 / 45457
+------------------
+     ethr =  1.00E-02,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is       41.4 secs
+
+     total energy              =   -5768.46510721 Ry
+     estimated scf accuracy    <      15.39289409 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  2     ecut=    50.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          2191 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         93478 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 29973 / 15484 / 45457
+------------------
+     ethr =  4.01E-03,  avg # of iterations =  1.0
+     Minimization algorithm failed to find Fermi energy: reverting to bisection
+     Possible cause: smearing is larger than the electronic band-gap.
+
+     total cpu time spent up to now is       60.5 secs
+
+     total energy              =   -5766.54320044 Ry
+     estimated scf accuracy    <       7.85427776 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  3     ecut=    50.00 Ry     beta= 0.20
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          2218 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         93360 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 29973 / 15484 / 45457
+------------------
+     ethr =  2.05E-03,  avg # of iterations =  1.0
+
+     total cpu time spent up to now is       78.5 secs
+
+     total energy              =   -5766.28729486 Ry
+     estimated scf accuracy    <       2.58384176 Ry
+
+     End of self-consistent calculation
+
+     convergence NOT achieved after   3 iterations: stopping
+
+     Writing config to output data dir ./tmp_hse/Y_str_hse.save/ :
+     XML data file, charge density distributed wavefunctions
+ 
+     init_run     :    222.45s CPU     19.64s WALL (       1 calls)
+     electrons    :    629.03s CPU     58.25s WALL (       1 calls)
+
+     Called by init_run:
+     aceinit0     :      0.00s CPU      0.00s WALL (       1 calls)
+     wfcinit      :      0.74s CPU      0.79s WALL (       1 calls)
+     wfcinit:atom :      0.01s CPU      0.01s WALL (       1 calls)
+     wfcinit:wfcr :      0.72s CPU      0.76s WALL (       1 calls)
+     potinit      :    210.02s CPU     16.16s WALL (       1 calls)
+     hinit0       :     10.97s CPU      1.51s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :      4.69s CPU      4.67s WALL (       3 calls)
+     sum_band     :      3.48s CPU      3.56s WALL (       3 calls)
+     v_of_rho     :      0.14s CPU      0.20s WALL (       4 calls)
+     v_h          :      0.01s CPU      0.01s WALL (       4 calls)
+     v_xc         :      0.07s CPU      0.07s WALL (       4 calls)
+     newd         :      0.99s CPU      1.01s WALL (       4 calls)
+     PAW_pot      :    828.89s CPU     63.29s WALL (       4 calls)
+     mix_rho      :      0.50s CPU      0.57s WALL (       3 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.24s CPU      0.24s WALL (       7 calls)
+     cegterg      :      4.59s CPU      4.57s WALL (       3 calls)
+
+     Called by sum_band:
+     sum_band:wei :      0.00s CPU      0.00s WALL (       3 calls)
+     sum_band:loo :      1.31s CPU      1.30s WALL (       3 calls)
+     sum_band:buf :      0.03s CPU      0.03s WALL (       3 calls)
+     sum_band:ini :      0.21s CPU      0.21s WALL (       3 calls)
+     sum_band:cal :      0.00s CPU      0.00s WALL (       3 calls)
+     sum_band:bec :      0.15s CPU      0.15s WALL (       3 calls)
+     addusdens    :      1.67s CPU      1.66s WALL (       3 calls)
+                                        1.66s GPU  (       3 calls)
+     addusd:skk   :      0.24s CPU      0.24s WALL (      15 calls)
+                                        0.24s GPU  (      15 calls)
+
+     Called by *egterg:
+     cdiaghg      :      0.17s CPU      0.19s WALL (       7 calls)
+                                        0.19s GPU  (       7 calls)
+     cegterg:over :      0.67s CPU      0.67s WALL (       4 calls)
+     cegterg:upda :      0.43s CPU      0.43s WALL (       4 calls)
+     cegterg:last :      0.31s CPU      0.31s WALL (       4 calls)
+     h_psi        :      2.33s CPU      2.36s WALL (       8 calls)
+     s_psi        :      0.67s CPU      0.67s WALL (       8 calls)
+     g_psi        :      0.01s CPU      0.01s WALL (       4 calls)
+
+     Called by h_psi:
+     h_psi:calbec :      0.04s CPU      0.05s WALL (       8 calls)
+     vloc_psi     :      1.31s CPU      1.33s WALL (       8 calls)
+                                        1.32s GPU  (       8 calls)
+     add_vuspsi   :      0.97s CPU      0.97s WALL (       8 calls)
+
+     General routines
+     calbec       :      0.04s CPU      0.05s WALL (      11 calls)
+     fft          :      0.26s CPU      0.29s WALL (      52 calls)
+                                        0.05s GPU  (      48 calls)
+     ffts         :      0.10s CPU      0.14s WALL (     126 calls)
+                                        0.03s GPU  (     122 calls)
+     fftw         :      0.01s CPU      1.10s WALL (     291 calls)
+                                        1.04s GPU  (     291 calls)
+     interpolate  :      0.38s CPU      0.48s WALL (       4 calls)
+     davcio       :      0.00s CPU      0.14s WALL (       7 calls)
+ 
+     Parallel routines
+
+     EXX routines
+     exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
+
+     EXX+US  routines
+
+     EXX+PAW routines
+
+     PAW routines
+     PAW_pot      :    828.89s CPU     63.29s WALL (       4 calls)
+     PAW_symme    :      0.00s CPU      0.00s WALL (       7 calls)
+ 
+     PWSCF        :  14m12.43s CPU   1m19.64s WALL
+
+ 
+   This run was terminated on:  23:49:49   7Jul2026            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=
+Warning: ieee_invalid is signaling
+Warning: ieee_divide_by_zero is signaling
+Warning: ieee_inexact is signaling
+FORTRAN STOP

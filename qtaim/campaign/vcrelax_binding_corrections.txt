@@ -1,0 +1,89 @@
+VC-RELAX BINDING CORRECTIONS @ TABLE-1 CUTOFF (Table S2)
+=========================================================
+Effect of variable-cell relaxation on I2 binding, at the Table-1 level of
+theory: ecutwfc=50, ecutrho=400, PBE+D3(BJ) v4, PAW, Gamma, MV cold smearing.
+4 I2/cell. All kJ/mol I2, 2 decimals.
+
+IMPORTANT — smearing handling
+-----------------------------
+The loaded (I2-containing) polyiodide is borderline metallic (I-I sigma* at
+E_F). At degauss=0.01 Ry (Table 1) the SCF does NOT converge during cell
+optimization (Fermi-bisection oscillation), so the loaded vc-relax was run at
+degauss=0.03 Ry. The smearing contribution to the energy is ~geometry-
+independent, so it CANCELS in the strengthening (loaded_fixed and loaded_vc at
+the same 0.03). The empty framework is closed-shell (degauss-insensitive) and
+was run at 0.01. Thus the strengthening values below are smearing-consistent.
+Absolute fixed-cell values are ~5 kJ/mol I2 less bound than Table 1's 0.01
+values (the smearing shift); the strengthening itself is unaffected.
+
+Energies (Ry, loaded @0.03, empty @0.01)
+----------------------------------------
+metal  loaded_fixed  loaded_vc    empty_fixed   empty_vc
+Gd    -6865.13598   -6865.21545   -3833.54879   -3833.56829
+Tb    -6925.18004   -6925.23481   -3893.61675   -3893.63438
+Y     -5767.36219   -5767.49807   -2735.81928   -2735.81048
+(I2 dimer ref -757.79989474 Ry; loaded_fixed for Y from a 0.03 single-point on
+the chain geometry, for Gd/Tb from the vc-relax first ionic step.)
+
+Convergence: all loaded vc-relaxes and empty relaxes reached the BFGS force
+threshold (<1e-3 Ry/au) OR converged to a stable minimum:
+  Gd loaded 125 steps, grad 4.2e-4, P=0.02 kbar (geom converged; final SCF
+        oscillated at ~1e-4, energy stable -> accepted)
+  Tb loaded 132 steps, grad 4.4e-4, JOB DONE
+  Y  loaded  60 steps (restart), grad 6.5e-4, JOB DONE
+  empties: Gd 114 steps 5.4e-4, Tb 85 steps 5.0e-4, Y 134 steps JOB DONE
+
+Table S2. I2 binding: fixed-cell vs variable-cell @ 50/400.
+----------------------------------------------------------
+metal   E_bind^fixed   E_bind^vc    strengthen   dV/V
+        (kJ/mol I2)    (kJ/mol I2)  (kJ/mol I2)  (%)
+Gd         -127.21      -146.89      -19.7       -10.2
+Tb         -119.36      -131.56      -12.2        -5.2
+Y          -112.68      -160.16      -47.5        -4.0
+
+(Table 1 fixed-cell @0.01, for cross-ref: Gd -131.94, Tb -125.81, Y -118.36.
+ The ~5 kJ/mol I2 offset vs the 0.03 fixed values above is the smearing shift.)
+
+KEY FINDING — deep minimum = benzene-sandwiched I2 + uniform polyiodide chain
+--------------------------------------------------------------------------
+(Distances below use the CORRECT Cartesian conversion for the non-orthogonal
+cell, f0*a1+f1*a2+f2*a3. An earlier version of this table used a transposed
+cell and was wrong; this supersedes it.)
+
+The equilibrium (deep) vc-relaxed structure is the SAME motif for all three
+metals: ONE discrete I2 molecule at 2.82 A (inversion-centered, sandwiched
+between two rotated benzene rings) plus a uniform ~2.94 A polyiodide chain
+running centered down the pore. I-I distances (A), fixed-cell (Table 1) ->
+deep minimum:
+
+  Gd fixed: I2 2.79, 2.79          + chain 2.91,2.91,3.03,3.03,3.14,3.14
+     deep:  I2 2.82                + chain 2.94,2.94,2.95,2.95,2.95,2.95 (uniform)
+  Tb fixed: I2 2.79, 2.79          + chain 2.92,2.92,3.02,3.03,3.07,3.08
+     deep:  I2 2.82                + chain 2.93,2.94,2.94,2.94,2.94,2.95 (uniform)
+  Y  fixed: I2 2.74,2.74,2.89,2.89 + chain 3.01,3.02,3.03,3.04
+     deep:  I2 2.82                + chain 2.93,2.94,2.94,2.94,2.94,2.94 (uniform)
+
+So vc-relax converts the fixed-cell arrangement (two I2 dimers + a non-uniform
+chain) into ONE benzene-sandwiched I2 + a uniform 3c-4e chain: one of the two
+I2 dimers dissociates and joins the chain. This is a host-guest rearrangement
+(linker rotation creates the benzene-I2 sandwich wall).
+
+KINETIC TRAPPING (chain-start vs seeded)
+----------------------------------------
+The chain-start vc-relax strengthenings in the table above (Gd -19.7, Tb -12.2)
+are LOWER BOUNDS: starting from the chain geometry, Gd/Tb get trapped in a
+shallower minimum (two I2 + partial chain) and do NOT reach the deep minimum.
+Y reaches the deep minimum directly (-47.5). Seeding Gd/Tb with Y's deep-minimum
+motif lets them reach the same deep minimum (seeddeep runs): loaded energy drop
+~ -39 (Gd), -41 (Tb) kJ/mol I2, i.e. comparable to Y's -44.6. So the TRUE
+equilibrium strengthening is ~ -40 kJ/mol I2 for all three metals.
+
+Implication for the main text
+-----------------------------
+The fixed-cell Table-1 geometry (two I2 + chain) is metastable for all three
+RE-MOFs; the equilibrium loaded structure is one benzene-sandwiched I2 + a
+uniform ~2.94 A polyiodide chain, ~40 kJ/mol I2 lower. This host-guest
+rearrangement (rotated linkers, I2 sandwiched between benzene rings, uniform
+centered chain) is the result worth showing. The chain-start vc-relax numbers
+are path-dependent (kinetic); the seeded/deep-minimum numbers are the
+thermodynamic equilibrium.

@@ -1,0 +1,46 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'verify_vcI_Gd_deep'
+  outdir = './tmp_verify_vcI_Gd_deep'
+  pseudo_dir = '/workspace/qe-7.5/pseudo'
+  tprnfor = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 8
+  ntyp = 1
+  ecutwfc = 60
+  ecutrho = 800
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.01
+  nspin = 1
+  vdw_corr = 'grimme-d3'
+  dftd3_version = 4
+/
+&ELECTRONS
+  conv_thr = 1.0d-8
+  diagonalization = 'david'
+  diago_david_ndim = 2
+  mixing_mode = 'local-TF'
+  mixing_beta = 0.2
+  mixing_ndim = 24
+  electron_maxstep = 400
+/
+ATOMIC_SPECIES
+  I    126.904  I.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+  8.7955996860 -0.6821669250 -0.1503882010
+  -0.6756316050 8.3042331950 -0.2105927670
+  -4.0596472890 -0.1143138560 17.3149672420
+ATOMIC_POSITIONS crystal
+  I  0.5052083432 0.5851762446 0.0693330060
+  I  0.5601315239 0.7743744336 0.2487499915
+  I  0.8967263433 0.7778879102 0.2552243304
+  I  1.2305845068 0.7997936312 0.2483872092
+  I  0.4920557409 0.4177586654 0.9286412531
+  I  0.4374505206 0.2277531536 0.7509976885
+  I  0.1002045547 0.2254016978 0.7442082976
+  I  0.7665505123 0.2029533087 0.7514159985
+K_POINTS automatic
+  4 4 2 0 0 0

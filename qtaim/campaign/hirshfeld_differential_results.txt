@@ -1,0 +1,26 @@
+Differential Hirshfeld: dPop = Pop(loaded) - Pop(empty) - Pop(i2only), e/cell.
+(+ = atom GAINED density = reduced). Sum check = 0.0000 (exact) for both systems.
+
+Y_str:  I -0.54  |  Y +0.79  |  O -0.18  |  C -0.09  |  H +0.02
+Gd_str: I -0.44  |  Gd +0.86 |  O -0.24  |  C -0.21  |  H +0.03
+
+=> Hirshfeld says I OXIDIZED, METAL gains ~0.8 e. Agrees with Mulliken, NOT Bader.
+BUT: metal (Y/Gd) is redox-inert (Bader |dq|<0.04; d-states at +4-5 eV). Hirshfeld
+giving the metal +0.8 e is an ARTIFACT of the diffuse free-atom metal reference
+(Y/Gd valence = 11 incl. 4d/5f, very diffuse promolecular -> large w_metal everywhere).
+Non-iterative Hirshfeld weights are NOT transferable between loaded (metal present)
+and i2only (no metal) references. So Hirshfeld(absolute/differential) is unreliable
+here for the SAME reason Mulliken is (re-partitioning absolute densities with
+confounding references), not because Bader is wrong.
+
+============================================================
+PARTITION-FREE VORONOI INTEGRATION OF deltarho.cube (Y_str)
+============================================================
+deltarho = loaded - empty - i2only. Voronoi mask = voxels nearer an I than any
+framework atom (pure geometry; no basis, no promolecular, no topology).
+  total integral deltarho : +0.0000 e (exact)
+  iodine Voronoi region   : +0.090 e   <- iodine region GAINED (reduced)
+  framework Voronoi       : -0.090 e   <- framework LOST
+=> Density physically moved from framework to iodine. Sign robust (no partition).
+(Magnitude is partition-dependent: Voronoi +0.09 < vdW-sphere +0.62 < Bader +0.74;
+all three direct-deltarho integrations are POSITIVE for iodine.)

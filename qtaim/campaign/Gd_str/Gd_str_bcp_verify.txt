@@ -1,0 +1,55 @@
+==== Gd_str : BCP re-location & artifact removal ====
+
+[AII] I-I candidate CPs REJECTED as non-bonded (intra-atomic 5p-shell / PAW spike / near-nuclear):
+  field   ncppair         rho_b     lap_b   rho_A3  reason
+  val     122I5-I6       0.1090    -0.570    0.735  same-atom termini (5p-shell/PAW)
+  val     125I7-I8       0.1076    -0.494    0.726  same-atom termini (5p-shell/PAW)
+  val     127I5-I6       0.0950    -0.480    0.641  same-atom termini (5p-shell/PAW)
+  val     155I1-I4       0.0162     1.470    0.110  lap=1.47 (near-nuclear)
+  val     157I5-I8       0.0162     1.718    0.109  lap=1.72 (near-nuclear)
+  val     158I5-I7       0.0128     1.614    0.086  lap=1.61 (near-nuclear)
+  rho17    83I7-I8       0.5369  -155.495    3.623  same-atom termini (5p-shell/PAW)
+  rho17   120I5-I8       0.2343   -14.362    1.581  same-atom termini (5p-shell/PAW)
+  rho17   122I7-I8       0.2297   -12.782    1.550  same-atom termini (5p-shell/PAW)
+  rho17   126I7-I8       0.1106    -0.533    0.746  rho=0.111 outside bonding window
+  rho17   127I1-I4       0.1104    -0.510    0.745  rho=0.110 outside bonding window
+  rho17   128I7-I8       0.1100    -0.653    0.743  rho=0.110 outside bonding window
+  rho17   163I7-I8       0.0033     2.620    0.022  same-atom termini (5p-shell/PAW)
+  rho17   165I1-I2       0.0032     1.986    0.022  lap=1.99 (near-nuclear)
+  rho17   166I1-I2       0.0030     2.679    0.020  lap=2.68 (near-nuclear)
+  rho17   168I5-I6       0.0027     2.885    0.018  lap=2.89 (near-nuclear)
+  rho17   169I5-I7       0.0025     3.130    0.017  same-atom termini (5p-shell/PAW)
+  rho17   170I5-I6       0.0024     2.925    0.016  lap=2.93 (near-nuclear)
+  rho17   173I3-I4       0.0018     3.772    0.012  same-atom termini (5p-shell/PAW)
+
+[AIO] I-O candidate CPs REJECTED as non-bonded (intra-atomic 5p-shell / PAW spike / near-nuclear):
+  field   ncppair         rho_b     lap_b   rho_A3  reason
+  val     126I3-O19      0.1072    -0.535    0.724  rho=0.107 outside bonding window
+  val     128I1-O1       0.0948    -0.381    0.639  rho=0.095 outside bonding window
+  val     150I1-O1       0.0174     1.640    0.118  same-atom termini (5p-shell/PAW)
+  val     151I1-O1       0.0171     1.929    0.116  same-atom termini (5p-shell/PAW)
+  val     159I1-O1       0.0127     1.597    0.085  same-atom termini (5p-shell/PAW)
+  rho17   124I5-O12      0.2043   -19.859    1.378  rho=0.204 outside bonding window
+  rho17   139I1-O1       0.0462     7.036    0.312  lap=7.04 (near-nuclear)
+
+[B] monotonicity check on corrected I-I BCP rho (must fall with distance):
+  pair      d(A)    rho_b   rho_A3  monotone?
+  I7-I8     2.99   0.0454    0.307  ok
+  I1-I4     2.99   0.0456    0.307  ok
+  I5-I6     3.04   0.0426    0.288  ok
+  I1-I2     3.04   0.0426    0.288  ok
+  I1-I3     3.11   0.0381    0.257  ok
+
+[C] bonding-region (t=0.3-0.7) straight-line rho profile on clean val.cube (I-I check):
+  pair      d(A)  rho_prof   vs BCP
+  I7-I8     2.99    0.0455       ok
+  I1-I4     2.99    0.0455       ok
+  I5-I6     3.04    0.0427       ok
+  I1-I2     3.04    0.0427       ok
+  I1-I3     3.11    0.0380       ok
+
+[D] I-O bonding-region profile on clean val.cube (same rigor as I-I):
+  pair      d(A)  rho_BCP  rho_prof   vs BCP
+  I5-O12    2.77   0.0300    0.0301       ok
+  I5-O4     3.31   0.0105    0.0105       ok
+  I1-O16    3.31   0.0105    0.0105       ok

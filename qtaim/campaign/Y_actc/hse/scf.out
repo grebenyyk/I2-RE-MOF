@@ -1,0 +1,895 @@
+
+     Program PWSCF v.7.5 starts on 12Jul2026 at 11:34:56 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI & OpenMP), running on       4 processor cores
+     Number of MPI processes:                 1
+     Threads/MPI process:                     4
+
+     MPI processes distributed on     1 nodes
+     14695 MiB available memory on the printing compute node when the environment starts
+ 
+     Reading input from hse/scf.in
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  4
+     file C.pbe-n-kjpaw_psl.1.0.0.UPF: wavefunction(s)  2S 2P renormalized
+     file Y.pbe-spn-kjpaw_psl.1.0.0.UPF: wavefunction(s)  4S 4P renormalized
+     file I.pbe-n-kjpaw_psl.1.0.0.UPF: wavefunction(s)  5S renormalized
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= HSE
+                           (   1   4  12   4   0   0   0)
+     EXX-fraction              =        0.25
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+     EXX fraction changed:   0.25
+     EXX Screening parameter changed:    0.1060000
+
+     gamma-point specific algorithms are used
+     Message from routine setup :
+     BEWARE: nonlinear core correction is not consistent with hybrid XC
+     Message from routine setup:
+     Warning: ecutfock not valid for US/PAW, ignored
+ 
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     a serial algorithm will be used
+
+     EXX: q-point mesh:     1    1    1
+     EXX: grid of k+q points same as grid of k-points
+ 
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum        9815    4895   1223              1305987   461613   57675
+ 
+     Using Slab Decomposition
+ 
+
+
+     bravais-lattice index     =            0
+     lattice parameter (alat)  =      16.8843  a.u.
+     unit-cell volume          =    9667.0357 (a.u.)^3
+     number of atoms/cell      =           80
+     number of atomic types    =            5
+     number of electrons       =       384.00
+     number of Kohn-Sham states=          230
+     kinetic-energy cutoff     =      50.0000  Ry
+     charge density cutoff     =     400.0000  Ry
+     cutoff for Fock operator  =     200.0000  Ry
+     scf convergence threshold =      1.0E-06
+     mixing beta               =       0.1000
+     number of iterations used =           20  local-TF  mixing
+     Exchange-correlation= HSE
+                           (   1   4  12   4   0   0   0)
+     EXX-fraction              =        0.25
+
+     GPU acceleration is ACTIVE.  1 visible GPUs per MPI rank
+
+
+     GPU used by master process:
+
+        Device Number: 0
+        Device name: NVIDIA L40S
+        Compute capability : 89
+        Ratio of single to double precision performance  : 64
+        Memory Clock Rate (KHz): 9001000
+        Memory Bus Width (bits): 384
+        Peak Memory Bandwidth (GB/s): 864.10
+
+     celldm(1)=  16.884325  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.000000   1.081255   0.000000 )  
+               a(3) = (  -0.421113   0.000000   1.857437 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000 -0.000000  0.226717 )  
+               b(2) = (  0.000000  0.924851 -0.000000 )  
+               b(3) = (  0.000000  0.000000  0.538376 )  
+
+
+     PseudoPot. # 1 for C  read from file:
+     /workspace/qe-7.5/pseudo/C.pbe-n-kjpaw_psl.1.0.0.UPF
+     MD5 check sum: 5f16ad9a65e90284d1d834d4ab3b0f7d
+     Pseudo is Projector augmented-wave + core cor, Zval =  4.0
+     Generated using &quot;atomic&quot; code by A. Dal Corso  v.6.3
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1073 points,  4 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 2 for H  read from file:
+     /workspace/qe-7.5/pseudo/H.pbe-kjpaw.UPF
+     MD5 check sum: a225a3f3a1be5237eb8f6a7e61cbb4ee
+     Pseudo is Projector augmented-wave, Zval =  1.0
+     Generated using "atomic" code by A. Dal Corso (espresso distribution)
+     Shape of augmentation charge: PSQ
+     Using radial grid of  929 points,  2 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 3 for O  read from file:
+     /workspace/qe-7.5/pseudo/O.pbe-kjpaw.UPF
+     MD5 check sum: c7f41d994d4e90c1781f5cd713c45011
+     Pseudo is Projector augmented-wave + core cor, Zval =  6.0
+     Generated using "atomic" code by A. Dal Corso (espresso distribution)
+     Shape of augmentation charge: BESSEL
+     Using radial grid of 1095 points,  4 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 4 for Y  read from file:
+     /workspace/qe-7.5/pseudo/Y.pbe-spn-kjpaw_psl.1.0.0.UPF
+     MD5 check sum: d52e8d8ffa9ef5a9f13bb13aaba2e897
+     Pseudo is Projector augmented-wave + core cor, Zval = 11.0
+     Generated using &quot;atomic&quot; code by A. Dal Corso  v.6.2.2
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1223 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     PseudoPot. # 5 for I  read from file:
+     /workspace/qe-7.5/pseudo/I.pbe-n-kjpaw_psl.1.0.0.UPF
+     MD5 check sum: cd3d296c3308a581e1559a0c8a554cb5
+     Pseudo is Projector augmented-wave + core cor, Zval =  7.0
+     Generated using &quot;atomic&quot; code by A. Dal Corso  v.6.3
+     Shape of augmentation charge: PSQ
+     Using radial grid of 1247 points,  6 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   2
+                l(6) =   2
+     Q(r) pseudized with 0 coefficients 
+
+
+     atomic species   valence    mass     pseudopotential
+     C                 4.00    12.01100     C ( 1.00)
+     H                 1.00     1.00800     H ( 1.00)
+     O                 6.00    15.99900     O ( 1.00)
+     Y                11.00    88.90600     Y ( 1.00)
+     I                 7.00   126.90400     I ( 1.00)
+
+     No symmetry found
+
+
+                                    s                        frac. trans.
+
+      isym =  1     identity                                     
+
+ cryst.   s( 1) = (     1          0          0      )
+                  (     0          1          0      )
+                  (     0          0          1      )
+
+ cart.    s( 1) = (  1.0000000  0.0000000 -0.0000000 )
+                  (  0.0000000  1.0000000  0.0000000 )
+                  (  0.0000000  0.0000000  1.0000000 )
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1        C      tau(   1) = (   0.3743218  -0.0172884   0.0911880  )
+         2        C      tau(   2) = (  -0.0573458  -0.0288033   0.9295600  )
+         3        C      tau(   3) = (  -0.0104684   0.4087665   0.2925781  )
+         4        C      tau(   4) = (  -0.0028198   0.4757543   0.1424812  )
+         5        C      tau(   5) = (   0.1257108   0.4574902   0.0496676  )
+         6        C      tau(   6) = (   0.8743227   0.5579145   0.0911881  )
+         7        C      tau(   7) = (   0.4788015   0.4508889   0.6849452  )
+         8        C      tau(   8) = (   0.3784976   0.4970964   0.8064451  )
+         9        C      tau(   9) = (   0.2211885   0.4669735   0.8043461  )
+        10        C      tau(  10) = (   0.4426734   0.5694355   0.9295563  )
+        11        C      tau(  11) = (   0.7211982   0.0736495   0.8043467  )
+        12        C      tau(  12) = (   0.4895290   0.1318526   0.2925841  )
+        13        C      tau(  13) = (   0.6257014   0.0831467   0.0496626  )
+        14        C      tau(  14) = (   0.6000863   0.9915352   1.1724828  )
+        15        C      tau(  15) = (   0.7003888   1.0377280   1.0509914  )
+        16        C      tau(  16) = (  -0.1423118   1.0076071   1.0530824  )
+        17        C      tau(  17) = (   0.6362289   1.1100556   0.9278758  )
+        18        C      tau(  18) = (   0.5893627   0.6724819   1.5648640  )
+        19        C      tau(  19) = (   0.5817165   0.6054986   1.7149631  )
+        20        C      tau(  20) = (   0.4531839   0.6237636   1.8077668  )
+        21        C      tau(  21) = (  -0.2954365   0.5233397   1.7662559  )
+        22        C      tau(  22) = (   0.4971749   0.0648698   0.1424779  )
+        23        C      tau(  23) = (  -0.1214963   0.0435296   0.8064519  )
+        24        C      tau(  24) = (  -0.0212030   0.0897288   0.6849502  )
+        25        C      tau(  25) = (  -0.0468178   0.9981126   1.8077718  )
+        26        C      tau(  26) = (   0.0817066   1.0163856   1.7149593  )
+        27        C      tau(  27) = (   0.0893544   0.9493966   1.5648627  )
+        28        C      tau(  28) = (   0.1362236   0.5118272   0.9278744  )
+        29        C      tau(  29) = (   0.3576968   0.6142871   1.0530804  )
+        30        C      tau(  30) = (   0.2003918   0.5841552   1.0509854  )
+        31        C      tau(  31) = (   0.1000853   0.6303561   1.1724826  )
+        32        C      tau(  32) = (   0.2045655   1.0985508   1.7662437  )
+        33        H      tau(  33) = (   0.2766906  -0.0301726   0.1628385  )
+        34        H      tau(  34) = (   0.3021890   1.1114267   1.6945962  )
+        35        H      tau(  35) = (  -0.1470210   0.8817635   1.6641109  )
+        36        H      tau(  36) = (   0.0624871  -0.0510216   0.9299706  )
+        37        H      tau(  37) = (   0.7766946   0.5707889   0.1628288  )
+        38        H      tau(  38) = (   0.2259097   0.3411672   0.1933231  )
+        39        H      tau(  39) = (   0.5164089   1.1322740   0.9274706  )
+        40        H      tau(  40) = (   0.7258962   0.1994809   0.1933142  )
+        41        H      tau(  41) = (   0.0163903   0.4896018   0.9274661  )
+        42        H      tau(  42) = (  -0.1978051   0.5104651   1.6946073  )
+        43        H      tau(  43) = (   0.3529741   0.7401002   1.6641079  )
+        44        H      tau(  44) = (   0.5625048   0.5916520   0.9299703  )
+        45        O      tau(  45) = (  -0.0293627   0.8800272   1.5182459  )
+        46        O      tau(  46) = (   0.1440533   0.7205474   1.2786017  )
+        47        O      tau(  47) = (  -0.0375136   0.5886974   1.1746320  )
+        48        O      tau(  48) = (   0.3306875   0.7029567   1.7666167  )
+        49        O      tau(  49) = (  -0.2922612   0.6623449   1.4868038  )
+        50        O      tau(  50) = (   0.4706363   0.7418497   1.5182493  )
+        51        O      tau(  51) = (  -0.0748483   0.9384902   1.1658739  )
+        52        O      tau(  52) = (   0.4624899   1.0331864   1.1746280  )
+        53        O      tau(  53) = (   0.6440552   0.9013407   1.2786012  )
+        54        O      tau(  54) = (   0.4251677   0.6834023   1.1658738  )
+        55        O      tau(  55) = (   0.3711528   0.1217159   0.3706346  )
+        56        O      tau(  56) = (   0.7481972   0.1623427   0.0908139  )
+        57        O      tau(  57) = (   0.1537061   0.3978567   0.6915667  )
+        58        O      tau(  58) = (   0.6164008   0.4925572   0.6828045  )
+        59        O      tau(  59) = (   0.4348452   0.3607092   0.5788390  )
+        60        O      tau(  60) = (   0.2482097   0.3782995   0.0908224  )
+        61        O      tau(  61) = (   0.8711506   0.4189070   0.3706326  )
+        62        O      tau(  62) = (   0.1082507   0.3394126   0.3391874  )
+        63        O      tau(  63) = (   0.6537172   0.1427630   0.6915743  )
+        64        O      tau(  64) = (   0.1164006   0.0480696   0.6828187  )
+        65        O      tau(  65) = (  -0.0651592   0.1799083   0.5788451  )
+        66        O      tau(  66) = (  -0.1693112   0.9189155   1.7666155  )
+        67        O      tau(  67) = (   0.2077357   0.9595437   1.4868031  )
+        68        O      tau(  68) = (   0.6082456   0.2012200   0.3391898  )
+        69        Y      tau(  69) = (  -0.1336855   0.7736543   1.3211060  )
+        70        Y      tau(  70) = (   0.2125587   0.2330109   0.5363324  )
+        71        Y      tau(  71) = (   0.7125610   0.3075964   0.5363331  )
+        72        Y      tau(  72) = (   0.3663211   0.8482422   1.3211105  )
+        73        I      tau(  73) = (   0.3687809   0.6682112   0.2496159  )
+        74        I      tau(  74) = (   0.3588520   0.8164177   0.5183574  )
+        75        I      tau(  75) = (   0.6991157   0.8254364   0.5195612  )
+        76        I      tau(  76) = (   1.0213067   0.8045375   0.5140618  )
+        77        I      tau(  77) = (   0.2136251   0.4047343   1.6251116  )
+        78        I      tau(  78) = (   0.2032790   0.2627008   1.3534118  )
+        79        I      tau(  79) = (  -0.1337130   0.2724559   1.3437890  )
+        80        I      tau(  80) = (   0.5425587   0.2746713   1.3448837  )
+
+   Crystallographic axes
+
+     site n.     atom                  positions (cryst. coord.)
+         1        C      tau(   1) = (  0.3949957 -0.0159892  0.0490935  )
+         2        C      tau(   2) = (  0.1534015 -0.0266387  0.5004530  )
+         3        C      tau(   3) = (  0.0558641  0.3780482  0.1575171  )
+         4        C      tau(   4) = (  0.0294832  0.4400020  0.0767085  )
+         5        C      tau(   5) = (  0.1369713  0.4231104  0.0267399  )
+         6        C      tau(   6) = (  0.8949966  0.5159879  0.0490935  )
+         7        C      tau(   7) = (  0.6340904  0.4170051  0.3687583  )
+         8        C      tau(   8) = (  0.5613326  0.4597403  0.4341709  )
+         9        C      tau(   9) = (  0.4035477  0.4318810  0.4330409  )
+        10        C      tau(  10) = (  0.6534198  0.5266431  0.5004510  )
+        11        C      tau(  11) = (  0.9035574  0.0681148  0.4330412  )
+        12        C      tau(  12) = (  0.5558629  0.1219441  0.1575204  )
+        13        C      tau(  13) = (  0.6369608  0.0768983  0.0267372  )
+        14        C      tau(  14) = (  0.8659084  0.9170226  0.6312369  )
+        15        C      tau(  15) = (  0.9386666  0.9597440  0.5658288  )
+        16        C      tau(  16) = (  0.0964401  0.9318866  0.5669546  )
+        17        C      tau(  17) = (  0.8465943  1.0266363  0.4995463  )
+        18        C      tau(  18) = (  0.9441444  0.6219457  0.8424856  )
+        19        C      tau(  19) = (  0.9705283  0.5599962  0.9232955  )
+        20        C      tau(  20) = (  0.8630358  0.5768885  0.9732587  )
+        21        C      tau(  21) = (  0.1050041  0.4840113  0.9509102  )
+        22        C      tau(  22) = (  0.5294771  0.0599949  0.0767067  )
+        23        C      tau(  23) = (  0.0613402  0.0402584  0.4341746  )
+        24        C      tau(  24) = (  0.1340870  0.0829858  0.3687609  )
+        25        C      tau(  25) = (  0.3630352  0.9231057  0.9732614  )
+        26        C      tau(  26) = (  0.4705174  0.9400054  0.9232934  )
+        27        C      tau(  27) = (  0.4441358  0.8780506  0.8424849  )
+        28        C      tau(  28) = (  0.3465887  0.4733640  0.4995456  )
+        29        C      tau(  29) = (  0.5964482  0.5681241  0.5669535  )
+        30        C      tau(  30) = (  0.4386683  0.5402566  0.5658256  )
+        31        C      tau(  31) = (  0.3659073  0.5829856  0.6312368  )
+        32        C      tau(  32) = (  0.6050034  1.0159961  0.9509037  )
+        33        H      tau(  33) = (  0.3136089 -0.0279052  0.0876684  )
+        34        H      tau(  34) = (  0.6863832  1.0279043  0.9123304  )
+        35        H      tau(  35) = (  0.2302616  0.8155000  0.8959178  )
+        36        H      tau(  36) = (  0.2733275 -0.0471874  0.5006741  )
+        37        H      tau(  37) = (  0.8136107  0.5278948  0.0876632  )
+        38        H      tau(  38) = (  0.2697394  0.3155289  0.1040806  )
+        39        H      tau(  39) = (  0.7266824  1.0471850  0.4993281  )
+        40        H      tau(  40) = (  0.7697238  0.1844901  0.1040758  )
+        41        H      tau(  41) = (  0.2266629  0.4528089  0.4993257  )
+        42        H      tau(  42) = (  0.1863916  0.4721042  0.9123363  )
+        43        H      tau(  43) = (  0.7302560  0.6844826  0.8959162  )
+        44        H      tau(  44) = (  0.7733451  0.5471901  0.5006739  )
+        45        O      tau(  45) = (  0.3148499  0.8138943  0.8173875  )
+        46        O      tau(  46) = (  0.4339344  0.6663991  0.6883688  )
+        47        O      tau(  47) = (  0.2287957  0.5444575  0.6323940  )
+        48        O      tau(  48) = (  0.7312099  0.6501304  0.9511045  )
+        49        O      tau(  49) = (  0.0448229  0.6125705  0.8004599  )
+        50        O      tau(  50) = (  0.8148496  0.6861006  0.8173894  )
+        51        O      tau(  51) = (  0.1894754  0.8679638  0.6276789  )
+        52        O      tau(  52) = (  0.7287983  0.9555437  0.6323918  )
+        53        O      tau(  53) = (  0.9339361  0.8336060  0.6883685  )
+        54        O      tau(  54) = (  0.6894914  0.6320454  0.6276788  )
+        55        O      tau(  55) = (  0.4551821  0.1125691  0.1995409  )
+        56        O      tau(  56) = (  0.7687863  0.1501428  0.0488921  )
+        57        O      tau(  57) = (  0.3104962  0.3679583  0.3723231  )
+        58        O      tau(  58) = (  0.7712044  0.4555422  0.3676058  )
+        59        O      tau(  59) = (  0.5660780  0.3336024  0.3116332  )
+        60        O      tau(  60) = (  0.2688007  0.3498707  0.0488966  )
+        61        O      tau(  61) = (  0.9551794  0.3874266  0.1995398  )
+        62        O      tau(  62) = (  0.1851503  0.3139061  0.1826104  )
+        63        O      tau(  63) = (  0.8105090  0.1320346  0.3723272  )
+        64        O      tau(  64) = (  0.2712074  0.0444573  0.3676134  )
+        65        O      tau(  65) = (  0.0660750  0.1663884  0.3116365  )
+        66        O      tau(  66) = (  0.2312110  0.8498601  0.9511038  )
+        67        O      tau(  67) = (  0.5448196  0.8874352  0.8004595  )
+        68        O      tau(  68) = (  0.6851458  0.1860986  0.1826117  )
+        69        Y      tau(  69) = (  0.1658320  0.7155151  0.7112521  )
+        70        Y      tau(  70) = (  0.3341545  0.2155004  0.2887486  )
+        71        Y      tau(  71) = (  0.8341570  0.2844809  0.2887490  )
+        72        Y      tau(  72) = (  0.6658396  0.7844979  0.7112545  )
+        73        I      tau(  73) = (  0.4253732  0.6179959  0.1343873  )
+        74        I      tau(  74) = (  0.4763726  0.7550649  0.2790713  )
+        75        I      tau(  75) = (  0.8169092  0.7634059  0.2797194  )
+        76        I      tau(  76) = (  1.1378534  0.7440775  0.2767587  )
+        77        I      tau(  77) = (  0.5820659  0.3743190  0.8749215  )
+        78        I      tau(  78) = (  0.5101208  0.2429592  0.7286448  )
+        79        I      tau(  79) = (  0.1709472  0.2519812  0.7234641  )
+        80        I      tau(  80) = (  0.8474670  0.2540301  0.7240534  )
+
+     number of k points=     1  Marzari-Vanderbilt smearing, width (Ry)=  0.0300
+                       cart. coord. in units 2pi/alat
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   2.0000000
+
+                       cryst. coord.
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   2.0000000
+
+     Dense  grid:   652994 G-vectors     FFT dimensions: ( 108, 120, 216)
+
+     Smooth grid:   230807 G-vectors     FFT dimensions: (  80,  90, 150)
+
+     Dynamical RAM for                 wfc:     101.28 MB
+
+     Dynamical RAM for     wfc (w. buffer):     101.28 MB
+
+     Dynamical RAM for                 EXX:    1778.09 MB
+
+     Dynamical RAM for           str. fact:      49.82 MB
+
+     Dynamical RAM for           local pot:       0.00 MB
+
+     Dynamical RAM for          nlocal pot:     302.95 MB
+
+     Dynamical RAM for                qrad:       8.03 MB
+
+     Dynamical RAM for          rho,v,vnew:      93.96 MB
+
+     Dynamical RAM for               rhoin:      31.32 MB
+
+     Dynamical RAM for           G-vectors:      39.13 MB
+
+     Dynamical RAM for          h,s,v(r/c):       4.84 MB
+
+     Dynamical RAM for          <psi|beta>:       1.21 MB
+
+     Dynamical RAM for                 psi:     202.56 MB
+
+     Dynamical RAM for                hpsi:     202.56 MB
+
+     Dynamical RAM for                spsi:     202.56 MB
+
+     Dynamical RAM for      wfcinit/wfcrot:     203.77 MB
+
+     Dynamical RAM for           addusdens:    2172.13 MB
+
+     Estimated static dynamical RAM per process >       2.51 GB
+
+     Estimated max dynamical RAM per process >       4.63 GB
+     EXX: ACE will be initialized later
+
+     Check: negative core charge=   -0.000002
+
+     Initial potential from superposition of free atoms
+
+     starting charge     383.9818, renormalised to     384.0000
+     Starting wfcs are  320 randomized atomic wfcs
+
+     total cpu time spent up to now is        4.2 secs
+
+     Self-consistent Calculation
+[tb_dev] Currently allocated     6.28E+00 Mbytes, locked:    0 /   3
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  1     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1252 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         13134 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5612 / 39845 / 45457
+------------------
+     ethr =  1.00E-02,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        8.0 secs
+
+     total energy              =   -5769.69283125 Ry
+     estimated scf accuracy    <      15.50048865 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  2     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12839 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5988 / 39469 / 45457
+------------------
+     ethr =  4.04E-03,  avg # of iterations =  1.0
+
+     total cpu time spent up to now is       11.2 secs
+
+     total energy              =   -5766.53583120 Ry
+     estimated scf accuracy    <      11.37119534 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  3     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12634 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  2.96E-03,  avg # of iterations =  1.0
+
+     total cpu time spent up to now is       14.7 secs
+
+     total energy              =   -5766.90622368 Ry
+     estimated scf accuracy    <       2.03734810 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  4     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12616 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  5.31E-04,  avg # of iterations =  2.0
+     Minimization algorithm failed to find Fermi energy: reverting to bisection
+     Possible cause: smearing is larger than the electronic band-gap.
+
+     total cpu time spent up to now is       18.0 secs
+
+     total energy              =   -5767.19861418 Ry
+     estimated scf accuracy    <       1.11476842 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  5     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12605 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  2.90E-04,  avg # of iterations =  1.0
+     Minimization algorithm failed to find Fermi energy: reverting to bisection
+     Possible cause: smearing is larger than the electronic band-gap.
+
+     total cpu time spent up to now is       21.2 secs
+
+     total energy              =   -5767.22305143 Ry
+     estimated scf accuracy    <       1.13496842 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  6     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12570 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  2.90E-04,  avg # of iterations =  1.0
+     Minimization algorithm failed to find Fermi energy: reverting to bisection
+     Possible cause: smearing is larger than the electronic band-gap.
+
+     total cpu time spent up to now is       24.6 secs
+
+     total energy              =   -5766.66142831 Ry
+     estimated scf accuracy    <       1.20637635 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  7     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12554 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  2.90E-04,  avg # of iterations =  2.0
+     Minimization algorithm failed to find Fermi energy: reverting to bisection
+     Possible cause: smearing is larger than the electronic band-gap.
+
+     total cpu time spent up to now is       27.9 secs
+
+     total energy              =   -5767.00453946 Ry
+     estimated scf accuracy    <       0.38477981 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  8     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1334 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12539 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  1.00E-04,  avg # of iterations = 10.0
+     Minimization algorithm failed to find Fermi energy: reverting to bisection
+     Possible cause: smearing is larger than the electronic band-gap.
+
+     total cpu time spent up to now is       31.7 secs
+
+     total energy              =   -5766.87574818 Ry
+     estimated scf accuracy    <       0.66748057 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration #  9     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1339 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12705 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  1.00E-04,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is       35.2 secs
+
+     total energy              =   -5766.73337811 Ry
+     estimated scf accuracy    <       0.27529096 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 10     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1341 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12664 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  7.17E-05,  avg # of iterations =  4.0
+     Minimization algorithm failed to find Fermi energy: reverting to bisection
+     Possible cause: smearing is larger than the electronic band-gap.
+
+     total cpu time spent up to now is       38.9 secs
+
+     total energy              =   -5766.84870007 Ry
+     estimated scf accuracy    <       0.20424554 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 11     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1348 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12592 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  5.32E-05,  avg # of iterations =  1.0
+
+     total cpu time spent up to now is       42.1 secs
+
+     total energy              =   -5766.79923139 Ry
+     estimated scf accuracy    <       0.10946850 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 12     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1355 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12574 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  2.85E-05,  avg # of iterations =  3.0
+
+     total cpu time spent up to now is       45.8 secs
+
+     total energy              =   -5766.82434215 Ry
+     estimated scf accuracy    <       0.01718540 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 13     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1362 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12557 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  4.48E-06,  avg # of iterations = 15.0
+
+     total cpu time spent up to now is       49.7 secs
+
+     total energy              =   -5766.82421523 Ry
+     estimated scf accuracy    <       0.01221245 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 14     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1377 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12497 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  3.18E-06,  avg # of iterations =  1.0
+
+     total cpu time spent up to now is       53.4 secs
+
+     total energy              =   -5766.82342035 Ry
+     estimated scf accuracy    <       0.00482933 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 15     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1384 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12627 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  1.26E-06,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is       56.8 secs
+
+     total energy              =   -5766.82455534 Ry
+     estimated scf accuracy    <       0.00412363 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 16     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1391 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12591 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  1.07E-06,  avg # of iterations =  1.0
+
+     total cpu time spent up to now is       60.1 secs
+
+     total energy              =   -5766.82404750 Ry
+     estimated scf accuracy    <       0.00404445 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 17     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1398 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12494 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  1.05E-06,  avg # of iterations =  1.0
+
+     total cpu time spent up to now is       64.2 secs
+
+     total energy              =   -5766.82390060 Ry
+     estimated scf accuracy    <       0.00169786 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 18     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1405 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12513 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  4.42E-07,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is       67.4 secs
+
+     total energy              =   -5766.82378311 Ry
+     estimated scf accuracy    <       0.00093617 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 19     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1412 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12474 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  2.44E-07,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is       70.8 secs
+
+     total energy              =   -5766.82374990 Ry
+     estimated scf accuracy    <       0.00030713 Ry
+[tb_dev] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+[tb_pin] Currently allocated     0.00E+00 Mbytes, locked:    0 /   0
+
+     iteration # 20     ecut=    50.00 Ry     beta= 0.10
+     Davidson diagonalization with overlap
+
+---- Real-time Memory Report at c_bands before calling an iterative solver
+          1419 MiB given to the printing process from OS
+             0 MiB allocation reported by mallinfo(arena+hblkhd)
+         12338 MiB available memory on the node where the printing process lives
+     GPU memory used/free/total (MiB): 5990 / 39467 / 45457
+------------------
+     ethr =  8.00E-08,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is       75.0 secs
+
+     total energy              =   -5766.82381625 Ry
+     estimated scf accuracy    <       0.00009859 Ry
+
+     End of self-consistent calculation
+
+     convergence NOT achieved after  20 iterations: stopping
+
+     Writing config to output data dir ./tmp_hse/Y_actc_hse.save/ :
+     XML data file, charge density distributed wavefunctions
+ 
+     init_run     :      3.88s CPU      3.66s WALL (       1 calls)
+     electrons    :     57.30s CPU     70.98s WALL (       1 calls)
+
+     Called by init_run:
+     aceinit0     :      0.00s CPU      0.00s WALL (       1 calls)
+     wfcinit      :      0.22s CPU      0.31s WALL (       1 calls)
+     wfcinit:atom :      0.01s CPU      0.01s WALL (       1 calls)
+     wfcinit:wfcr :      0.20s CPU      0.23s WALL (       1 calls)
+     potinit      :      2.52s CPU      2.21s WALL (       1 calls)
+     hinit0       :      0.90s CPU      0.73s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :      6.76s CPU      9.54s WALL (      20 calls)
+     sum_band     :      2.68s CPU      3.67s WALL (      20 calls)
+     v_of_rho     :      0.44s CPU      0.67s WALL (      21 calls)
+     v_h          :      0.02s CPU      0.02s WALL (      21 calls)
+     v_xc         :      0.20s CPU      0.27s WALL (      21 calls)
+     newd         :      1.61s CPU      2.39s WALL (      21 calls)
+     PAW_pot      :     44.61s CPU     49.09s WALL (      21 calls)
+     mix_rho      :      1.45s CPU      3.69s WALL (      20 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.11s CPU      0.14s WALL (      41 calls)
+     regterg      :      6.55s CPU      9.22s WALL (      20 calls)
+
+     Called by sum_band:
+     sum_band:wei :      0.01s CPU      0.01s WALL (      20 calls)
+     sum_band:loo :      1.20s CPU      1.54s WALL (      20 calls)
+     sum_band:buf :      0.07s CPU      0.09s WALL (      20 calls)
+     sum_band:ini :      0.05s CPU      0.07s WALL (      20 calls)
+     sum_band:cal :      0.00s CPU      0.00s WALL (      20 calls)
+     sum_band:bec :      0.14s CPU      0.20s WALL (      20 calls)
+     addusdens    :      1.23s CPU      1.75s WALL (      20 calls)
+                                        1.75s GPU  (      20 calls)
+     addusd:skk   :      0.05s CPU      0.08s WALL (     100 calls)
+                                        0.08s GPU  (     100 calls)
+
+     Called by *egterg:
+     rdiaghg      :      0.67s CPU      0.91s WALL (      76 calls)
+                                        0.91s GPU  (      76 calls)
+     regterg:over :      0.93s CPU      1.22s WALL (      56 calls)
+     regterg:upda :      0.33s CPU      0.53s WALL (      56 calls)
+     regterg:last :      0.51s CPU      0.68s WALL (      32 calls)
+     h_psi        :      3.69s CPU      5.21s WALL (      77 calls)
+     s_psi        :      0.05s CPU      0.09s WALL (      77 calls)
+     g_psi        :      0.01s CPU      0.01s WALL (      56 calls)
+
+     Called by h_psi:
+     h_psi:calbec :      0.01s CPU      0.01s WALL (      77 calls)
+     vloc_psi     :      2.34s CPU      3.41s WALL (      77 calls)
+                                        3.41s GPU  (      77 calls)
+     add_vuspsi   :      0.71s CPU      0.94s WALL (      77 calls)
+
+     General routines
+     calbec       :      0.01s CPU      0.01s WALL (      97 calls)
+     fft          :      1.00s CPU      1.49s WALL (     231 calls)
+                                        0.11s GPU  (     210 calls)
+     ffts         :      0.42s CPU      0.94s WALL (    1157 calls)
+                                        0.24s GPU  (    1136 calls)
+     fftw         :      0.05s CPU      3.37s WALL (    3082 calls)
+                                        2.72s GPU  (    3082 calls)
+     interpolate  :      1.63s CPU      2.92s WALL (      21 calls)
+     davcio       :      0.14s CPU      0.71s WALL (     460 calls)
+ 
+     Parallel routines
+
+     EXX routines
+     exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
+
+     EXX+US  routines
+
+     EXX+PAW routines
+
+     PAW routines
+     PAW_pot      :     44.61s CPU     49.09s WALL (      21 calls)
+ 
+     PWSCF        :   1m 1.73s CPU   1m15.68s WALL
+
+ 
+   This run was terminated on:  11:36:12  12Jul2026            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=
+Warning: ieee_invalid is signaling
+Warning: ieee_divide_by_zero is signaling
+Warning: ieee_inexact is signaling
+FORTRAN STOP

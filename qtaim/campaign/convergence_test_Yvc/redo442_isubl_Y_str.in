@@ -1,0 +1,46 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'redo442_isubl_Y_str'
+  outdir = './tmp_redo442_isubl_Y_str'
+  pseudo_dir = '/workspace/qe-7.5/pseudo'
+  tprnfor = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 8
+  ntyp = 1
+  ecutwfc = 50
+  ecutrho = 400
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.01
+  nspin = 1
+  vdw_corr = 'grimme-d3'
+  dftd3_version = 4
+/
+&ELECTRONS
+  conv_thr = 1.0d-8
+  diagonalization = 'david'
+  diago_david_ndim = 2
+  mixing_mode = 'local-TF'
+  mixing_beta = 0.2
+  mixing_ndim = 16
+  electron_maxstep = 300
+/
+ATOMIC_SPECIES
+  I    126.904  I.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+  8.9348000000 0.0000000000 0.0000000000
+  0.0000000000 9.6608000000 0.0000000000
+  -3.7625602248 0.0000000000 16.5958256665
+ATOMIC_POSITIONS crystal
+  I  0.4306723141 0.0762536627 0.7012645210
+  I  0.5920955211 0.3448317984 0.7472741674
+  I  0.9219028231 0.3376756663 0.7468356390
+  I  0.2505924720 0.3835861581 0.7583687674
+  I  0.5693276859 0.9237463373 0.2987354790
+  I  0.4079044789 0.6551682016 0.2527258326
+  I  0.0780971769 0.6623243337 0.2531643610
+  I  0.7494075280 0.6164138419 0.2416312326
+K_POINTS automatic
+  4 4 2 0 0 0

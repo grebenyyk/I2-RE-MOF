@@ -1,0 +1,53 @@
+HSE (hybrid) check of I2@Y-MOF charge transfer — summary
+=========================================================
+Goal: confirm the framework->I charge transfer (CT) seen in PBE PDOS is real
+and not a PBE self-interaction artifact, by repeating at the HSE level.
+
+Setup: QE 7.5 GPU (1 L40S), HSE06 (exx_fraction 0.25, screening 0.106,
+gygi-baldereschi), PAW (C/H/O/Y-spn/I-n), ecutwfc 50, ecutrho 400, Gamma-only,
+ACE, mv smearing degauss 0.03 (Y_str also tested cold/0.01), conv_thr 1e-6.
+Same geometries as the PBE pdos_Y_3variants plot (from scf_loaded.in).
+
+HSE SCF converges cleanly for all 3 variants (25-34 iters, ~1-2 min each).
+The converged HSE eigenvalues/occupations (printed before the post-SCF EXX
+step) give the gaps and Fermi-level occupations:
+
+  variant        HSE gap        HOMO occ  LUMO occ  E_F (eV)
+  Y-MOF_st       ~200-400 meV*  0.84      0.05      1.84
+  Y-MOF_act      ~490 meV       0.76      0.08      1.99
+  Y-MOF_vc/deep  ~80 meV        0.60      0.45      2.87
+  * smearing-dependent (401 meV at mv/0.03, 202 meV at cold/0.01) -> near-degenerate states at E_F
+
+Conclusion (answers the CT question):
+  - HSE does NOT open a clean semiconductor gap. All gaps are <<1 eV and
+    smearing-dependent, i.e. the polyiodide stays near-metallic at the hybrid
+    level. The vc/deep variant (uniform 3c-4e chain) is the most metallic.
+  - The bands straddling E_F retain strong partial occupation (0.05-0.84) at
+    HSE -> charge transfer persists at the hybrid level.
+  => CT is NOT a PBE self-interaction artifact. If it were, HSE would open a
+     sizeable gap and depopulate the I-p states at E_F; it does neither.
+
+Full HSE PDOS (orbital-resolved): BLOCKED. projwfc.x needs wfc1.dat, which QE
+writes only at JOB DONE after the post-convergence PAW-EXX energy evaluation.
+That step runs >45 min and never completed interactively (5+ runs killed at
+24-45 min). Bypasses attempted, all failed: ecutfock (ignored for PAW),
+ecutrho 400->200 (EXX grid unchanged, tied to ecutwfc), OMP threads (step not
+threaded), disk_io='high' .wfc1 (direct-access, incompatible with projwfc),
+electron_maxstep=30 (skips finalization but also skips wfc1.dat), cold vs mv
+smearing (identical), exx_me_rcut (invalid variable), PBE-base+patch+wfc-swap
+(blocked by .wfc1 format). See memory i2-mof-hse-pdos-paw-finalization-blocker.
+
+Path to full HSE PDOS: overnight-style run, let each finalization finish
+(~1-2 h/variant, untested to completion), then projwfc.x (ngauss=0 degauss 0.01,
+matches PBE proj.in) on each. Inputs: build_hse_pdos.py; run_hse.sh; run_proj.sh.
+
+UPDATE 2026-07-12: HSE PDOS OBTAINED for all 3 variants (Y_str/st, Y_actc/act,
+Y_deep/vc) via a .wfc1 decode that bypasses the hung PAW-EXX finalization.
+Method: HSE scf with electron_maxstep BELOW convergence (no finalization) writes
+{prefix}.wfc1 (direct-access evc) + schema (HSE eigenvalues/Fermi); a PBE scf
+gives the sequential wfc1.dat format template (header + Miller); decode_hse_pdos.py
+writes HSE wfc1.dat = PBE header/Miller + HSE evc (local==kdip order for -np 1);
+projwfc.x projects -> hse_pdos files. Verified sane: I-5p sigma* acceptor pinned
+at E_F (st +0.19, act +0.32, vc +0.004 eV above E_F at HSE; PBE +0.13/+0.13/+0.007).
+Figure: final_activated_results/pdos_Y_3variants_HSE.png (I-5p HSE solid + PBE
+dashed, O-2p per-O, 3 variants). Pipeline: salvage_pipeline.sh.

@@ -1,0 +1,29 @@
+PBE-D3 convergence study on I2@Y-MOFvc (80-atom loaded / 72-atom empty / gas).
+All SCFs at conv_thr = 1e-6. ΔEads = (E_loaded - E_empty - 4·E_gas)/4 × 1312.75 Ry→kJ.
+
+=== K-MESH (ecut 50/400; loaded AND empty at mesh k; gas @Γ) ===
+  k-mesh    E_loaded (Ry)     E_empty (Ry)     ΔEads (kJ/I2)   Δ vs 4×4×2
+  Γ         -5767.508605      -2735.809709     -163.82         -71.11   (Fermi undersampling)
+  2×2×1     -5767.228213      -2735.809843      -71.75         +20.96
+  4×4×2     -5767.292174      -2735.809950      -92.71          0.00   ← production (loaded)
+  6×6×3     -5767.300069      -2735.809951      -95.30          -2.59
+
+  → Loaded polyiodide@MOF needs 4×4×2 (metallic polyiodide bands; Γ off by 71 kJ).
+  → Empty MOF: max|Δ vs Γ| = 0.080 kJ/I2; 4×4×2 vs 6×6×3 = 0.0005 kJ ⇒ CONVERGED, Γ adequate.
+  → Gas I2 (20 Å box): Δ(2×2×1 − Γ) = 0.000 meV ⇒ Γ exact.
+
+=== CUTOFF (k 4×4×2; empty/gas at matched cutoff) ===
+  ecut      ΔEads (kJ/I2)   Δ vs 50/400   step
+  40/320      -92.70          +0.09         —
+  50/400      -92.79           0.00        -0.09   ← production
+  60/480      -92.82          -0.03        -0.03
+
+  Steps shrink 0.09 → 0.03 ⇒ CONVERGING (variational; higher ecut lowers E_loaded
+  slightly more than E_empty since loaded has more electrons, so ΔEads grows
+  marginally more exothermic by a vanishing amount). Spread 40→60 = 0.12 kJ.
+
+=== CONCLUSION ===
+  Production: loaded@4×4×2, empty@Γ, gas@Γ → ΔEads = -92.79 kJ/mol per I2.
+  Only the loaded cell needs 4×4×2; empty MOF and gas I2 are converged at Γ
+  (empty bias of empty@Γ vs empty@4×4×2 = -0.08 kJ/I2, negligible).
+  Ecut 50/400 is within 0.03 kJ of 60/480 and ~0.09 of 40/320 ⇒ converged.

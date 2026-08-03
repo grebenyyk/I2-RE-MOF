@@ -1,0 +1,40 @@
+Y_act QTAIM CHANGES — old (wrong -12 structure) → new (correct -118, final/Y-MOF_chain.POSCAR)
+=====================================================================================
+New values from qtaim/campaign/Y_actc/ (60/800). BCP from rho17 (critic2 on val.cube
+segfaults for this structure — known issue; rho17 ≈ rho0 at BCPs, values valid).
+
+1) CHARGE TRANSFER (Bader δρ, e/cell) — CT roughly HALVED on the correct structure
+---------------------------------------------------------------------------------
+species   OLD(-12)   NEW(-118)    Δ        note
+  I       +0.495     +0.262    -0.233     iodine CT halved (was overstated)
+  O       -0.371     -0.144    +0.227     O donation halved
+  C       -0.096     -0.082    +0.014     ~same
+  H       -0.019     -0.018    +0.001     ~same
+  Y       -0.009     -0.018    -0.009     spectator (both)
+=> SIGN UNCHANGED (iodine reduced, linker donates, Y spectator). Magnitude ~halved.
+   Update: the "+0.50 e/cell for Y_act" in tables/text → +0.26 e/cell (+0.033/atom).
+
+2) I-I BCP — cores slightly longer/borderline; topology (atom pairing) changed
+---------------------------------------------------------------------------------
+OLD (-12):  I4-I5 2.69 (ρ0.0746 cov) | I7-I8 2.69 (0.0743 cov) | I3-I6 2.94 (0.0496)
+            I2-I3 2.95 (0.0481) | I1-I2 3.02 (0.0439) | I2-I6 3.10 (0.0382)
+NEW (-118): I5-I6 2.74 (ρ0.0695 bord)| I1-I2 2.74 (0.0692 bord) | I3-I4 2.89 (0.0533 bord)
+            I7-I8 2.89 (0.0528 bord) | I6-I7 3.01 (0.0438 cs)  | I2-I4 3.02 (0.0435 cs)
+            I6-I8 3.03 (0.0425 cs)  | I2-I3 3.04 (0.0420 cs)
+=> 2 short "cores" at 2.69 (covalent) → 2.74 (borderline, ∇²ρ~0). 8 I-I bonds (was 6).
+   Different atom pairing (geometry differs). Replace ALL old Y_act I-I rows with these.
+
+3) I-O BCP — contacts MUCH longer/weaker on the correct structure
+---------------------------------------------------------------------------------
+OLD (-12): I1-O23 2.53 (ρ0.306) | I6-O3 2.63 (0.264) | I3-O5 2.86 (0.166) ... [8 contacts, 2.53-3.23 A]
+NEW (-118): I7-O3 3.32 (ρ0.070) | I8-O8 3.34 (0.071) | I4-O20 3.38 (0.067) | I3-O14 3.39 (0.061)
+            I6-O23 3.64 (0.040) | I2-O11 3.70 (0.036) | I7-O5 3.97 (0.023)  [7 contacts, 3.3-4.0 A]
+=> The wrong structure had iodine crammed against oxygens (short 2.53 A, ρ up to 0.31);
+   the correct -118 has loose, long I···O halogen contacts (3.3-4.0 A, ρ 0.02-0.07).
+   Replace ALL old Y_act I-O rows.
+
+BOTTOM LINE: every Y_act real-space number in the current tables (BCP I-I, BCP I-O, CT)
+needs replacing with the Y_actc values above. The QUALITATIVE story is unchanged
+(polyiodide, iodine reduced, linker→I CT, Y spectator, carboxylate-anchored) — only the
+magnitudes shift (CT ~halved, I-O contacts much longer/weaker, I-I cores slightly longer).
+Other 5 systems (Y_str, Tb_str, Gd_str, Tb_act, Gd_act) are UNAFFECTED (verified correct).

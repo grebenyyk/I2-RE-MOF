@@ -1,0 +1,40 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'hse_i2'
+  outdir = './tmp'
+  pseudo_dir = '/workspace/qe-7.5/pseudo'
+  tprnfor = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 50
+  ecutrho = 400
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.01
+  nspin = 1
+  input_dft = 'hse'
+  exxdiv_treatment = 'gygi-baldereschi'
+  x_gamma_extrapolation = .true.
+/
+&ELECTRONS
+  conv_thr = 1.0d-7
+  diagonalization = 'david'
+  diago_david_ndim = 4
+  mixing_mode = 'local-TF'
+  mixing_beta = 0.2
+  mixing_ndim = 16
+  electron_maxstep = 500
+/
+ATOMIC_SPECIES
+I      126.904  I.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+   20.0000000000   0.0000000000   0.0000000000
+   0.0000000000   20.0000000000   0.0000000000
+   0.0000000000   0.0000000000   20.0000000000
+ATOMIC_POSITIONS crystal
+I    0.500000000000  0.500000000000  0.433329800000
+I    0.500000000000  0.500000000000  0.566670200000
+K_POINTS gamma

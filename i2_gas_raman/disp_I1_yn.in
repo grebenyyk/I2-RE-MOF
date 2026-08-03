@@ -1,0 +1,33 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'i2gas_I1_yn'
+  outdir = './tmp_I1_yn'
+  pseudo_dir = '/workspace/qe-7.5/pseudo'
+  tprnfor = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 60
+  ecutrho = 400
+  occupations = 'fixed'
+  nspin = 1
+/
+&ELECTRONS
+  conv_thr = 1.0d-8
+  diagonalization = 'david'
+  mixing_beta = 0.2
+/
+&IONS
+/
+ATOMIC_SPECIES
+  I  126.904  I.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+  15.0 0 0
+  0 15.0 0
+  0 0 15.0
+ATOMIC_POSITIONS angstrom
+  I  6.1550860211  7.5000000000  7.5000000000
+  I  8.8449139789  7.4900000000  7.5000000000
+K_POINTS gamma

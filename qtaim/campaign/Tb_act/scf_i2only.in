@@ -1,0 +1,47 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'Tb_act_i2only'
+  outdir = './tmp_i2only'
+  pseudo_dir = '/workspace/qe-7.5/pseudo'
+  tprnfor = .true.
+  tstress = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 8
+  ntyp = 1
+  ecutwfc = 60
+  ecutrho = 800
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.01
+  nspin = 1
+  vdw_corr = 'grimme-d3'
+  dftd3_version = 4
+/
+&ELECTRONS
+  conv_thr = 1.0d-8
+  diagonalization = 'david'
+  diago_david_ndim = 2
+  mixing_mode = 'local-TF'
+  mixing_beta = 0.2
+  mixing_ndim = 16
+  electron_maxstep = 300
+/
+ATOMIC_SPECIES
+I    126.904  I.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+   9.0225999925   0.0000000000   0.0000000000
+   0.0000000000   9.6614000720   0.0000000000
+  -3.8267553348   0.0000000000   16.7031423717
+ATOMIC_POSITIONS crystal
+I    0.398615692000  0.668089263200  0.124440992600
+I    0.496863066200  0.750036044600  0.283579261300
+I    0.833620551800  0.743912320600  0.286383384400
+I    1.158700713600  0.742122760500  0.289035853200
+I    0.607730199700  0.337744549400  0.878060966400
+I    0.501396872500  0.244745716600  0.721277098500
+I    0.165096858500  0.250670745100  0.718437885400
+I    0.840031907800  0.251460665000  0.714881108100
+K_POINTS automatic
+  1 1 1 0 0 0

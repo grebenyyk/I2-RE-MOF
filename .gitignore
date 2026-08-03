@@ -1,0 +1,91 @@
+# =============================================================================
+# i2_mof — default-deny ALLOWLIST .gitignore
+#
+# This tree is ~623 GB of Quantum ESPRESSO data, almost all of it regenerable
+# binaries (wavefunctions .wfc*, charge-density.dat, .save/ restart dirs, .cube
+# grids, .mix*, .hdf5, pseudopotentials, ...). Rather than maintain a fragile
+# blocklist of every binary type — and re-edit it every time QE emits a new one
+# — we invert it:
+#
+#   1. `*`              ignore everything
+#   2. `!*/`            ...but traverse into every directory
+#   3. `!<extensions>`  re-allow ONLY known-good text/code/result/figure types
+#   4. `/dir/**`        exclude a few scratch/third-party subtrees
+#
+# Net effect: ONLY the file types in section 3 can ever enter git, no matter
+# what new binary extensions appear as the project runs. New calculations get
+# their .in/.out/POSCAR/code tracked automatically and their binaries + .save/
+# restart dirs ignored automatically — zero manual maintenance.
+#
+# Gotcha baked into the design: a bare directory pattern like `/tools/` does
+# NOT exclude once `!*/` (step 2) is present; the file-level form `/tools/**`
+# is required. Verified empirically against `git add`.
+# =============================================================================
+
+# --- 1. Ignore everything by default ---
+*
+
+# --- 2. Traverse into every directory so the allowlist below can match ---
+!*/
+
+# --- 3. ALLOWLIST (the only file types that can be tracked) ---
+# repo meta
+!/.gitignore
+# code
+!*.py
+!*.sh
+!*.pl
+# docs / text / structured data
+!*.md
+!*.rst
+!*.txt
+!*.json
+!*.yaml
+!*.yml
+!*.csv
+!*.tsv
+!*.tex
+# QE / VASP inputs and text outputs
+!*.in
+!*.out
+!*.pwi
+!*.pwo
+# structures
+!*.cif
+!*.xyz
+!*.vasp
+!*POSCAR*
+!KPOINTS*
+!INCAR*
+# figures / tables
+!*.pdf
+!*.png
+!*.jpg
+!*.jpeg
+!*.svg
+!*.eps
+!*.docx
+!*.xlsx
+
+# --- 4. EXCLUDE subtrees (file-level /** ; MUST follow the allowlist).
+#        NOTE: gitignore has NO inline comments — a '#' mid-line is taken
+#        literally and silently breaks the pattern. Keep comments on their
+#        own '#' lines, patterns alone on theirs.
+# third-party binaries/source: critic2, multiwfn, tarballs
+/tools/**
+# scratch
+/tmp/**
+# redundant copy of final_activated_results/
+/final_activated_results_archive/**
+# QE .save/ restart dirs (any depth; covers future runs automatically)
+*.save/
+# QE PAW numeric dump inside .save/ (the only allowlisted type that lives there)
+paw.txt
+__pycache__/
+*.pyc
+*.pyo
+
+# --- Tunables: uncomment a line to START tracking that type ---
+# !*.upf     # pseudopotentials (treated as external: PSLibrary / SSSP)
+# !*.xml     # QE data-file-schema dumps (regenerable)
+# !*.log     # run / campaign logs

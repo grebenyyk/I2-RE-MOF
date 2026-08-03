@@ -1,0 +1,32 @@
+BREATHING / ACTIVATION-STRAIN TEST (corrected, official sources = collect_final_table.py)
+E(loaded_str)-E(loaded_act) = dE_strain(empty) + [int_str - int_act]*4
+Sources: loaded_str={s}/uniform_chain/loaded.out, empty_str={s}/empty_mof.out,
+loaded_act = 08_Gd/activated_chain/loaded.out, {06_Tb,13_Y}/activated_i2/loaded_ext.out,
+empty_act={s}/activate_empty/relax.out. Et = LAST "! total energy" (trajectory-safe).
+Reproduces table exactly: Gd -200.4/-131.9, Tb -177.3/-125.8, Y -177.4/-118.4 (str/act per I2).
+
+metal  int_str  int_act  dEstrain(empty) int_gain loaded_diff  verdict       strain/gain
+Gd     -200.4   -131.9     +1125 kJ       -274     +851 kJ     activated fav   4.1x
+Tb     -177.3   -125.8      +996 kJ       -206     +790 kJ     activated fav   4.8x
+Y      -177.4   -118.4     +1190 kJ       -236     +954 kJ     activated fav   5.0x
+
+CONCLUSION: NONE of the three RE-MOFs breathe for iodine.
+- Empty-framework strain (activated -> strained geometry) costs 996-1190 kJ/mol/cell.
+- Iodine binding gains only 206-274 kJ/mol/cell from straining (4-5x too little).
+- Loaded system favors the ACTIVATED (undistorted) pore by 790-954 kJ/mol/cell.
+- => -126 to -132 per I2 (activated) is the THERMODYNAMIC loaded-state binding.
+- => -177 to -200 (strained) is "pre-organization" binding -- not thermodynamically accessible.
+- Strain localizes on carboxylate O atoms (iodine-anchoring sites), 0.55-0.85 A shifts;
+  metal moves only 0.30 A. Same cell/volume -> internal O-coordination rearrangement,
+  NOT MIL-53-style volume breathing. Framework (RE-O coordination) too stiff to warp.
+
+NOTE on earlier Y=-12 error: that used qtaim/campaign/Y_act (a reseeded variant with a
+bad geometry) and a first-match energy read on trajectory files. Corrected here.
+Empty-framework strain is robust (~1000-1190) across campaign and official sources.
+
+
+--- TWO-DECIMAL TABLE ---
+metal   int_str   int_act    dEstrain   int_gain  ld_str_act
+Gd     -200.44   -131.94     1124.68    -274.01      850.68
+Tb     -177.26   -125.81      996.28    -205.80      790.47
+Y      -177.43   -118.36     1190.47    -236.30      954.17

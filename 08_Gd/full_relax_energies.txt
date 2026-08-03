@@ -1,0 +1,82 @@
+==============================================================================
+Gd-MOF (08_Gd) FULL-RELAX SORPTION CALCULATIONS
+Cell FIXED, ALL atoms (framework + I) movable. PBE+D3(BJ), 50/400 Ry, Gamma.
+==============================================================================
+
+--- REFERENCES ---
+E_I2(vacuum)              = -757.79989474 Ry   (i2_mof/i2_vac_ref/scf.out)
+E_empty(activated)        = -3833.54878663 Ry   (08_Gd/activate_empty/relax.out)
+E_empty(full-relax prior)= -3833.54532508 Ry   (08_Gd/full_relax/empty_full.out)
+  -> prior empty_full BFGS converged? False  (CAVEAT: did NOT fully converge,
+      stopped at bfgs step 48 w/ force ~0.011; treat as indicative only)
+
+--- RUN RESULTS ---
+
+[CHAIN seed]  (full_relax_chain)
+  JOB DONE             : True
+  bfgs converged       : True
+  bfgs steps / scf cyc : 63 / 66
+  final force (Ry/au)  : 0.004457
+  E_loaded final (Ry)  : -6865.18736323
+  final-geometry src   : last ATOMIC_POSITIONS block (= converged final geometry)
+  framework RMSD vs seed (A): 0.2396
+  I-I <4.5 A contacts (seed): 10 -- 2.986, 2.986, 2.991, 2.991, 3.039, 3.039
+  I-I <4.5 A contacts (fin) : 12 -- 2.819, 2.819, 2.927, 2.927, 3.039, 3.039
+
+[MOL seed]  (full_relax_mol)
+  JOB DONE             : True
+  bfgs converged       : False
+  bfgs steps / scf cyc : 182 / 182
+  final force (Ry/au)  : 0.010344
+  E_loaded final (Ry)  : -6865.08823602
+  ** NOTE              : hit nstep cap (did NOT print 'bfgs converged');
+     using last ionic geometry. Final force 0.0103 Ry/au.
+  final-geometry src   : last ATOMIC_POSITIONS block (run hit nstep cap; not formally converged)
+  framework RMSD vs seed (A): 0.2077
+  I-I <4.5 A contacts (seed): 11 -- 2.663, 2.690, 2.705, 2.707, 3.572, 4.082
+  I-I <4.5 A contacts (fin) : 10 -- 2.712, 2.715, 2.870, 2.939, 3.025, 3.128
+
+--- SORPTION ENERGY E_int(per I2) ---
+Formula: E_int = (E_loaded - E_empty_ref - 4*E_I2vac) * 13.605693009 / 4
+         then *96.485 -> kJ/mol per I2.  N_I2 = 4.
+
+[CHAIN] E_loaded = -6865.18736323 Ry
+   vs activated-empty                        E_empty=-3833.54879 Ry -> E_int = -1.4932 eV/I2 = -144.07 kJ/mol/I2
+   vs full-relax-empty(prior,UNCONVERGED)    E_empty=-3833.54533 Ry -> E_int = -1.5050 eV/I2 = -145.21 kJ/mol/I2
+[MOL] E_loaded = -6865.08823602 Ry
+   vs activated-empty                        E_empty=-3833.54879 Ry -> E_int = -1.1560 eV/I2 = -111.54 kJ/mol/I2
+   vs full-relax-empty(prior,UNCONVERGED)    E_empty=-3833.54533 Ry -> E_int = -1.1678 eV/I2 = -112.68 kJ/mol/I2
+
+--- CHAIN vs MOL: do the two seeds collapse to the same minimum? ---
+  RMSD all 80 atoms (chain-final vs mol-final): 1.6296 A
+  RMSD framework only                         : 0.1522 A
+  RMSD I atoms only                           : 5.1330 A
+  dE = E_chain - E_mol = -0.099127 Ry = -1.3487 eV = -130.13 kJ/mol (per unit cell, 4 I2)
+  -> per I2: -32.53 kJ/mol
+
+  CONCLUSION: the two seeds CONVERGED TO DISTINCT MINIMA (chain stays lower; full relaxation does NOT collapse them).
+
+--- RAW ENERGIES (for re-computation with a future rigorous E_empty_full) ---
+  E_loaded(chain) = -6865.18736323 Ry
+  E_loaded(mol)   = -6865.08823602 Ry
+  E_I2vac         = -757.79989474 Ry  (x4 = -3031.19957896)
+
+--- CAVEATS ---
+* Both runs used conv_thr=1e-3, mixing_beta=0.2, degauss=0.01. The chain SCF
+  plateaus at ~7e-4 accuracy at the strained-chain geometry (conv_thr 1e-5/1e-6
+  is unreachable there and caused the first attempts to abort at the 300-iter
+  SCF cap; the original uniform_chain/loaded.in also accepted ~3e-4 on its first
+  SCF). The mol run initially used conv_thr=1e-5 and aborted at step 64 (SCF
+  plateau ~1.0e-5); it was restarted from its step-63 geometry with conv_thr=1e-3
+  (see attempt1_conv1e-5_64steps/).
+* The mol hit nstep=200 (force 0.0103, just above forc_conv_thr=1e-2) -- the mol
+  basin is broad/soft; the energy had effectively converged (delta-E < 1e-5 Ry
+  over the last ~30 steps, E = -6865.0882 Ry). The chain converged cleanly
+  (force 0.0045, 'bfgs converged' at step 63).
+* E_int 'vs activated-empty' uses the framework-only-relaxed empty (no I).
+  A rigorous full-relax reference needs the empty framework ALSO full-relaxed
+  (cell fixed, atoms free). The prior full_relax/empty_full did NOT converge
+  (stopped step 48, force 0.011) -- its E is reported for reference only.
+* First attempts with mixing_beta=0.1 failed (SCF hit 300-iter cap); the proven
+  recipe is mixing_beta=0.2 + degauss=0.01 (matches uniform_chain/loaded.in).
+  See full_relax_chain/attempt1_beta0p1/ and attempt2_conv1e-5_stalled/.

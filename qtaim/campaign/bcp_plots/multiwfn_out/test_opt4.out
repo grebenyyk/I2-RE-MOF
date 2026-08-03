@@ -1,0 +1,1257 @@
+[95m Multiwfn -- A Multifunctional Wavefunction Analyzer
+[0m[32m Version 2026.7.11 (release date is the same as version name)
+[0m Developer: Tian Lu (Beijing Kein Research Center for Natural Sciences)
+ Multiwfn official website: http://sobereva.com/multiwfn
+ Multiwfn English forum: http://sobereva.com/wfnbbs
+ Multiwfn Chinese forum: http://bbs.keinsci.com/wfn
+ ( Number of parallel threads:   4  Current date: 2026-07-14  Time: 07:00:20 )
+ 
+ Both following papers ***MUST BE CITED IN MAIN TEXT*** if Multiwfn is used:
+[36m
+  Tian Lu, Feiwu Chen, J. Comput. Chem., 33, 580 (2012) DOI: 10.1002/jcc.22885
+  Tian Lu, J. Chem. Phys., 161, 082503 (2024) DOI: 10.1063/5.0216272
+[0m
+ See "How to cite Multiwfn.pdf" in Multiwfn binary package for more information
+ 
+ Now input file path, for example, E:\Plastic_Memories\Aira.mwfn
+ (.mwfn/wfn/wfx/fch/molden/pdb/xyz/mol2/cif/cub... see Section 2.5 of manual)
+ Hint: Pressing ENTER button directly can select a file in a GUI window. To reload the past file, inputting "o". Input such as ?miku.fch can open the miku.fch in the same folder as the past file
+ Please wait...
+ 
+ Title line of this file:
+ Cubefile created from PWScf calculation
+Contains the selected quantity on a FFT grid
+
+ Total number of atoms:      80
+ 
+ Grid information:
+ Translation vector:        X           Y           Z         Norm   (Bohr)
+          Vector 1:     0.105527    0.000000    0.000000    0.105527
+          Vector 2:     0.000000    0.101424    0.000000    0.101424
+          Vector 3:    -0.023701    0.000000    0.104539    0.107192
+ Volume of each grid:    0.001119 Bohr^3
+ The range of x is from     0.000000 to     9.692194 Bohr,  160 points
+ The range of y is from     0.000000 to    18.154896 Bohr,  180 points
+ The range of z is from     0.000000 to    31.257161 Bohr,  300 points
+ Total number of grid points:     8640000
+ This grid data will take up at least    65 MB memory
+ 
+ Loading grid data, please wait...
+ 
+ Statistical information:
+ Global minimum value:  0.23181000E-04 at  -6.39080   2.02848  29.58454 Bohr
+ Global maximum value:  0.11016000E+01 at   5.35712  11.86661  29.89815 Bohr
+ Differential element:   0.0011188778 Bohr^3
+ Summing up positive value in grid file:               343203.3894192714
+ After multiplied by differential element:                384.0026628002
+ Summing up negative value in grid file:                    0.0000000000
+ After multiplied by differential element:                  0.0000000000
+ Summing up all value in grid file:                    343203.3894192714
+ After multiplied by differential element:                384.0026628002
+
+ Loaded /workspace/dimitry/calc/qe/i2_mof/qtaim/campaign/Y_act/val.cube successfully!
+ 
+ Formula: H12 C32 O24 Y4 I8      Total atoms:      80
+ Molecule weight:      2151.28369 Da
+ Point group: C1 
+ 
+ Note: A set of grid data is presented in memory
+ "q": Exit program gracefully          "r": Load a new file
+                    ************ Main function menu ************
+ 0 Show molecular structure and view isosurface
+ 1 Output all properties at a point       2 Topology analysis
+ 3 Output and plot specific property in a line
+ 4 Output and plot specific property in a plane
+ 5 Output and plot specific property within a spatial region (calc. grid data)
+ 6 Check & modify wavefunction
+ 7 Population analysis and calculation of atomic charges
+ 8 Orbital composition analysis           9 Bond order analysis
+ 10 Plot total DOS, PDOS, OPDOS, local DOS, COHP and photoelectron spectrum
+ 11 Plot IR/Raman/UV-Vis/ECD/VCD/ROA/NMR spectrum
+ 12 Quantitative analysis of molecular surface
+ 13 Process grid data
+ 14 Adaptive natural density partitioning (AdNDP) analysis
+ 15 Fuzzy atomic space analysis
+ 16 Charge decomposition analysis (CDA) and plot orbital interaction diagram
+ 17 Basin analysis                       18 Electron excitation analysis
+ 19 Orbital localization analysis        20 Visual study of weak interaction
+ 21 Energy decomposition analysis        22 Conceptual DFT (CDFT) analysis
+ 23 ETS-NOCV analysis                    24 (Hyper)polarizability analysis
+ 25 Electron delocalization and aromaticity analyses
+ 26 Structure and geometry related analyses
+ 100 Other functions (Part 1)            200 Other functions (Part 2)
+ 300 Other functions (Part 3)
+ 
+          !!! Note: All length units in this module are Bohr !!!
+ 
+              ================ Topology analysis ===============
+ -11 Select real space function, current:    1
+ -10 Return to main menu
+ -9 Measure distances, angles and dihedral angles between CPs or atoms
+ -5 Modify or print detail or export paths, or plot property along a path
+ -4 Modify or export CPs (critical points)
+ -3 Set interbasin surface generating parameters
+ -2 Set path generating parameters
+ -1 Set CP searching parameters
+ 0 Print and visualize all generated CPs, paths and interbasin surfaces
+ 1 Search CPs from given starting points
+ 2 Search CPs from nuclear positions
+ 3 Search CPs from midpoint of atomic pairs
+ 4 Search CPs from triangle center of three atoms
+ 5 Search CPs from pyramid center of four atoms
+ 6 Search CPs from a batch of points within sphere(s)
+ 7 Show real space function values at specific CP or all CPs
+ 8 Generating the paths connecting (3,-3) and (3,-1) CPs
+ 9 Generating the paths connecting (3,+1) and (3,+3) CPs
+ 10 Add or delete interbasin surfaces
+ 20 Calculate Shannon aromaticity index
+ 21 Calculate gradient and curvature of electron density along a direction
+ 
+              ------------ Modify or export found CPs ------------
+ 0 Return
+ 1 Print summary of CPs (in Bohr)    -1 Print summary of CPs (in Angstrom)
+ 2 Delete some CPs
+ 3 Add a CP artificially
+ 4 Save CPs to CPs.txt in current folder
+ 5 Load CPs from a text file
+ 6 Export CPs as CPs.pdb file in current folder
+ Input file path, e.g. C:\ltwd\CPs.txt
+ (The format of the file must be identical to the one outputted by option 4)
+ Note: If pressing ENTER button directly, CPs.txt in current folder will be loaded
+ Done, CP information has been retrieved from the file
+ 
+              ------------ Modify or export found CPs ------------
+ 0 Return
+ 1 Print summary of CPs (in Bohr)    -1 Print summary of CPs (in Angstrom)
+ 2 Delete some CPs
+ 3 Add a CP artificially
+ 4 Save CPs to CPs.txt in current folder
+ 5 Load CPs from a text file
+ 6 Export CPs as CPs.pdb file in current folder
+ 
+              ================ Topology analysis ===============
+ -11 Delete results and reselect real space function, current:    1
+ -10 Return to main menu
+ -9 Measure distances, angles and dihedral angles between CPs or atoms
+ -5 Modify or print detail or export paths, or plot property along a path
+ -4 Modify or export CPs (critical points)
+ -3 Set interbasin surface generating parameters
+ -2 Set path generating parameters
+ -1 Set CP searching parameters
+ 0 Visualize all generated CPs, paths and interbasin surfaces
+ 00 Print information of all generated CPs and paths
+ 1 Search CPs from given starting points
+ 2 Search CPs from nuclear positions
+ 3 Search CPs from midpoint of atomic pairs
+ 4 Search CPs from triangle center of three atoms
+ 5 Search CPs from pyramid center of four atoms
+ 6 Search CPs from a batch of points within sphere(s)
+ 7 Show real space function values at specific CP or all CPs
+ 8 Generating the paths connecting (3,-3) and (3,-1) CPs
+ 9 Generating the paths connecting (3,+1) and (3,+3) CPs
+ 10 Add or delete interbasin surfaces
+ 20 Calculate Shannon aromaticity index
+ 21 Calculate gradient and curvature of electron density along a direction
+ Input the index of the CP that you are interested in, e.g. 3
+ Note 1: If input 0, then properties of all CPs will be outputted to CPprop.txt in current folder (and if you feel the output speed is slow, you can input -1 to avoid outputting ESP, which is the most expensive one)
+ Note 2: If input CP index with "d" suffix, e.g. 17d, then property of this CP can be decomposed into orbital contribution
+ Please wait...
+ Outputting properties of CP     1  /   806
+ Outputting properties of CP     2  /   806
+ Outputting properties of CP     3  /   806
+ Outputting properties of CP     4  /   806
+ Outputting properties of CP     5  /   806
+ Outputting properties of CP     6  /   806
+ Outputting properties of CP     7  /   806
+ Outputting properties of CP     8  /   806
+ Outputting properties of CP     9  /   806
+ Outputting properties of CP    10  /   806
+ Outputting properties of CP    11  /   806
+ Outputting properties of CP    12  /   806
+ Outputting properties of CP    13  /   806
+ Outputting properties of CP    14  /   806
+ Outputting properties of CP    15  /   806
+ Outputting properties of CP    16  /   806
+ Outputting properties of CP    17  /   806
+ Outputting properties of CP    18  /   806
+ Outputting properties of CP    19  /   806
+ Outputting properties of CP    20  /   806
+ Outputting properties of CP    21  /   806
+ Outputting properties of CP    22  /   806
+ Outputting properties of CP    23  /   806
+ Outputting properties of CP    24  /   806
+ Outputting properties of CP    25  /   806
+ Outputting properties of CP    26  /   806
+ Outputting properties of CP    27  /   806
+ Outputting properties of CP    28  /   806
+ Outputting properties of CP    29  /   806
+ Outputting properties of CP    30  /   806
+ Outputting properties of CP    31  /   806
+ Outputting properties of CP    32  /   806
+ Outputting properties of CP    33  /   806
+ Outputting properties of CP    34  /   806
+ Outputting properties of CP    35  /   806
+ Outputting properties of CP    36  /   806
+ Outputting properties of CP    37  /   806
+ Outputting properties of CP    38  /   806
+ Outputting properties of CP    39  /   806
+ Outputting properties of CP    40  /   806
+ Outputting properties of CP    41  /   806
+ Outputting properties of CP    42  /   806
+ Outputting properties of CP    43  /   806
+ Outputting properties of CP    44  /   806
+ Outputting properties of CP    45  /   806
+ Outputting properties of CP    46  /   806
+ Outputting properties of CP    47  /   806
+ Outputting properties of CP    48  /   806
+ Outputting properties of CP    49  /   806
+ Outputting properties of CP    50  /   806
+ Outputting properties of CP    51  /   806
+ Outputting properties of CP    52  /   806
+ Outputting properties of CP    53  /   806
+ Outputting properties of CP    54  /   806
+ Outputting properties of CP    55  /   806
+ Outputting properties of CP    56  /   806
+ Outputting properties of CP    57  /   806
+ Outputting properties of CP    58  /   806
+ Outputting properties of CP    59  /   806
+ Outputting properties of CP    60  /   806
+ Outputting properties of CP    61  /   806
+ Outputting properties of CP    62  /   806
+ Outputting properties of CP    63  /   806
+ Outputting properties of CP    64  /   806
+ Outputting properties of CP    65  /   806
+ Outputting properties of CP    66  /   806
+ Outputting properties of CP    67  /   806
+ Outputting properties of CP    68  /   806
+ Outputting properties of CP    69  /   806
+ Outputting properties of CP    70  /   806
+ Outputting properties of CP    71  /   806
+ Outputting properties of CP    72  /   806
+ Outputting properties of CP    73  /   806
+ Outputting properties of CP    74  /   806
+ Outputting properties of CP    75  /   806
+ Outputting properties of CP    76  /   806
+ Outputting properties of CP    77  /   806
+ Outputting properties of CP    78  /   806
+ Outputting properties of CP    79  /   806
+ Outputting properties of CP    80  /   806
+ Outputting properties of CP    81  /   806
+ Outputting properties of CP    82  /   806
+ Outputting properties of CP    83  /   806
+ Outputting properties of CP    84  /   806
+ Outputting properties of CP    85  /   806
+ Outputting properties of CP    86  /   806
+ Outputting properties of CP    87  /   806
+ Outputting properties of CP    88  /   806
+ Outputting properties of CP    89  /   806
+ Outputting properties of CP    90  /   806
+ Outputting properties of CP    91  /   806
+ Outputting properties of CP    92  /   806
+ Outputting properties of CP    93  /   806
+ Outputting properties of CP    94  /   806
+ Outputting properties of CP    95  /   806
+ Outputting properties of CP    96  /   806
+ Outputting properties of CP    97  /   806
+ Outputting properties of CP    98  /   806
+ Outputting properties of CP    99  /   806
+ Outputting properties of CP   100  /   806
+ Outputting properties of CP   101  /   806
+ Outputting properties of CP   102  /   806
+ Outputting properties of CP   103  /   806
+ Outputting properties of CP   104  /   806
+ Outputting properties of CP   105  /   806
+ Outputting properties of CP   106  /   806
+ Outputting properties of CP   107  /   806
+ Outputting properties of CP   108  /   806
+ Outputting properties of CP   109  /   806
+ Outputting properties of CP   110  /   806
+ Outputting properties of CP   111  /   806
+ Outputting properties of CP   112  /   806
+ Outputting properties of CP   113  /   806
+ Outputting properties of CP   114  /   806
+ Outputting properties of CP   115  /   806
+ Outputting properties of CP   116  /   806
+ Outputting properties of CP   117  /   806
+ Outputting properties of CP   118  /   806
+ Outputting properties of CP   119  /   806
+ Outputting properties of CP   120  /   806
+ Outputting properties of CP   121  /   806
+ Outputting properties of CP   122  /   806
+ Outputting properties of CP   123  /   806
+ Outputting properties of CP   124  /   806
+ Outputting properties of CP   125  /   806
+ Outputting properties of CP   126  /   806
+ Outputting properties of CP   127  /   806
+ Outputting properties of CP   128  /   806
+ Outputting properties of CP   129  /   806
+ Outputting properties of CP   130  /   806
+ Outputting properties of CP   131  /   806
+ Outputting properties of CP   132  /   806
+ Outputting properties of CP   133  /   806
+ Outputting properties of CP   134  /   806
+ Outputting properties of CP   135  /   806
+ Outputting properties of CP   136  /   806
+ Outputting properties of CP   137  /   806
+ Outputting properties of CP   138  /   806
+ Outputting properties of CP   139  /   806
+ Outputting properties of CP   140  /   806
+ Outputting properties of CP   141  /   806
+ Outputting properties of CP   142  /   806
+ Outputting properties of CP   143  /   806
+ Outputting properties of CP   144  /   806
+ Outputting properties of CP   145  /   806
+ Outputting properties of CP   146  /   806
+ Outputting properties of CP   147  /   806
+ Outputting properties of CP   148  /   806
+ Outputting properties of CP   149  /   806
+ Outputting properties of CP   150  /   806
+ Outputting properties of CP   151  /   806
+ Outputting properties of CP   152  /   806
+ Outputting properties of CP   153  /   806
+ Outputting properties of CP   154  /   806
+ Outputting properties of CP   155  /   806
+ Outputting properties of CP   156  /   806
+ Outputting properties of CP   157  /   806
+ Outputting properties of CP   158  /   806
+ Outputting properties of CP   159  /   806
+ Outputting properties of CP   160  /   806
+ Outputting properties of CP   161  /   806
+ Outputting properties of CP   162  /   806
+ Outputting properties of CP   163  /   806
+ Outputting properties of CP   164  /   806
+ Outputting properties of CP   165  /   806
+ Outputting properties of CP   166  /   806
+ Outputting properties of CP   167  /   806
+ Outputting properties of CP   168  /   806
+ Outputting properties of CP   169  /   806
+ Outputting properties of CP   170  /   806
+ Outputting properties of CP   171  /   806
+ Outputting properties of CP   172  /   806
+ Outputting properties of CP   173  /   806
+ Outputting properties of CP   174  /   806
+ Outputting properties of CP   175  /   806
+ Outputting properties of CP   176  /   806
+ Outputting properties of CP   177  /   806
+ Outputting properties of CP   178  /   806
+ Outputting properties of CP   179  /   806
+ Outputting properties of CP   180  /   806
+ Outputting properties of CP   181  /   806
+ Outputting properties of CP   182  /   806
+ Outputting properties of CP   183  /   806
+ Outputting properties of CP   184  /   806
+ Outputting properties of CP   185  /   806
+ Outputting properties of CP   186  /   806
+ Outputting properties of CP   187  /   806
+ Outputting properties of CP   188  /   806
+ Outputting properties of CP   189  /   806
+ Outputting properties of CP   190  /   806
+ Outputting properties of CP   191  /   806
+ Outputting properties of CP   192  /   806
+ Outputting properties of CP   193  /   806
+ Outputting properties of CP   194  /   806
+ Outputting properties of CP   195  /   806
+ Outputting properties of CP   196  /   806
+ Outputting properties of CP   197  /   806
+ Outputting properties of CP   198  /   806
+ Outputting properties of CP   199  /   806
+ Outputting properties of CP   200  /   806
+ Outputting properties of CP   201  /   806
+ Outputting properties of CP   202  /   806
+ Outputting properties of CP   203  /   806
+ Outputting properties of CP   204  /   806
+ Outputting properties of CP   205  /   806
+ Outputting properties of CP   206  /   806
+ Outputting properties of CP   207  /   806
+ Outputting properties of CP   208  /   806
+ Outputting properties of CP   209  /   806
+ Outputting properties of CP   210  /   806
+ Outputting properties of CP   211  /   806
+ Outputting properties of CP   212  /   806
+ Outputting properties of CP   213  /   806
+ Outputting properties of CP   214  /   806
+ Outputting properties of CP   215  /   806
+ Outputting properties of CP   216  /   806
+ Outputting properties of CP   217  /   806
+ Outputting properties of CP   218  /   806
+ Outputting properties of CP   219  /   806
+ Outputting properties of CP   220  /   806
+ Outputting properties of CP   221  /   806
+ Outputting properties of CP   222  /   806
+ Outputting properties of CP   223  /   806
+ Outputting properties of CP   224  /   806
+ Outputting properties of CP   225  /   806
+ Outputting properties of CP   226  /   806
+ Outputting properties of CP   227  /   806
+ Outputting properties of CP   228  /   806
+ Outputting properties of CP   229  /   806
+ Outputting properties of CP   230  /   806
+ Outputting properties of CP   231  /   806
+ Outputting properties of CP   232  /   806
+ Outputting properties of CP   233  /   806
+ Outputting properties of CP   234  /   806
+ Outputting properties of CP   235  /   806
+ Outputting properties of CP   236  /   806
+ Outputting properties of CP   237  /   806
+ Outputting properties of CP   238  /   806
+ Outputting properties of CP   239  /   806
+ Outputting properties of CP   240  /   806
+ Outputting properties of CP   241  /   806
+ Outputting properties of CP   242  /   806
+ Outputting properties of CP   243  /   806
+ Outputting properties of CP   244  /   806
+ Outputting properties of CP   245  /   806
+ Outputting properties of CP   246  /   806
+ Outputting properties of CP   247  /   806
+ Outputting properties of CP   248  /   806
+ Outputting properties of CP   249  /   806
+ Outputting properties of CP   250  /   806
+ Outputting properties of CP   251  /   806
+ Outputting properties of CP   252  /   806
+ Outputting properties of CP   253  /   806
+ Outputting properties of CP   254  /   806
+ Outputting properties of CP   255  /   806
+ Outputting properties of CP   256  /   806
+ Outputting properties of CP   257  /   806
+ Outputting properties of CP   258  /   806
+ Outputting properties of CP   259  /   806
+ Outputting properties of CP   260  /   806
+ Outputting properties of CP   261  /   806
+ Outputting properties of CP   262  /   806
+ Outputting properties of CP   263  /   806
+ Outputting properties of CP   264  /   806
+ Outputting properties of CP   265  /   806
+ Outputting properties of CP   266  /   806
+ Outputting properties of CP   267  /   806
+ Outputting properties of CP   268  /   806
+ Outputting properties of CP   269  /   806
+ Outputting properties of CP   270  /   806
+ Outputting properties of CP   271  /   806
+ Outputting properties of CP   272  /   806
+ Outputting properties of CP   273  /   806
+ Outputting properties of CP   274  /   806
+ Outputting properties of CP   275  /   806
+ Outputting properties of CP   276  /   806
+ Outputting properties of CP   277  /   806
+ Outputting properties of CP   278  /   806
+ Outputting properties of CP   279  /   806
+ Outputting properties of CP   280  /   806
+ Outputting properties of CP   281  /   806
+ Outputting properties of CP   282  /   806
+ Outputting properties of CP   283  /   806
+ Outputting properties of CP   284  /   806
+ Outputting properties of CP   285  /   806
+ Outputting properties of CP   286  /   806
+ Outputting properties of CP   287  /   806
+ Outputting properties of CP   288  /   806
+ Outputting properties of CP   289  /   806
+ Outputting properties of CP   290  /   806
+ Outputting properties of CP   291  /   806
+ Outputting properties of CP   292  /   806
+ Outputting properties of CP   293  /   806
+ Outputting properties of CP   294  /   806
+ Outputting properties of CP   295  /   806
+ Outputting properties of CP   296  /   806
+ Outputting properties of CP   297  /   806
+ Outputting properties of CP   298  /   806
+ Outputting properties of CP   299  /   806
+ Outputting properties of CP   300  /   806
+ Outputting properties of CP   301  /   806
+ Outputting properties of CP   302  /   806
+ Outputting properties of CP   303  /   806
+ Outputting properties of CP   304  /   806
+ Outputting properties of CP   305  /   806
+ Outputting properties of CP   306  /   806
+ Outputting properties of CP   307  /   806
+ Outputting properties of CP   308  /   806
+ Outputting properties of CP   309  /   806
+ Outputting properties of CP   310  /   806
+ Outputting properties of CP   311  /   806
+ Outputting properties of CP   312  /   806
+ Outputting properties of CP   313  /   806
+ Outputting properties of CP   314  /   806
+ Outputting properties of CP   315  /   806
+ Outputting properties of CP   316  /   806
+ Outputting properties of CP   317  /   806
+ Outputting properties of CP   318  /   806
+ Outputting properties of CP   319  /   806
+ Outputting properties of CP   320  /   806
+ Outputting properties of CP   321  /   806
+ Outputting properties of CP   322  /   806
+ Outputting properties of CP   323  /   806
+ Outputting properties of CP   324  /   806
+ Outputting properties of CP   325  /   806
+ Outputting properties of CP   326  /   806
+ Outputting properties of CP   327  /   806
+ Outputting properties of CP   328  /   806
+ Outputting properties of CP   329  /   806
+ Outputting properties of CP   330  /   806
+ Outputting properties of CP   331  /   806
+ Outputting properties of CP   332  /   806
+ Outputting properties of CP   333  /   806
+ Outputting properties of CP   334  /   806
+ Outputting properties of CP   335  /   806
+ Outputting properties of CP   336  /   806
+ Outputting properties of CP   337  /   806
+ Outputting properties of CP   338  /   806
+ Outputting properties of CP   339  /   806
+ Outputting properties of CP   340  /   806
+ Outputting properties of CP   341  /   806
+ Outputting properties of CP   342  /   806
+ Outputting properties of CP   343  /   806
+ Outputting properties of CP   344  /   806
+ Outputting properties of CP   345  /   806
+ Outputting properties of CP   346  /   806
+ Outputting properties of CP   347  /   806
+ Outputting properties of CP   348  /   806
+ Outputting properties of CP   349  /   806
+ Outputting properties of CP   350  /   806
+ Outputting properties of CP   351  /   806
+ Outputting properties of CP   352  /   806
+ Outputting properties of CP   353  /   806
+ Outputting properties of CP   354  /   806
+ Outputting properties of CP   355  /   806
+ Outputting properties of CP   356  /   806
+ Outputting properties of CP   357  /   806
+ Outputting properties of CP   358  /   806
+ Outputting properties of CP   359  /   806
+ Outputting properties of CP   360  /   806
+ Outputting properties of CP   361  /   806
+ Outputting properties of CP   362  /   806
+ Outputting properties of CP   363  /   806
+ Outputting properties of CP   364  /   806
+ Outputting properties of CP   365  /   806
+ Outputting properties of CP   366  /   806
+ Outputting properties of CP   367  /   806
+ Outputting properties of CP   368  /   806
+ Outputting properties of CP   369  /   806
+ Outputting properties of CP   370  /   806
+ Outputting properties of CP   371  /   806
+ Outputting properties of CP   372  /   806
+ Outputting properties of CP   373  /   806
+ Outputting properties of CP   374  /   806
+ Outputting properties of CP   375  /   806
+ Outputting properties of CP   376  /   806
+ Outputting properties of CP   377  /   806
+ Outputting properties of CP   378  /   806
+ Outputting properties of CP   379  /   806
+ Outputting properties of CP   380  /   806
+ Outputting properties of CP   381  /   806
+ Outputting properties of CP   382  /   806
+ Outputting properties of CP   383  /   806
+ Outputting properties of CP   384  /   806
+ Outputting properties of CP   385  /   806
+ Outputting properties of CP   386  /   806
+ Outputting properties of CP   387  /   806
+ Outputting properties of CP   388  /   806
+ Outputting properties of CP   389  /   806
+ Outputting properties of CP   390  /   806
+ Outputting properties of CP   391  /   806
+ Outputting properties of CP   392  /   806
+ Outputting properties of CP   393  /   806
+ Outputting properties of CP   394  /   806
+ Outputting properties of CP   395  /   806
+ Outputting properties of CP   396  /   806
+ Outputting properties of CP   397  /   806
+ Outputting properties of CP   398  /   806
+ Outputting properties of CP   399  /   806
+ Outputting properties of CP   400  /   806
+ Outputting properties of CP   401  /   806
+ Outputting properties of CP   402  /   806
+ Outputting properties of CP   403  /   806
+ Outputting properties of CP   404  /   806
+ Outputting properties of CP   405  /   806
+ Outputting properties of CP   406  /   806
+ Outputting properties of CP   407  /   806
+ Outputting properties of CP   408  /   806
+ Outputting properties of CP   409  /   806
+ Outputting properties of CP   410  /   806
+ Outputting properties of CP   411  /   806
+ Outputting properties of CP   412  /   806
+ Outputting properties of CP   413  /   806
+ Outputting properties of CP   414  /   806
+ Outputting properties of CP   415  /   806
+ Outputting properties of CP   416  /   806
+ Outputting properties of CP   417  /   806
+ Outputting properties of CP   418  /   806
+ Outputting properties of CP   419  /   806
+ Outputting properties of CP   420  /   806
+ Outputting properties of CP   421  /   806
+ Outputting properties of CP   422  /   806
+ Outputting properties of CP   423  /   806
+ Outputting properties of CP   424  /   806
+ Outputting properties of CP   425  /   806
+ Outputting properties of CP   426  /   806
+ Outputting properties of CP   427  /   806
+ Outputting properties of CP   428  /   806
+ Outputting properties of CP   429  /   806
+ Outputting properties of CP   430  /   806
+ Outputting properties of CP   431  /   806
+ Outputting properties of CP   432  /   806
+ Outputting properties of CP   433  /   806
+ Outputting properties of CP   434  /   806
+ Outputting properties of CP   435  /   806
+ Outputting properties of CP   436  /   806
+ Outputting properties of CP   437  /   806
+ Outputting properties of CP   438  /   806
+ Outputting properties of CP   439  /   806
+ Outputting properties of CP   440  /   806
+ Outputting properties of CP   441  /   806
+ Outputting properties of CP   442  /   806
+ Outputting properties of CP   443  /   806
+ Outputting properties of CP   444  /   806
+ Outputting properties of CP   445  /   806
+ Outputting properties of CP   446  /   806
+ Outputting properties of CP   447  /   806
+ Outputting properties of CP   448  /   806
+ Outputting properties of CP   449  /   806
+ Outputting properties of CP   450  /   806
+ Outputting properties of CP   451  /   806
+ Outputting properties of CP   452  /   806
+ Outputting properties of CP   453  /   806
+ Outputting properties of CP   454  /   806
+ Outputting properties of CP   455  /   806
+ Outputting properties of CP   456  /   806
+ Outputting properties of CP   457  /   806
+ Outputting properties of CP   458  /   806
+ Outputting properties of CP   459  /   806
+ Outputting properties of CP   460  /   806
+ Outputting properties of CP   461  /   806
+ Outputting properties of CP   462  /   806
+ Outputting properties of CP   463  /   806
+ Outputting properties of CP   464  /   806
+ Outputting properties of CP   465  /   806
+ Outputting properties of CP   466  /   806
+ Outputting properties of CP   467  /   806
+ Outputting properties of CP   468  /   806
+ Outputting properties of CP   469  /   806
+ Outputting properties of CP   470  /   806
+ Outputting properties of CP   471  /   806
+ Outputting properties of CP   472  /   806
+ Outputting properties of CP   473  /   806
+ Outputting properties of CP   474  /   806
+ Outputting properties of CP   475  /   806
+ Outputting properties of CP   476  /   806
+ Outputting properties of CP   477  /   806
+ Outputting properties of CP   478  /   806
+ Outputting properties of CP   479  /   806
+ Outputting properties of CP   480  /   806
+ Outputting properties of CP   481  /   806
+ Outputting properties of CP   482  /   806
+ Outputting properties of CP   483  /   806
+ Outputting properties of CP   484  /   806
+ Outputting properties of CP   485  /   806
+ Outputting properties of CP   486  /   806
+ Outputting properties of CP   487  /   806
+ Outputting properties of CP   488  /   806
+ Outputting properties of CP   489  /   806
+ Outputting properties of CP   490  /   806
+ Outputting properties of CP   491  /   806
+ Outputting properties of CP   492  /   806
+ Outputting properties of CP   493  /   806
+ Outputting properties of CP   494  /   806
+ Outputting properties of CP   495  /   806
+ Outputting properties of CP   496  /   806
+ Outputting properties of CP   497  /   806
+ Outputting properties of CP   498  /   806
+ Outputting properties of CP   499  /   806
+ Outputting properties of CP   500  /   806
+ Outputting properties of CP   501  /   806
+ Outputting properties of CP   502  /   806
+ Outputting properties of CP   503  /   806
+ Outputting properties of CP   504  /   806
+ Outputting properties of CP   505  /   806
+ Outputting properties of CP   506  /   806
+ Outputting properties of CP   507  /   806
+ Outputting properties of CP   508  /   806
+ Outputting properties of CP   509  /   806
+ Outputting properties of CP   510  /   806
+ Outputting properties of CP   511  /   806
+ Outputting properties of CP   512  /   806
+ Outputting properties of CP   513  /   806
+ Outputting properties of CP   514  /   806
+ Outputting properties of CP   515  /   806
+ Outputting properties of CP   516  /   806
+ Outputting properties of CP   517  /   806
+ Outputting properties of CP   518  /   806
+ Outputting properties of CP   519  /   806
+ Outputting properties of CP   520  /   806
+ Outputting properties of CP   521  /   806
+ Outputting properties of CP   522  /   806
+ Outputting properties of CP   523  /   806
+ Outputting properties of CP   524  /   806
+ Outputting properties of CP   525  /   806
+ Outputting properties of CP   526  /   806
+ Outputting properties of CP   527  /   806
+ Outputting properties of CP   528  /   806
+ Outputting properties of CP   529  /   806
+ Outputting properties of CP   530  /   806
+ Outputting properties of CP   531  /   806
+ Outputting properties of CP   532  /   806
+ Outputting properties of CP   533  /   806
+ Outputting properties of CP   534  /   806
+ Outputting properties of CP   535  /   806
+ Outputting properties of CP   536  /   806
+ Outputting properties of CP   537  /   806
+ Outputting properties of CP   538  /   806
+ Outputting properties of CP   539  /   806
+ Outputting properties of CP   540  /   806
+ Outputting properties of CP   541  /   806
+ Outputting properties of CP   542  /   806
+ Outputting properties of CP   543  /   806
+ Outputting properties of CP   544  /   806
+ Outputting properties of CP   545  /   806
+ Outputting properties of CP   546  /   806
+ Outputting properties of CP   547  /   806
+ Outputting properties of CP   548  /   806
+ Outputting properties of CP   549  /   806
+ Outputting properties of CP   550  /   806
+ Outputting properties of CP   551  /   806
+ Outputting properties of CP   552  /   806
+ Outputting properties of CP   553  /   806
+ Outputting properties of CP   554  /   806
+ Outputting properties of CP   555  /   806
+ Outputting properties of CP   556  /   806
+ Outputting properties of CP   557  /   806
+ Outputting properties of CP   558  /   806
+ Outputting properties of CP   559  /   806
+ Outputting properties of CP   560  /   806
+ Outputting properties of CP   561  /   806
+ Outputting properties of CP   562  /   806
+ Outputting properties of CP   563  /   806
+ Outputting properties of CP   564  /   806
+ Outputting properties of CP   565  /   806
+ Outputting properties of CP   566  /   806
+ Outputting properties of CP   567  /   806
+ Outputting properties of CP   568  /   806
+ Outputting properties of CP   569  /   806
+ Outputting properties of CP   570  /   806
+ Outputting properties of CP   571  /   806
+ Outputting properties of CP   572  /   806
+ Outputting properties of CP   573  /   806
+ Outputting properties of CP   574  /   806
+ Outputting properties of CP   575  /   806
+ Outputting properties of CP   576  /   806
+ Outputting properties of CP   577  /   806
+ Outputting properties of CP   578  /   806
+ Outputting properties of CP   579  /   806
+ Outputting properties of CP   580  /   806
+ Outputting properties of CP   581  /   806
+ Outputting properties of CP   582  /   806
+ Outputting properties of CP   583  /   806
+ Outputting properties of CP   584  /   806
+ Outputting properties of CP   585  /   806
+ Outputting properties of CP   586  /   806
+ Outputting properties of CP   587  /   806
+ Outputting properties of CP   588  /   806
+ Outputting properties of CP   589  /   806
+ Outputting properties of CP   590  /   806
+ Outputting properties of CP   591  /   806
+ Outputting properties of CP   592  /   806
+ Outputting properties of CP   593  /   806
+ Outputting properties of CP   594  /   806
+ Outputting properties of CP   595  /   806
+ Outputting properties of CP   596  /   806
+ Outputting properties of CP   597  /   806
+ Outputting properties of CP   598  /   806
+ Outputting properties of CP   599  /   806
+ Outputting properties of CP   600  /   806
+ Outputting properties of CP   601  /   806
+ Outputting properties of CP   602  /   806
+ Outputting properties of CP   603  /   806
+ Outputting properties of CP   604  /   806
+ Outputting properties of CP   605  /   806
+ Outputting properties of CP   606  /   806
+ Outputting properties of CP   607  /   806
+ Outputting properties of CP   608  /   806
+ Outputting properties of CP   609  /   806
+ Outputting properties of CP   610  /   806
+ Outputting properties of CP   611  /   806
+ Outputting properties of CP   612  /   806
+ Outputting properties of CP   613  /   806
+ Outputting properties of CP   614  /   806
+ Outputting properties of CP   615  /   806
+ Outputting properties of CP   616  /   806
+ Outputting properties of CP   617  /   806
+ Outputting properties of CP   618  /   806
+ Outputting properties of CP   619  /   806
+ Outputting properties of CP   620  /   806
+ Outputting properties of CP   621  /   806
+ Outputting properties of CP   622  /   806
+ Outputting properties of CP   623  /   806
+ Outputting properties of CP   624  /   806
+ Outputting properties of CP   625  /   806
+ Outputting properties of CP   626  /   806
+ Outputting properties of CP   627  /   806
+ Outputting properties of CP   628  /   806
+ Outputting properties of CP   629  /   806
+ Outputting properties of CP   630  /   806
+ Outputting properties of CP   631  /   806
+ Outputting properties of CP   632  /   806
+ Outputting properties of CP   633  /   806
+ Outputting properties of CP   634  /   806
+ Outputting properties of CP   635  /   806
+ Outputting properties of CP   636  /   806
+ Outputting properties of CP   637  /   806
+ Outputting properties of CP   638  /   806
+ Outputting properties of CP   639  /   806
+ Outputting properties of CP   640  /   806
+ Outputting properties of CP   641  /   806
+ Outputting properties of CP   642  /   806
+ Outputting properties of CP   643  /   806
+ Outputting properties of CP   644  /   806
+ Outputting properties of CP   645  /   806
+ Outputting properties of CP   646  /   806
+ Outputting properties of CP   647  /   806
+ Outputting properties of CP   648  /   806
+ Outputting properties of CP   649  /   806
+ Outputting properties of CP   650  /   806
+ Outputting properties of CP   651  /   806
+ Outputting properties of CP   652  /   806
+ Outputting properties of CP   653  /   806
+ Outputting properties of CP   654  /   806
+ Outputting properties of CP   655  /   806
+ Outputting properties of CP   656  /   806
+ Outputting properties of CP   657  /   806
+ Outputting properties of CP   658  /   806
+ Outputting properties of CP   659  /   806
+ Outputting properties of CP   660  /   806
+ Outputting properties of CP   661  /   806
+ Outputting properties of CP   662  /   806
+ Outputting properties of CP   663  /   806
+ Outputting properties of CP   664  /   806
+ Outputting properties of CP   665  /   806
+ Outputting properties of CP   666  /   806
+ Outputting properties of CP   667  /   806
+ Outputting properties of CP   668  /   806
+ Outputting properties of CP   669  /   806
+ Outputting properties of CP   670  /   806
+ Outputting properties of CP   671  /   806
+ Outputting properties of CP   672  /   806
+ Outputting properties of CP   673  /   806
+ Outputting properties of CP   674  /   806
+ Outputting properties of CP   675  /   806
+ Outputting properties of CP   676  /   806
+ Outputting properties of CP   677  /   806
+ Outputting properties of CP   678  /   806
+ Outputting properties of CP   679  /   806
+ Outputting properties of CP   680  /   806
+ Outputting properties of CP   681  /   806
+ Outputting properties of CP   682  /   806
+ Outputting properties of CP   683  /   806
+ Outputting properties of CP   684  /   806
+ Outputting properties of CP   685  /   806
+ Outputting properties of CP   686  /   806
+ Outputting properties of CP   687  /   806
+ Outputting properties of CP   688  /   806
+ Outputting properties of CP   689  /   806
+ Outputting properties of CP   690  /   806
+ Outputting properties of CP   691  /   806
+ Outputting properties of CP   692  /   806
+ Outputting properties of CP   693  /   806
+ Outputting properties of CP   694  /   806
+ Outputting properties of CP   695  /   806
+ Outputting properties of CP   696  /   806
+ Outputting properties of CP   697  /   806
+ Outputting properties of CP   698  /   806
+ Outputting properties of CP   699  /   806
+ Outputting properties of CP   700  /   806
+ Outputting properties of CP   701  /   806
+ Outputting properties of CP   702  /   806
+ Outputting properties of CP   703  /   806
+ Outputting properties of CP   704  /   806
+ Outputting properties of CP   705  /   806
+ Outputting properties of CP   706  /   806
+ Outputting properties of CP   707  /   806
+ Outputting properties of CP   708  /   806
+ Outputting properties of CP   709  /   806
+ Outputting properties of CP   710  /   806
+ Outputting properties of CP   711  /   806
+ Outputting properties of CP   712  /   806
+ Outputting properties of CP   713  /   806
+ Outputting properties of CP   714  /   806
+ Outputting properties of CP   715  /   806
+ Outputting properties of CP   716  /   806
+ Outputting properties of CP   717  /   806
+ Outputting properties of CP   718  /   806
+ Outputting properties of CP   719  /   806
+ Outputting properties of CP   720  /   806
+ Outputting properties of CP   721  /   806
+ Outputting properties of CP   722  /   806
+ Outputting properties of CP   723  /   806
+ Outputting properties of CP   724  /   806
+ Outputting properties of CP   725  /   806
+ Outputting properties of CP   726  /   806
+ Outputting properties of CP   727  /   806
+ Outputting properties of CP   728  /   806
+ Outputting properties of CP   729  /   806
+ Outputting properties of CP   730  /   806
+ Outputting properties of CP   731  /   806
+ Outputting properties of CP   732  /   806
+ Outputting properties of CP   733  /   806
+ Outputting properties of CP   734  /   806
+ Outputting properties of CP   735  /   806
+ Outputting properties of CP   736  /   806
+ Outputting properties of CP   737  /   806
+ Outputting properties of CP   738  /   806
+ Outputting properties of CP   739  /   806
+ Outputting properties of CP   740  /   806
+ Outputting properties of CP   741  /   806
+ Outputting properties of CP   742  /   806
+ Outputting properties of CP   743  /   806
+ Outputting properties of CP   744  /   806
+ Outputting properties of CP   745  /   806
+ Outputting properties of CP   746  /   806
+ Outputting properties of CP   747  /   806
+ Outputting properties of CP   748  /   806
+ Outputting properties of CP   749  /   806
+ Outputting properties of CP   750  /   806
+ Outputting properties of CP   751  /   806
+ Outputting properties of CP   752  /   806
+ Outputting properties of CP   753  /   806
+ Outputting properties of CP   754  /   806
+ Outputting properties of CP   755  /   806
+ Outputting properties of CP   756  /   806
+ Outputting properties of CP   757  /   806
+ Outputting properties of CP   758  /   806
+ Outputting properties of CP   759  /   806
+ Outputting properties of CP   760  /   806
+ Outputting properties of CP   761  /   806
+ Outputting properties of CP   762  /   806
+ Outputting properties of CP   763  /   806
+ Outputting properties of CP   764  /   806
+ Outputting properties of CP   765  /   806
+ Outputting properties of CP   766  /   806
+ Outputting properties of CP   767  /   806
+ Outputting properties of CP   768  /   806
+ Outputting properties of CP   769  /   806
+ Outputting properties of CP   770  /   806
+ Outputting properties of CP   771  /   806
+ Outputting properties of CP   772  /   806
+ Outputting properties of CP   773  /   806
+ Outputting properties of CP   774  /   806
+ Outputting properties of CP   775  /   806
+ Outputting properties of CP   776  /   806
+ Outputting properties of CP   777  /   806
+ Outputting properties of CP   778  /   806
+ Outputting properties of CP   779  /   806
+ Outputting properties of CP   780  /   806
+ Outputting properties of CP   781  /   806
+ Outputting properties of CP   782  /   806
+ Outputting properties of CP   783  /   806
+ Outputting properties of CP   784  /   806
+ Outputting properties of CP   785  /   806
+ Outputting properties of CP   786  /   806
+ Outputting properties of CP   787  /   806
+ Outputting properties of CP   788  /   806
+ Outputting properties of CP   789  /   806
+ Outputting properties of CP   790  /   806
+ Outputting properties of CP   791  /   806
+ Outputting properties of CP   792  /   806
+ Outputting properties of CP   793  /   806
+ Outputting properties of CP   794  /   806
+ Outputting properties of CP   795  /   806
+ Outputting properties of CP   796  /   806
+ Outputting properties of CP   797  /   806
+ Outputting properties of CP   798  /   806
+ Outputting properties of CP   799  /   806
+ Outputting properties of CP   800  /   806
+ Outputting properties of CP   801  /   806
+ Outputting properties of CP   802  /   806
+ Outputting properties of CP   803  /   806
+ Outputting properties of CP   804  /   806
+ Outputting properties of CP   805  /   806
+ Outputting properties of CP   806  /   806
+ Done! The results have been outputted to CPprop.txt in current folder
+ Note: Unless otherwise specified, all units are in a.u.
+ 
+              ================ Topology analysis ===============
+ -11 Delete results and reselect real space function, current:    1
+ -10 Return to main menu
+ -9 Measure distances, angles and dihedral angles between CPs or atoms
+ -5 Modify or print detail or export paths, or plot property along a path
+ -4 Modify or export CPs (critical points)
+ -3 Set interbasin surface generating parameters
+ -2 Set path generating parameters
+ -1 Set CP searching parameters
+ 0 Visualize all generated CPs, paths and interbasin surfaces
+ 00 Print information of all generated CPs and paths
+ 1 Search CPs from given starting points
+ 2 Search CPs from nuclear positions
+ 3 Search CPs from midpoint of atomic pairs
+ 4 Search CPs from triangle center of three atoms
+ 5 Search CPs from pyramid center of four atoms
+ 6 Search CPs from a batch of points within sphere(s)
+ 7 Show real space function values at specific CP or all CPs
+ 8 Generating the paths connecting (3,-3) and (3,-1) CPs
+ 9 Generating the paths connecting (3,+1) and (3,+3) CPs
+ 10 Add or delete interbasin surfaces
+ 20 Calculate Shannon aromaticity index
+ 21 Calculate gradient and curvature of electron density along a direction
+ 
+ Note: A set of grid data is presented in memory
+ "q": Exit program gracefully          "r": Load a new file
+                    ************ Main function menu ************
+ 0 Show molecular structure and view isosurface
+ 1 Output all properties at a point       2 Topology analysis
+ 3 Output and plot specific property in a line
+ 4 Output and plot specific property in a plane
+ 5 Output and plot specific property within a spatial region (calc. grid data)
+ 6 Check & modify wavefunction
+ 7 Population analysis and calculation of atomic charges
+ 8 Orbital composition analysis           9 Bond order analysis
+ 10 Plot total DOS, PDOS, OPDOS, local DOS, COHP and photoelectron spectrum
+ 11 Plot IR/Raman/UV-Vis/ECD/VCD/ROA/NMR spectrum
+ 12 Quantitative analysis of molecular surface
+ 13 Process grid data
+ 14 Adaptive natural density partitioning (AdNDP) analysis
+ 15 Fuzzy atomic space analysis
+ 16 Charge decomposition analysis (CDA) and plot orbital interaction diagram
+ 17 Basin analysis                       18 Electron excitation analysis
+ 19 Orbital localization analysis        20 Visual study of weak interaction
+ 21 Energy decomposition analysis        22 Conceptual DFT (CDFT) analysis
+ 23 ETS-NOCV analysis                    24 (Hyper)polarizability analysis
+ 25 Electron delocalization and aromaticity analyses
+ 26 Structure and geometry related analyses
+ 100 Other functions (Part 1)            200 Other functions (Part 2)
+ 300 Other functions (Part 3)
+ -10 Return to main menu
+ -2 Obtain deformation property
+ -1 Obtain promolecule property
+ 0 Set custom operation
+             ----------- Available real space functions -----------
+ 1 Promolecular electron density 
+ 8 Electrostatic potential from nuclear charges
+ 14 Reduced density gradient (RDG) with promolecular approximation
+ 16 Sign(lambda2)*rho with promolecular approximation
+ 22 Delta-g (promolecular approximation)
+ 25 van der Waals potential (probe=C )
+ 100 User-defined function (iuserfunc=   -3)  See Section 2.7 of manual
+ -10 Return to main menu
+ Draw which kind of map?
+ 1 Color-filled map (with/without contour lines)
+ 2 Contour line map
+ 3 Relief map
+ 4 Shaded relief map
+ 5 Shaded relief map with projection
+ 6 Gradient lines map with/without contour lines
+ 7 Vector field map with/without contour lines
+  -10 Return to main menu
+ How many grids in the two dimensions, respectively?
+ (200,200 is recommended)
+ Hint: You can press ENTER button directly to use recommended value
+ 
+  -10 Return to main menu
+ Please define the plane to be plotted
+ 1: XY plane   2: XZ plane   3: YZ plane
+ 4: Define by three atoms    5: Define by three given points
+ 6: Input origin and translation vector (For expert users)
+ 7: Parallel to a bond and meantime normal to a plane defined by three atoms
+ 8: Above or below the plane consisting of specific atoms
+ 0: Set extension distance for plane type 1~5, current:  4.5000 Bohr
+ -1: Set translation and rotation of the map for plane types 4, 5 and 8
+ Input index of three atoms, e.g. 3,6,7
+ 
+ X/Y/Z of origin of the plane:    2.45638  12.28775  25.06945 Bohr
+ X/Y/Z of end of the plane:       9.68339  -6.38402  19.73254 Bohr
+ X/Y/Z of translation vector 1: -0.02039 -0.04288 -0.01210 Bohr, Norm:  0.04900
+ X/Y/Z of translation vector 2:  0.04456 -0.01956 -0.00575 Bohr, Norm:  0.04900
+ 
+ Calculating plane data, please wait...
+ Note: All exponential functions exp(x) with x< -40.000 will be ignored
+ Progress: [--------------------------------------------------]     0.3 %     - Progress: [--------------------------------------------------]     0.7 %     \ Progress: [--------------------------------------------------]     1.0 %     | Progress: [--------------------------------------------------]     1.3 %     / Progress: [--------------------------------------------------]     1.7 %     - Progress: [#-------------------------------------------------]     2.0 %     \ Progress: [#-------------------------------------------------]     2.3 %     | Progress: [#-------------------------------------------------]     2.7 %     / Progress: [#-------------------------------------------------]     3.0 %     - Progress: [#-------------------------------------------------]     3.3 %     \ Progress: [#-------------------------------------------------]     3.7 %     | Progress: [##------------------------------------------------]     4.0 %     / Progress: [##------------------------------------------------]     4.3 %     - Progress: [##------------------------------------------------]     4.7 %     \ Progress: [##------------------------------------------------]     5.0 %     | Progress: [##------------------------------------------------]     5.3 %     / Progress: [##------------------------------------------------]     5.7 %     - Progress: [###-----------------------------------------------]     6.0 %     \ Progress: [###-----------------------------------------------]     6.3 %     | Progress: [###-----------------------------------------------]     6.7 %     / Progress: [###-----------------------------------------------]     7.0 %     - Progress: [###-----------------------------------------------]     7.3 %     \ Progress: [###-----------------------------------------------]     7.7 %     | Progress: [####----------------------------------------------]     8.0 %     / Progress: [####----------------------------------------------]     8.3 %     - Progress: [####----------------------------------------------]     8.7 %     \ Progress: [####----------------------------------------------]     9.0 %     | Progress: [####----------------------------------------------]     9.3 %     / Progress: [####----------------------------------------------]     9.7 %     - Progress: [#####---------------------------------------------]    10.0 %     \ Progress: [#####---------------------------------------------]    10.3 %     | Progress: [#####---------------------------------------------]    10.7 %     / Progress: [#####---------------------------------------------]    11.0 %     - Progress: [#####---------------------------------------------]    11.3 %     \ Progress: [#####---------------------------------------------]    11.7 %     | Progress: [######--------------------------------------------]    12.0 %     / Progress: [######--------------------------------------------]    12.3 %     - Progress: [######--------------------------------------------]    12.7 %     \ Progress: [######--------------------------------------------]    13.0 %     | Progress: [######--------------------------------------------]    13.3 %     / Progress: [######--------------------------------------------]    13.7 %     - Progress: [#######-------------------------------------------]    14.0 %     \ Progress: [#######-------------------------------------------]    14.3 %     | Progress: [#######-------------------------------------------]    14.7 %     / Progress: [#######-------------------------------------------]    15.0 %     - Progress: [#######-------------------------------------------]    15.3 %     \ Progress: [#######-------------------------------------------]    15.7 %     | Progress: [########------------------------------------------]    16.0 %     / Progress: [########------------------------------------------]    16.3 %     - Progress: [########------------------------------------------]    16.7 %     \ Progress: [########------------------------------------------]    17.0 %     | Progress: [########------------------------------------------]    17.3 %     / Progress: [########------------------------------------------]    17.7 %     - Progress: [#########-----------------------------------------]    18.0 %     \ Progress: [#########-----------------------------------------]    18.3 %     | Progress: [#########-----------------------------------------]    18.7 %     / Progress: [#########-----------------------------------------]    19.0 %     - Progress: [#########-----------------------------------------]    19.3 %     \ Progress: [#########-----------------------------------------]    19.7 %     | Progress: [##########----------------------------------------]    20.0 %     / Progress: [##########----------------------------------------]    20.3 %     - Progress: [##########----------------------------------------]    20.7 %     \ Progress: [##########----------------------------------------]    21.0 %     | Progress: [##########----------------------------------------]    21.3 %     / Progress: [##########----------------------------------------]    21.7 %     - Progress: [###########---------------------------------------]    22.0 %     \ Progress: [###########---------------------------------------]    22.3 %     | Progress: [###########---------------------------------------]    22.7 %     / Progress: [###########---------------------------------------]    23.0 %     - Progress: [###########---------------------------------------]    23.3 %     \ Progress: [###########---------------------------------------]    23.7 %     | Progress: [############--------------------------------------]    24.0 %     / Progress: [############--------------------------------------]    24.3 %     - Progress: [############--------------------------------------]    24.7 %     \ Progress: [############--------------------------------------]    25.0 %     | Progress: [############--------------------------------------]    25.3 %     / Progress: [############--------------------------------------]    25.7 %     - Progress: [#############-------------------------------------]    26.0 %     \ Progress: [#############-------------------------------------]    26.3 %     | Progress: [#############-------------------------------------]    26.7 %     / Progress: [#############-------------------------------------]    27.0 %     - Progress: [#############-------------------------------------]    27.3 %     \ Progress: [#############-------------------------------------]    27.7 %     | Progress: [##############------------------------------------]    28.0 %     / Progress: [##############------------------------------------]    28.3 %     - Progress: [##############------------------------------------]    28.7 %     \ Progress: [##############------------------------------------]    29.0 %     | Progress: [##############------------------------------------]    29.3 %     / Progress: [##############------------------------------------]    29.7 %     - Progress: [###############-----------------------------------]    30.0 %     \ Progress: [###############-----------------------------------]    30.3 %     | Progress: [###############-----------------------------------]    30.7 %     / Progress: [###############-----------------------------------]    31.0 %     - Progress: [###############-----------------------------------]    31.3 %     \ Progress: [###############-----------------------------------]    31.7 %     | Progress: [################----------------------------------]    32.0 %     / Progress: [################----------------------------------]    32.3 %     - Progress: [################----------------------------------]    32.7 %     \ Progress: [################----------------------------------]    33.0 %     | Progress: [################----------------------------------]    33.3 %     / Progress: [################----------------------------------]    33.7 %     - Progress: [#################---------------------------------]    34.0 %     \ Progress: [#################---------------------------------]    34.3 %     | Progress: [#################---------------------------------]    34.7 %     / Progress: [#################---------------------------------]    35.0 %     - Progress: [#################---------------------------------]    35.3 %     \ Progress: [#################---------------------------------]    35.7 %     | Progress: [##################--------------------------------]    36.0 %     / Progress: [##################--------------------------------]    36.3 %     - Progress: [##################--------------------------------]    36.7 %     \ Progress: [##################--------------------------------]    37.0 %     | Progress: [##################--------------------------------]    37.3 %     / Progress: [##################--------------------------------]    37.7 %     - Progress: [###################-------------------------------]    38.0 %     \ Progress: [###################-------------------------------]    38.3 %     | Progress: [###################-------------------------------]    38.7 %     / Progress: [###################-------------------------------]    39.0 %     - Progress: [###################-------------------------------]    39.3 %     \ Progress: [###################-------------------------------]    39.7 %     | Progress: [####################------------------------------]    40.0 %     / Progress: [####################------------------------------]    40.3 %     - Progress: [####################------------------------------]    40.7 %     \ Progress: [####################------------------------------]    41.0 %     | Progress: [####################------------------------------]    41.3 %     / Progress: [####################------------------------------]    41.7 %     - Progress: [#####################-----------------------------]    42.0 %     \ Progress: [#####################-----------------------------]    42.3 %     | Progress: [#####################-----------------------------]    42.7 %     / Progress: [#####################-----------------------------]    43.0 %     - Progress: [#####################-----------------------------]    43.3 %     \ Progress: [#####################-----------------------------]    43.7 %     | Progress: [######################----------------------------]    44.0 %     / Progress: [######################----------------------------]    44.3 %     - Progress: [######################----------------------------]    44.7 %     \ Progress: [######################----------------------------]    45.0 %     | Progress: [######################----------------------------]    45.3 %     / Progress: [######################----------------------------]    45.7 %     - Progress: [#######################---------------------------]    46.0 %     \ Progress: [#######################---------------------------]    46.3 %     | Progress: [#######################---------------------------]    46.7 %     / Progress: [#######################---------------------------]    47.0 %     - Progress: [#######################---------------------------]    47.3 %     \ Progress: [#######################---------------------------]    47.7 %     | Progress: [########################--------------------------]    48.0 %     / Progress: [########################--------------------------]    48.3 %     - Progress: [########################--------------------------]    48.7 %     \ Progress: [########################--------------------------]    49.0 %     | Progress: [########################--------------------------]    49.3 %     / Progress: [########################--------------------------]    49.7 %     - Progress: [#########################-------------------------]    50.0 %     \ Progress: [#########################-------------------------]    50.3 %     | Progress: [#########################-------------------------]    50.7 %     / Progress: [#########################-------------------------]    51.0 %     - Progress: [#########################-------------------------]    51.3 %     \ Progress: [#########################-------------------------]    51.7 %     | Progress: [##########################------------------------]    52.0 %     / Progress: [##########################------------------------]    52.3 %     - Progress: [##########################------------------------]    52.7 %     \ Progress: [##########################------------------------]    53.0 %     | Progress: [##########################------------------------]    53.3 %     / Progress: [##########################------------------------]    53.7 %     - Progress: [###########################-----------------------]    54.0 %     \ Progress: [###########################-----------------------]    54.3 %     | Progress: [###########################-----------------------]    54.7 %     / Progress: [###########################-----------------------]    55.0 %     - Progress: [###########################-----------------------]    55.3 %     \ Progress: [###########################-----------------------]    55.7 %     | Progress: [############################----------------------]    56.0 %     / Progress: [############################----------------------]    56.3 %     - Progress: [############################----------------------]    56.7 %     \ Progress: [############################----------------------]    57.0 %     | Progress: [############################----------------------]    57.3 %     / Progress: [############################----------------------]    57.7 %     - Progress: [############################----------------------]    58.0 %     \ Progress: [#############################---------------------]    58.3 %     | Progress: [#############################---------------------]    58.7 %     / Progress: [#############################---------------------]    59.0 %     - Progress: [#############################---------------------]    59.3 %     \ Progress: [#############################---------------------]    59.7 %     | Progress: [##############################--------------------]    60.0 %     / Progress: [##############################--------------------]    60.3 %     - Progress: [##############################--------------------]    60.7 %     \ Progress: [##############################--------------------]    61.0 %     | Progress: [##############################--------------------]    61.3 %     / Progress: [##############################--------------------]    61.7 %     - Progress: [###############################-------------------]    62.0 %     \ Progress: [###############################-------------------]    62.3 %     | Progress: [###############################-------------------]    62.7 %     / Progress: [###############################-------------------]    63.0 %     - Progress: [###############################-------------------]    63.3 %     \ Progress: [###############################-------------------]    63.7 %     | Progress: [################################------------------]    64.0 %     / Progress: [################################------------------]    64.3 %     - Progress: [################################------------------]    64.7 %     \ Progress: [################################------------------]    65.0 %     | Progress: [################################------------------]    65.3 %     / Progress: [################################------------------]    65.7 %     - Progress: [#################################-----------------]    66.0 %     \ Progress: [#################################-----------------]    66.3 %     | Progress: [#################################-----------------]    66.7 %     / Progress: [#################################-----------------]    67.0 %     - Progress: [#################################-----------------]    67.3 %     \ Progress: [#################################-----------------]    67.7 %     | Progress: [##################################----------------]    68.0 %     / Progress: [##################################----------------]    68.3 %     - Progress: [##################################----------------]    68.7 %     \ Progress: [##################################----------------]    69.0 %     | Progress: [##################################----------------]    69.3 %     / Progress: [##################################----------------]    69.7 %     - Progress: [###################################---------------]    70.0 %     \ Progress: [###################################---------------]    70.3 %     | Progress: [###################################---------------]    70.7 %     / Progress: [###################################---------------]    71.0 %     - Progress: [###################################---------------]    71.3 %     \ Progress: [###################################---------------]    71.7 %     | Progress: [####################################--------------]    72.0 %     / Progress: [####################################--------------]    72.3 %     - Progress: [####################################--------------]    72.7 %     \ Progress: [####################################--------------]    73.0 %     | Progress: [####################################--------------]    73.3 %     / Progress: [####################################--------------]    73.7 %     - Progress: [#####################################-------------]    74.0 %     \ Progress: [#####################################-------------]    74.3 %     | Progress: [#####################################-------------]    74.7 %     / Progress: [#####################################-------------]    75.0 %     - Progress: [#####################################-------------]    75.3 %     \ Progress: [#####################################-------------]    75.7 %     | Progress: [######################################------------]    76.0 %     / Progress: [######################################------------]    76.3 %     - Progress: [######################################------------]    76.7 %     \ Progress: [######################################------------]    77.0 %     | Progress: [######################################------------]    77.3 %     / Progress: [######################################------------]    77.7 %     - Progress: [#######################################-----------]    78.0 %     \ Progress: [#######################################-----------]    78.3 %     | Progress: [#######################################-----------]    78.7 %     / Progress: [#######################################-----------]    79.0 %     - Progress: [#######################################-----------]    79.3 %     \ Progress: [#######################################-----------]    79.7 %     | Progress: [########################################----------]    80.0 %     / Progress: [########################################----------]    80.3 %     - Progress: [########################################----------]    80.7 %     \ Progress: [########################################----------]    81.0 %     | Progress: [########################################----------]    81.3 %     / Progress: [########################################----------]    81.7 %     - Progress: [#########################################---------]    82.0 %     \ Progress: [#########################################---------]    82.3 %     | Progress: [#########################################---------]    82.7 %     / Progress: [#########################################---------]    83.0 %     - Progress: [#########################################---------]    83.3 %     \ Progress: [#########################################---------]    83.7 %     | Progress: [##########################################--------]    84.0 %     / Progress: [##########################################--------]    84.3 %     - Progress: [##########################################--------]    84.7 %     \ Progress: [##########################################--------]    85.0 %     | Progress: [##########################################--------]    85.3 %     / Progress: [##########################################--------]    85.7 %     - Progress: [###########################################-------]    86.0 %     \ Progress: [###########################################-------]    86.3 %     | Progress: [###########################################-------]    86.7 %     / Progress: [###########################################-------]    87.0 %     - Progress: [###########################################-------]    87.3 %     \ Progress: [###########################################-------]    87.7 %     | Progress: [############################################------]    88.0 %     / Progress: [############################################------]    88.3 %     - Progress: [############################################------]    88.7 %     \ Progress: [############################################------]    89.0 %     | Progress: [############################################------]    89.3 %     / Progress: [############################################------]    89.7 %     - Progress: [#############################################-----]    90.0 %     \ Progress: [#############################################-----]    90.3 %     | Progress: [#############################################-----]    90.7 %     / Progress: [#############################################-----]    91.0 %     - Progress: [#############################################-----]    91.3 %     \ Progress: [#############################################-----]    91.7 %     | Progress: [##############################################----]    92.0 %     / Progress: [##############################################----]    92.3 %     - Progress: [##############################################----]    92.7 %     \ Progress: [##############################################----]    93.0 %     | Progress: [##############################################----]    93.3 %     / Progress: [##############################################----]    93.7 %     - Progress: [###############################################---]    94.0 %     \ Progress: [###############################################---]    94.3 %     | Progress: [###############################################---]    94.7 %     / Progress: [###############################################---]    95.0 %     - Progress: [###############################################---]    95.3 %     \ Progress: [###############################################---]    95.7 %     | Progress: [################################################--]    96.0 %     / Progress: [################################################--]    96.3 %     - Progress: [################################################--]    96.7 %     \ Progress: [################################################--]    97.0 %     | Progress: [################################################--]    97.3 %     / Progress: [################################################--]    97.7 %     - Progress: [#################################################-]    98.0 %     \ Progress: [#################################################-]    98.3 %     | Progress: [#################################################-]    98.7 %     / Progress: [#################################################-]    99.0 %     - Progress: [#################################################-]    99.3 %     \ Progress: [#################################################-]    99.7 %     | Progress: [##################################################]   100.0 %     / 
+
+ Calculation took up wall clock time         3 s
+
+ The minimum of data:  0.000000000000000E+000
+ The maximum of data:  0.533199832327333     
+
+ If you did not modify "CP_RGB_2D" in settings.ini, then brown, blue, orange and green dots in this map (if any) correspond to position of (3,-3), (3,-1), (3,+1) and (3,+3) type of critical points, respectively
+ 
+          -------- Post-processing menu of plotting plane map --------
+ -9 Only plot the data around certain atoms
+ -8 Change length unit of the graph to Angstrom
+ -7 Multiply the current data by a factor
+ -6 Export the current plane data to plane.txt in current folder
+ -5 Return to main menu
+ -4 Save (load) all plotting settings to (from) an external file
+ -3 Change other plotting settings
+ -2 Set label intervals in X and Y axes, current:  2.093  2.093
+ -1 Show the graph again
+ 0 Save the graph to a graphical file in current folder
+ 1 Disable showing atom labels and reference point
+ 2 Enable showing isovalue on contour lines
+ 3 Change setting of contour lines
+ 4 Set details of plotting critical points and paths
+ 5 Disable showing contour lines
+ 6 Generate and show interbasin paths
+ 7 Set stepsize and maximal iteration for interbasin path generation
+ 8 Enable showing bonds
+ 9 Enable filling colors for contour lines
+ 10 Show arrow on the gradient lines
+ 11 Set detailed parameters of plotting gradient line
+ 17 Set distance threshold for showing atom labels, current:  0.500 Bohr
+ 18 Change style of atomic labels: Only plot element symbol
+ 19 Enable showing extrema of a function on a contour line
+ 
+ 0 Return
+ 1 Disable showing (3,-3) CPs
+ 2 Disable showing (3,-1) CPs
+ 3 Disable showing (3,+1) CPs
+ 4 Disable showing (3,+3) CPs
+ 5 Disable showing paths
+ 8 Set distance threshold for showing CPs, current:    0.500 Bohr
+ 9 Set distance threshold for showing paths, current:    0.500 Bohr
+ 10 Set size of markers of CPs, current:  30
+ 11 Set thickness of topology paths, current:  10
+ 12 Set color of topology paths, current: Brown
+ 13 Set thickness of the interbasin paths derived from (3,-1), current:   7
+ 14 Set color of the interbasin paths derived from (3,-1), current: Dark blue
+ 15 Set color for CPs
+ 
+          -------- Post-processing menu of plotting plane map --------
+ -9 Only plot the data around certain atoms
+ -8 Change length unit of the graph to Angstrom
+ -7 Multiply the current data by a factor
+ -6 Export the current plane data to plane.txt in current folder
+ -5 Return to main menu
+ -4 Save (load) all plotting settings to (from) an external file
+ -3 Change other plotting settings
+ -2 Set label intervals in X and Y axes, current:  2.093  2.093
+ -1 Show the graph again
+ 0 Save the graph to a graphical file in current folder
+ 1 Disable showing atom labels and reference point
+ 2 Enable showing isovalue on contour lines
+ 3 Change setting of contour lines
+ 4 Set details of plotting critical points and paths
+ 5 Disable showing contour lines
+ 6 Generate and show interbasin paths
+ 7 Set stepsize and maximal iteration for interbasin path generation
+ 8 Enable showing bonds
+ 9 Enable filling colors for contour lines
+ 10 Show arrow on the gradient lines
+ 11 Set detailed parameters of plotting gradient line
+ 17 Set distance threshold for showing atom labels, current:  0.500 Bohr
+ 18 Change style of atomic labels: Only plot element symbol
+ 19 Enable showing extrema of a function on a contour line
+ Note: The bonding will be empirically determined according to interatomic distance and atomic covalent radii
+
+ Use which color for drawing the bonds?
+ 1  = Red        2  = Green
+ 3  = Blue       4  = White
+ 5  = Black      6  = Gray
+ 7  = Cyan       8  = Yellow
+ 9  = Orange     10 = Magenta
+ 11 = Crimson    12 = Dark green
+ 13 = Purple     14 = Brown
+ 15 = Dark blue  16 = Pink
+ 17 = User color 1, current:  0.0000  0.0000  0.0000
+ 18 = User color 2, current:  0.0000  0.0000  0.0000
+ 19 = User color 3, current:  0.0000  0.0000  0.0000
+ Note: RGB of user colors 1,2,3 can be customized by user1RGB/user2RGB/user3RGB in settings.ini
+ 
+          -------- Post-processing menu of plotting plane map --------
+ -9 Only plot the data around certain atoms
+ -8 Change length unit of the graph to Angstrom
+ -7 Multiply the current data by a factor
+ -6 Export the current plane data to plane.txt in current folder
+ -5 Return to main menu
+ -4 Save (load) all plotting settings to (from) an external file
+ -3 Change other plotting settings
+ -2 Set label intervals in X and Y axes, current:  2.093  2.093
+ -1 Show the graph again
+ 0 Save the graph to a graphical file in current folder
+ 1 Disable showing atom labels and reference point
+ 2 Enable showing isovalue on contour lines
+ 3 Change setting of contour lines
+ 4 Set details of plotting critical points and paths
+ 5 Disable showing contour lines
+ 6 Generate and show interbasin paths
+ 7 Set stepsize and maximal iteration for interbasin path generation
+ 8 Disable showing bonds
+ 9 Enable filling colors for contour lines
+ 10 Show arrow on the gradient lines
+ 11 Set detailed parameters of plotting gradient line
+ 17 Set distance threshold for showing atom labels, current:  0.500 Bohr
+ 18 Change style of atomic labels: Only plot element symbol
+ 19 Enable showing extrema of a function on a contour line
+ 
+          -------- Post-processing menu of plotting plane map --------
+ -9 Only plot the data around certain atoms
+ -8 Change length unit of the graph to Bohr
+ -7 Multiply the current data by a factor
+ -6 Export the current plane data to plane.txt in current folder
+ -5 Return to main menu
+ -4 Save (load) all plotting settings to (from) an external file
+ -3 Change other plotting settings
+ -2 Set label intervals in X and Y axes, current:  2.093  2.093
+ -1 Show the graph again
+ 0 Save the graph to a graphical file in current folder
+ 1 Disable showing atom labels and reference point
+ 2 Enable showing isovalue on contour lines
+ 3 Change setting of contour lines
+ 4 Set details of plotting critical points and paths
+ 5 Disable showing contour lines
+ 6 Generate and show interbasin paths
+ 7 Set stepsize and maximal iteration for interbasin path generation
+ 8 Disable showing bonds
+ 9 Enable filling colors for contour lines
+ 10 Show arrow on the gradient lines
+ 11 Set detailed parameters of plotting gradient line
+ 17 Set distance threshold for showing atom labels, current:  0.500 Bohr
+ 18 Change style of atomic labels: Only plot element symbol
+ 19 Enable showing extrema of a function on a contour line
+ Graph have been saved as png format with "dislin" prefix in current directory
+ 
+          -------- Post-processing menu of plotting plane map --------
+ -9 Only plot the data around certain atoms
+ -8 Change length unit of the graph to Bohr
+ -7 Multiply the current data by a factor
+ -6 Export the current plane data to plane.txt in current folder
+ -5 Return to main menu
+ -4 Save (load) all plotting settings to (from) an external file
+ -3 Change other plotting settings
+ -2 Set label intervals in X and Y axes, current:  2.093  2.093
+ -1 Show the graph again
+ 0 Save the graph to a graphical file in current folder
+ 1 Disable showing atom labels and reference point
+ 2 Enable showing isovalue on contour lines
+ 3 Change setting of contour lines
+ 4 Set details of plotting critical points and paths
+ 5 Disable showing contour lines
+ 6 Generate and show interbasin paths
+ 7 Set stepsize and maximal iteration for interbasin path generation
+ 8 Disable showing bonds
+ 9 Enable filling colors for contour lines
+ 10 Show arrow on the gradient lines
+ 11 Set detailed parameters of plotting gradient line
+ 17 Set distance threshold for showing atom labels, current:  0.500 Bohr
+ 18 Change style of atomic labels: Only plot element symbol
+ 19 Enable showing extrema of a function on a contour line
+ 
+ Note: A set of grid data is presented in memory
+ "q": Exit program gracefully          "r": Load a new file
+                    ************ Main function menu ************
+ 0 Show molecular structure and view isosurface
+ 1 Output all properties at a point       2 Topology analysis
+ 3 Output and plot specific property in a line
+ 4 Output and plot specific property in a plane
+ 5 Output and plot specific property within a spatial region (calc. grid data)
+ 6 Check & modify wavefunction
+ 7 Population analysis and calculation of atomic charges
+ 8 Orbital composition analysis           9 Bond order analysis
+ 10 Plot total DOS, PDOS, OPDOS, local DOS, COHP and photoelectron spectrum
+ 11 Plot IR/Raman/UV-Vis/ECD/VCD/ROA/NMR spectrum
+ 12 Quantitative analysis of molecular surface
+ 13 Process grid data
+ 14 Adaptive natural density partitioning (AdNDP) analysis
+ 15 Fuzzy atomic space analysis
+ 16 Charge decomposition analysis (CDA) and plot orbital interaction diagram
+ 17 Basin analysis                       18 Electron excitation analysis
+ 19 Orbital localization analysis        20 Visual study of weak interaction
+ 21 Energy decomposition analysis        22 Conceptual DFT (CDFT) analysis
+ 23 ETS-NOCV analysis                    24 (Hyper)polarizability analysis
+ 25 Electron delocalization and aromaticity analyses
+ 26 Structure and geometry related analyses
+ 100 Other functions (Part 1)            200 Other functions (Part 2)
+ 300 Other functions (Part 3)
