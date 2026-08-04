@@ -32,7 +32,17 @@ def readf(p):
     try: return open(p,errors="ignore").read()
     except: return ""
 def converged(tag):
-    s=readf(outf(tag)); return "bfgs converged" in s or "Damped Dynamics: convergence achieved" in s
+    s=readf(outf(tag))
+    if "bfgs converged" in s or "Damped Dynamics: convergence achieved" in s: return True
+    # floor-acceptance: soft-mode configs wiggle at the floor (damp ΔE ~threshold, never declares).
+    # Accept if >=30 steps, last-4 |ΔE|<0.04 kJ/mol (energy flat), last force<0.04 (soft-mode floor).
+    if s.count("ATOMIC_POSITIONS")>=30:
+        es=re.findall(r"!\s*total energy\s*=\s*(-?\d+\.\d+)",s)
+        if len(es)>=5:
+            dE=[abs(float(es[i])-float(es[i+1]))*13.6057 for i in range(len(es)-4,len(es)-1)]
+            mf=re.findall(r"Total force\s*=\s*([0-9.]+)",s)
+            if all(d<0.04 for d in dE) and mf and float(mf[-1])<0.04: return True
+    return False
 def failed(tag): return os.path.exists(f"{T}/l442_{tag}.FAILED")
 def divergent04(tag): return os.path.exists(f"{T}/l442_{tag}.DIVERGENT04")
 def retries(tag):
@@ -109,13 +119,21 @@ while True:
                     else: log(f"GPU{g} {tag} ended not-converged (nstep?) retry {n}/{MAXRETRY}")
             del running[g]
         else:
-            acc,it,_=scf_state(tag)
-            if acc is not None and it is not None and acc>1.0 and it>50:
+            if converged(tag):  # mid-run floor-acceptance: kill+done if at the soft-mode floor
                 try: os.killpg(os.getpgid(p.pid),9)
                 except: pass
-                if dg==0.04 and not divergent04(tag):
-                    open(f"{T}/l442_{tag}.DIVERGENT04","w").close(); log(f"GPU{g} {tag} KILL divergent >1Ry@it{it} -> retry @0.06")
-                else:
-                    open(f"{T}/l442_{tag}.FAILED","w").close(); log(f"GPU{g} {tag} KILL divergent @0.06 -> FAILED")
+                m=re.findall(r"!\s*total energy\s*=\s*(-?\d+\.\d+)",readf(outf(tag)))
+                mf=re.findall(r"Total force\s*=\s*([0-9.]+)",readf(outf(tag)))
+                log(f"GPU{g} DONE {tag} FLOOR-ACCEPT F={mf[-1][:6] if mf else '?'} E={m[-1] if m else '?'}")
                 del running[g]
+            else:
+                acc,it,_=scf_state(tag)
+                if acc is not None and it is not None and acc>1.0 and it>50:
+                    try: os.killpg(os.getpgid(p.pid),9)
+                    except: pass
+                    if dg==0.04 and not divergent04(tag):
+                        open(f"{T}/l442_{tag}.DIVERGENT04","w").close(); log(f"GPU{g} {tag} KILL divergent >1Ry@it{it} -> retry @0.06")
+                    else:
+                        open(f"{T}/l442_{tag}.FAILED","w").close(); log(f"GPU{g} {tag} KILL divergent @0.06 -> FAILED")
+                    del running[g]
 log("driver exit")

@@ -17,8 +17,8 @@ def is_conv(f):
     return "convergence has been achieved" in s and "!" in s
 for s,src in SP02SRC.items():
     insrc=src.replace(".out",".in")
-    if os.path.exists(insrc): shutil.copy(insrc,f"{D}/rd_poly_442_{s}.in")
-    if is_conv(src): shutil.copy(src,f"{D}/rd_poly_442_{s}.out")
+    if os.path.exists(insrc): shutil.copy(insrc,f"{D}/single_points/rd_poly_442_{s}.in")
+    if is_conv(src): shutil.copy(src,f"{D}/single_points/rd_poly_442_{s}.out")
 def parse(fn):
     """return (E_total, D3, converged) or (None,None,False)."""
     if not os.path.exists(fn): return None,None,False
@@ -30,7 +30,7 @@ def parse(fn):
 gasEt,gasD3,_=parse(f"{D}/rd_gas.out")
 SYS=["Gdvc","Tbvc","Yvc","Gdact","Tbact","Yact","Gdst","Tbst","Yst"]  # printed grouped below
 def decomp(s):
-    el,dl,cl=parse(f"{D}/rd_poly_442_{s}.out")
+    el,dl,cl=parse(f"{D}/single_points/rd_poly_442_{s}.out")
     ee,de,_=parse(f"{D}/rd_empty_{s}.out")
     if None in (el,dl,ee,de,gasEt,gasD3) or not cl:
         return None

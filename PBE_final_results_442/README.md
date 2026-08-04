@@ -6,16 +6,14 @@ Mirrors `PBE_final_results/` (the Γ-relaxed-geometry production set) but with g
 
 ## Layout (mirrors PBE_final_results)
 ```
-adsorption_9systems/   # 9 systems (Y/Gd/Tb × vc/act/st), 4×4×2-relaxed loaded + Γ empty/gas
-  relax_442_<sys>.in/out  # the ACTUAL relaxation (calculation='relax', damp) that produced the geometry
-  rd_poly_442_<sys>.in/out# clean single-point (calculation='scf', degauss=0.02, 4×4×2) at that relaxed
-                          #   geometry — the energy used for ΔEads. (Mirrors original rd_poly_*, which
-                          #   were also scf single-points on the Γ-relaxed geometry.)
-  rd_empty_<sys>.out      # empty framework (Γ, 0.02) — reused from PBE_final_results (unchanged)
-  rd_gas.out              # gas I2 (Γ, 0.02) — reused
-  compute_442_table.py    # self-refreshing ΔEads table (pulls latest SP02, writes adsorption_table_442.csv)
-  adsorption_table_442.csv
-landscape_3variants/    # (pending) 18-config Y landscape, 4×4×2-relaxed — populated when the campaign finishes
+adsorption_9systems/
+  relax_442_<sys>.in/out       # relaxations (calculation='relax', damp) -> the 4×4×2 geometries
+  rd_empty_<sys>.{in,out}      # empty framework (Γ, 0.02) reference, reused
+  rd_gas.{in,out}              # gas I2 (Γ, 0.02) reference, reused
+  single_points/rd_poly_442_<sys>.in/out  # clean 0.02 single-point scf at the relaxed geom -> ΔEads energies
+  cifs/rd_poly_442_<sys>_geom.cif         # the 4×4×2-relaxed geometries (P1, fractional [0,1))
+  compute_442_table.py  adsorption_table_442.csv
+landscape_3variants/          # (pending) 18-config Y landscape, 4×4×2-relaxed
 ```
 
 ### Why two inputs per system (relax + scf)?
