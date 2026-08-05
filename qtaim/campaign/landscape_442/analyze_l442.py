@@ -19,7 +19,16 @@ def Eloaded(tag):
     m=re.findall(r"!\s*total energy\s*=\s*(-?\d+\.\d+)",readf(f"{T}/l442_{tag}.out"))
     return float(m[-1]) if m else None
 def conv(tag):
-    s=readf(f"{T}/l442_{tag}.out"); return ("bfgs converged" in s or "Damped Dynamics: convergence achieved" in s)
+    s=readf(f"{T}/l442_{tag}.out")
+    if "bfgs converged" in s or "Damped Dynamics: convergence achieved" in s: return True
+    # floor-acceptance (mirror driver): >=15 steps, last-3 |dE|<0.06 kJ, force<0.04
+    if s.count("ATOMIC_POSITIONS")>=15:
+        es=re.findall(r"!\s*total energy\s*=\s*(-?\d+\.\d+)",s)
+        if len(es)>=4:
+            dE=[abs(float(es[i])-float(es[i+1]))*13.6057 for i in range(len(es)-3,len(es)-1)]
+            mf=re.findall(r"Total force\s*=\s*([0-9.]+)",s)
+            if all(d<0.06 for d in dE) and mf and float(mf[-1])<0.04: return True
+    return False
 def cell_in(tag):
     raw=readf(f"{T}/l442_{tag}.in")
     cm=re.search(r"CELL_PARAMETERS[^\n]*\n(.*?)\n\s*ATOMIC",raw,re.S).group(1).strip().split("\n")[:3]

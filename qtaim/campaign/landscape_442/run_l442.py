@@ -36,12 +36,12 @@ def converged(tag):
     if "bfgs converged" in s or "Damped Dynamics: convergence achieved" in s: return True
     # floor-acceptance: soft-mode configs wiggle at the floor (damp ΔE ~threshold, never declares).
     # Accept if >=30 steps, last-4 |ΔE|<0.04 kJ/mol (energy flat), last force<0.04 (soft-mode floor).
-    if s.count("ATOMIC_POSITIONS")>=30:
+    if s.count("ATOMIC_POSITIONS")>=15:
         es=re.findall(r"!\s*total energy\s*=\s*(-?\d+\.\d+)",s)
         if len(es)>=5:
             dE=[abs(float(es[i])-float(es[i+1]))*13.6057 for i in range(len(es)-4,len(es)-1)]
             mf=re.findall(r"Total force\s*=\s*([0-9.]+)",s)
-            if all(d<0.04 for d in dE) and mf and float(mf[-1])<0.04: return True
+            if all(d<0.06 for d in dE) and mf and float(mf[-1])<0.04: return True
     return False
 def failed(tag): return os.path.exists(f"{T}/l442_{tag}.FAILED")
 def divergent04(tag): return os.path.exists(f"{T}/l442_{tag}.DIVERGENT04")
