@@ -1,0 +1,40 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'gas_r2s_90'
+  outdir = './tmp_gas_r2s_90'
+  pseudo_dir = '/workspace/dimitry/calc/qe/i2_mof/qtaim/campaign/r2scan_442/pseudo_nc'
+  tprnfor = .true.
+/
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 90
+  ecutrho = 720
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.02
+  nspin = 1
+  vdw_corr = 'grimme-d3'
+  dftd3_version = 4
+  input_dft = 'r2SCAN'
+/
+&ELECTRONS
+  conv_thr = 1.0d-6
+  diagonalization = 'david'
+  diago_david_ndim = 2
+  mixing_mode = 'local-TF'
+  mixing_beta = 0.05
+  mixing_ndim = 24
+  electron_maxstep = 300
+/
+ATOMIC_SPECIES
+  I    126.904  I_ONCV_PBE-1.2.upf
+CELL_PARAMETERS angstrom
+  20.0000000000 0.0000000000 0.0000000000
+  0.0000000000 20.0000000000 0.0000000000
+  0.0000000000 0.0000000000 20.0000000000
+ATOMIC_POSITIONS crystal
+  I  0.5000000000 0.5000000000 0.5000000000
+  I  0.6355000000 0.5000000000 0.5000000000
+K_POINTS gamma
