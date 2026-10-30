@@ -34,12 +34,15 @@ during the act/st relaxation (cold-start SCF aid); **final energies here are cle
 Empty frameworks + gas I2 are Γ-converged (insulating; validated) — reused unchanged.
 
 ## Status
-- **adsorption_9systems:** 9 geometries relaxed (Tbst accepted at energy-converged floor F=0.013).
-  Clean 0.02 energies: vc×3, Yact, Gdact done; Tbact/Yst/Gdst/Tbst = SP02 in progress → PENDING.
-- **To refresh as SP02 completes:** `python3 adsorption_9systems/compute_442_table.py`
-  (auto-copies converged SP02 outputs, recomputes the table).
-- **landscape_3variants:** populated from `qtaim/campaign/landscape_442/` when the 18-config
-  campaign finishes (its own durable cron + `resume.sh`).
+- **adsorption_9systems:** COMPLETE — 9/9 geometries relaxed (Tbst accepted at energy-converged
+  floor F=0.013) and 9/9 clean 0.02 SPs converged; `adsorption_table_442.csv` is final.
+- **landscape_3variants:** COMPLETE — 18/18 4×4×2-relaxed (2026-08-05) + clean-0.02 SPs for the
+  motif-defining configs (2026-10-30). See its README: at production footing st and vc prefer
+  polyiodide (−137.1 / −99.1 kJ/I₂); **act prefers molecular I₂ (−67.3 vs −60.1)** — the
+  polyiodide-first act ranking from relaxation energies was a degauss-0.04 footing artefact.
+  Near-degenerate pairs (≤1.7 kJ) pending confirmation SPs.
+- convergence: the k-mesh (6×6×3) and ecut (60/480) checks in `PBE_final_results/convergence/`
+  are COMPLETE (13/13 converged).
 
 ## Key result (so far)
 4×4×2 relaxation **deepens I₂ binding** vs Γ: vc +6, Yact +15, Gdact +6 kJ/I₂ (clean 0.02).
