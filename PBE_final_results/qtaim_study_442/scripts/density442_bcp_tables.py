@@ -85,7 +85,7 @@ def analyse(label, d, tag):
         # has d2/d1 ~ 1; a shell artifact hugs one iodine with the next nucleus ~2x farther)
         if (Z[k1]==53 and d1 < 1.35 and d2/d1 > 1.5) or (Z[k2]==53 and d2 < 1.35 and d2/d1 > 1.5): nshell += 1; continue
         pair = {Z[k1], Z[k2]}
-        rec = [micf(pos[k1] @ Minv, pos[k2] @ Minv), rb, lb, k1, k2, d1, x]
+        rec = [micf(pos[k1] @ Minv, pos[k2] @ Minv), rb, lb, k1, k2, d1, x, src]
         if pair == {53}:
             II.append(rec)
             if src == 'critic2': have_c2.add(frozenset((k1,k2)))
@@ -126,6 +126,21 @@ def analyse(label, d, tag):
         print(f'    {name}: path-verified {nok}/{len(ok)} (rows kept, flag column)')
         return ok
     II=verify(II,'II'); IO=verify(IO,'IO'); IC=verify(IC,'IC'); MI=verify(MI,'MI')
+    # dump newton CP positions -> critic2 seed-point refinement input (uniform spline footing)
+    seeds=[]
+    for r in II+IO+IC+MI:
+        if len(r)>6 and r[6] is not None and frozenset((r[3],r[4])) not in have_c2:
+            seeds.append((r[3],r[4],r[6]))
+    if seeds:
+        pts=[]
+        for a,b,x in seeds:
+            f=(x@Minv)%1.0
+            pts.append("point x0 %.8f %.8f %.8f"%(f[0],f[1],f[2]))
+        lines=[f"crystal rho17_{tag}.cube",f"load rho17_{tag}.cube id rho"]
+        for i in range(0,len(pts),4):
+            lines.append("auto seed "+" ".join(pts[i:i+4]))
+        open(f'{D}/refine_{tag}.cri','w').write("\n".join(lines)+"\n")
+        print(f'  refine_{tag}.cri: {len(pts)} seeds')
     def gvh(rb, lb):
         g = TF*rb**(5/3) + lb/6; v = lb/4 - 2*g; return g, v, g+v
     Iorder = {k: i+1 for i, k in enumerate(Iidx)}
@@ -138,9 +153,9 @@ def analyse(label, d, tag):
         if rb >= 0.02: agree.append(abs(rb-lm)/rb*100)
         src = 'critic2' if frozenset((a,b)) in have_c2 else 'newton'
         rows.append(f"{label},I{Iorder[a]}-I{Iorder[b]},{dA:.3f},{d1:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{lm:.4f},"
-                    f"{g:.4f},{v:.4f},{h:.4f},{-v/2*HA:.1f},{0.429*g*HA:.1f},{0.68*abs(v)*HA:.1f},{0.67*g*HA:.1f},{int(rb>=0.02)},{src},{r[7]}")
+                    f"{g:.4f},{v:.4f},{h:.4f},{-v/2*HA:.1f},{0.429*g*HA:.1f},{0.68*abs(v)*HA:.1f},{0.67*g*HA:.1f},{int(rb>=0.02)},{src},{r[8]}")
     open(f'{OUT}/tables/BCP_II_full_442.csv','a').write("\n".join(rows)+"\n")
-    rows2 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au)"]
+    rows2 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au),src"]
     oorder = {}
     for r in sorted(IO, key=lambda r: -r[1]):
         dA, rb, lb, a, b, d1 = r[:6]
@@ -148,9 +163,9 @@ def analyse(label, d, tag):
         oi = a if Z[a]==8 else b
         ii = a if Z[a]==53 else b
         oorder.setdefault(oi, len(oorder)+1)
-        rows2.append(f"{label},O{oorder[oi]}-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f}")
+        rows2.append(f"{label},O{oorder[oi]}-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f},{r[7]}")
     open(f'{OUT}/tables/BCP_IO_full_442.csv','a').write("\n".join(rows2)+"\n")
-    rows4 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au)"]
+    rows4 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au),src"]
     cord = {}
     for r in sorted(IC, key=lambda r: -r[1]):
         dA, rb, lb, a, b, d1 = r[:6]
@@ -158,15 +173,15 @@ def analyse(label, d, tag):
         ci = a if Z[a]==6 else b
         ii = a if Z[a]==53 else b
         cord.setdefault(ci, len(cord)+1)
-        rows4.append(f"{label},C{cord[ci]}-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f}")
+        rows4.append(f"{label},C{cord[ci]}-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f},{r[7]}")
     open(f'{OUT}/tables/BCP_IC_full_442.csv','a').write("\n".join(rows4)+"\n")
-    rows3 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au)"]
+    rows3 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au),src"]
     for r in sorted(MI, key=lambda r: -r[1]):
         dA, rb, lb, a, b, d1 = r[:6]
         g, v, h = gvh(rb, lb)
         y = a if Z[a]==39 else b
         ii = a if Z[a]==53 else b
-        rows3.append(f"{label},Y-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f}")
+        rows3.append(f"{label},Y-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f},{r[8]}")
     open(f'{OUT}/tables/BCP_MI_native_442.csv','a').write("\n".join(rows3)+"\n")
     print(f'  II={len(II)} (shell-filtered {nshell}) IO={len(IO)} YI={len(MI)} other={nother}')
     if agree:

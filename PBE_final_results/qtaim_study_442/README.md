@@ -53,13 +53,20 @@ Motifs from the (path-verified) connectivity graphs:
 Consistent with the energetics/decomposition: act cores are the strongest individual bonds
 but fewest links; vc's I₂+2×I₃ aggregate is the most connected — the cooperative host.
 
-## Straight-line profile caveat (important for the methods text)
+## Value footing — unified on critic2 splines (2026-11-03)
 
-`rho_line_min` equals ρ_BCP to <3% only for bonds with **straight bond paths**:
-vc 6/8 bonded I–I within 3% (median 0.1%), act(poly) 4/8, st 2/8 (median 31-41%).
-For curved paths the straight line misses the saddle and the line minimum is NOT the BCP —
-the critic2 ρ/∇²ρ values are authoritative. The Γ-era "profile reproduces ρ_BCP to four
-significant figures" statement held for the Γ geometries and does NOT transfer to 442 as-is.
+All ρ/∇²ρ values come from critic2's spline of the plot-17 cube:
+`critic2` = found by the `auto seed pair dist 4.0 nr 8` search; `critic2(seedpt)` = CPs the
+seeded search missed, refined by critic2 1.4.309 (`tools/critic2_new`, built from upstream
+master) seeded at our Newton-recovered positions (`auto seed point x0 ...`, one seed per
+line; the old 1.2.1005 binary lacks this grammar). Only 2 rows remain trilinear — st's two
+non-bonded 4.4 Å fringe contacts (BONDED=0, information only). The `src` column tracks
+provenance; `path_ok` = the gradient-path verification (all rows = 1).
+
+`rho_line_min` (straight-line profile minimum) is an information column only: it equals
+ρ_BCP within 3% only for straight bond paths (vc 6/9, act(poly) 4/8, st 3/7); for curved
+paths the line misses the saddle. The Γ-era "profile reproduces ρ_BCP to four significant
+figures" statement does not transfer to 442 — use bond-path verification instead.
 
 ## Status / TODO
 - CSV only; .docx versions can be generated with the old make_full_ii-style script on request.
