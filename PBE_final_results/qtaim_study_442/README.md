@@ -20,19 +20,38 @@ I–I "bonds". (5 removed in act(mol), 1-2 elsewhere.)
   ρ ≥ 0.02 e/bohr³ criterion, `rho_line_min` = straight-line profile minimum (see caveat).
 - `BCP_IO_full_442.csv`, `BCP_MI_native_442.csv` — I···O and Y···I.
 
+## Validation (2026-10-31, after the cell-matrix fix)
+
+- **Every BCP is bond-path verified**: gradient paths traced uphill from each CP reach
+  exactly its two assigned nuclei (39/39 I–I, 17/17 I–O, 5/5 Y···I, 1/1 C···I excluded
+  rows re-checked; `path_ok` column = 1 everywhere in the final tables). Two earlier
+  "C–I bonds" in vc were exposed by this check as a C–H···I feature and a ring-like CP —
+  removed.
+- **All I–I and I–O distances cross-checked against the CIF geometries** (39/39, 17/17
+  exact matches; `scripts/validate_tables_vs_cif.py`).
+- Cell-matrix bug found and fixed: `H.T * dims` broadcasting corrupted distances in cells
+  with fully general lattice vectors (vc); st/act were unaffected by luck of axis-aligned
+  grid vectors. Same family as the old fractional→Cartesian transpose bug.
+
 ## Headline numbers (ρ in e/bohr³; E = −V/2 in kJ/mol)
 
 | system | chain structure | core I–I | core ρ | link I–I | link ρ | Y···I | I···O |
 |---|---|---|---|---|---|---|---|
 | st (poly_lS5) | 2×(4-core + links) | 2.87–2.91 Å | 0.042–0.056 | 3.00–3.01 Å | 0.042–0.043 | 2 found | none <4.5 Å |
-| vc (poly_lS3) | continuous chain | 2.90–2.93 Å | 0.039–0.053 | 3.03–3.43 Å | 0.020–0.041 | 1 | 3 (ρ 0.008–0.018) |
+| vc (poly_lS3) | **I₂(2.795 Å) bridging two I₃ rings** | I1–I5 **2.795** ρ 0.064 | I₂ core | 2.90–3.06 (triangles), 3.40/3.43 (bridges) | 0.020–0.053 | 2 | 4 (ρ 0.005–0.018) |
 | act (poly_lS2) | 2×(I₂)₂ units | 2.80 Å | 0.062 | 3.13–3.15 Å | 0.033–0.034 | — | 3 (ρ 0.002–0.006) |
 | act (mol_rd) | 4×I₂ | 2.70 Å (cores) | (see table) | none <0.02 | — | — | 3 (ρ 0.005–0.006) |
 
-Consistent with the energetics/decomposition: act cores are the *strongest individual*
-bonds (ρ 0.062, E=−V/2 ≈ 75 kJ/mol) but the act chain has fewer/weak links; vc's chain is
-the most connected (8 bonded contacts incl. 3.4 Å long links at ρ≈0.02) — the cooperative
-host. act(mol) has no contact above the 0.02 criterion except its molecular cores.
+Motifs from the (path-verified) connectivity graphs:
+- **st**: two linear I₄ chains (2.88/3.01 alternating) — classic polyiodide.
+- **vc**: an **I₂ molecule (I1–I5, 2.795 Å, ρ 0.064) bridging two cyclic I₃ units**
+  (I2–I3–I4 and I6–I7–I8, edges 2.90–3.06) via 3.40/3.43 Å contacts (ρ 0.020–0.021,
+  borderline at the 0.02 criterion — flag these as weak links, not chain bonds).
+- **act**: two branched (I₂)₂ units (2.80 cores + 3.13–3.16 links).
+- **act(mol)**: four isolated I₂; only molecular cores pass 0.02.
+
+Consistent with the energetics/decomposition: act cores are the strongest individual bonds
+but fewest links; vc's I₂+2×I₃ aggregate is the most connected — the cooperative host.
 
 ## Straight-line profile caveat (important for the methods text)
 

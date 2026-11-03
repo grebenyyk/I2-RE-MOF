@@ -38,7 +38,7 @@ def mic(dcart, M):
 def analyse(label, d, tag):
     D = f'{CAMP}/{d}'
     origin, H, dims, Z, pos, rho = load_cube(f'{D}/rho17_{tag}.cube')
-    M = H.T * np.array(dims, dtype=float)
+    M = H.T * np.array(dims, dtype=float)[:,None]   # row i = h_i*n_i ( broadcasting bug fix)
     Minv = np.linalg.inv(M)
     gx, Hx, lap = fields(rho, H)
     arrays = {'rho': rho, 'gx': gx[0], 'gy': gx[1], 'gz': gx[2],
@@ -74,50 +74,95 @@ def analyse(label, d, tag):
             if any(np.linalg.norm(x-c[0]) < 0.2 for c in cands): continue
             cands.append([x, ip('rho',x), ip('hxx',x)+ip('hyy',x)+ip('hzz',x), 'newton'])
     # ---- assign + filter ----
-    II, IO, MI = [], [], []
+    II, IO, MI, IC = [], [], [], []
     nshell = nother = 0
     have_c2 = set()
     for x, rb, lb, src in cands:
         ds = sorted((mic(pos[k]-x, M), k) for k in range(len(Z)))
         d1, d2, k1, k2 = ds[0][0], ds[1][0], ds[0][1], ds[1][1]
         if not (d1 < 2.6 and d2/d1 < 2): continue
-        if (Z[k1]==53 and d1 < 1.35) or (Z[k2]==53 and d2 < 1.35): nshell += 1; continue
+        # iodine 4d-shell filter: close to I *and* one-sided (a genuine X-I bond midpoint
+        # has d2/d1 ~ 1; a shell artifact hugs one iodine with the next nucleus ~2x farther)
+        if (Z[k1]==53 and d1 < 1.35 and d2/d1 > 1.5) or (Z[k2]==53 and d2 < 1.35 and d2/d1 > 1.5): nshell += 1; continue
         pair = {Z[k1], Z[k2]}
-        rec = [micf(pos[k1] @ Minv, pos[k2] @ Minv), rb, lb, k1, k2, d1]
+        rec = [micf(pos[k1] @ Minv, pos[k2] @ Minv), rb, lb, k1, k2, d1, x]
         if pair == {53}:
             II.append(rec)
             if src == 'critic2': have_c2.add(frozenset((k1,k2)))
         elif pair == {53,8}: IO.append(rec)
         elif pair == {53,39}: MI.append(rec)
+        elif pair == {53,6}: IC.append(rec)
         else: nother += 1
 
+
+    # ---- bond-path verification (QTAIM: a bond IS its bond path) ----
+    def path_ends(x0, seeds, n=600):
+        ends=[]
+        for k0 in seeds:
+            x=x0.copy()
+            d0=dpoint(x)
+            u=(pos[k0]-x - np.round((pos[k0]-x)@Minv)@M)
+            x=x+0.15*u/np.linalg.norm(u)      # leave the CP along the candidate direction
+            for _ in range(n):
+                if dpoint(x)[0][0] < 0.9: break
+                g=np.array([ip('g'+a,x) for a in 'xyz']); gn=np.linalg.norm(g)
+                if gn<1e-8: break
+                step=min(0.06, 0.02/max(gn,1e-12))
+                x=x+step*g/gn
+            ends.append(dpoint(x)[0][1])
+        return frozenset(ends)
+    def dpoint(x):
+        return sorted((np.linalg.norm((pos[k]-x-np.round((pos[k]-x)@Minv)@M))*BOHR, k) for k in range(len(Z)))
+
+    def verify(recs, name):
+        ok=[]
+        for r in recs:
+            x=r[6]
+            seeds=[r[3],r[4]]
+            e=path_ends(x,seeds)
+            if e == frozenset((r[3],r[4])): ok.append(r+[1])
+            else: r.append(0); ok.append(r)
+        nok=sum(1 for r in ok if r[-1]==1)
+        print(f'    {name}: path-verified {nok}/{len(ok)} (rows kept, flag column)')
+        return ok
+    II=verify(II,'II'); IO=verify(IO,'IO'); IC=verify(IC,'IC'); MI=verify(MI,'MI')
     def gvh(rb, lb):
         g = TF*rb**(5/3) + lb/6; v = lb/4 - 2*g; return g, v, g+v
     Iorder = {k: i+1 for i, k in enumerate(Iidx)}
-    rows = ["System,Bond,d_pair(A),d1(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),rho_line_min(e/bohr3),G(au),V(au),H(au),E=-V/2,E=0.429G,E=0.68|V|,E=0.67G,BONDED(0.02),src"]
+    rows = ["System,Bond,d_pair(A),d1(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),rho_line_min(e/bohr3),G(au),V(au),H(au),E=-V/2,E=0.429G,E=0.68|V|,E=0.67G,BONDED(0.02),src,path_ok"]
     agree = []
     for r in sorted(II, key=lambda r: -r[1]):
-        dA, rb, lb, a, b, d1 = r
+        dA, rb, lb, a, b, d1 = r[:6]
         g, v, h = gvh(rb, lb)
         lm = line_min(a, b)
         if rb >= 0.02: agree.append(abs(rb-lm)/rb*100)
         src = 'critic2' if frozenset((a,b)) in have_c2 else 'newton'
         rows.append(f"{label},I{Iorder[a]}-I{Iorder[b]},{dA:.3f},{d1:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{lm:.4f},"
-                    f"{g:.4f},{v:.4f},{h:.4f},{-v/2*HA:.1f},{0.429*g*HA:.1f},{0.68*abs(v)*HA:.1f},{0.67*g*HA:.1f},{int(rb>=0.02)},{src}")
+                    f"{g:.4f},{v:.4f},{h:.4f},{-v/2*HA:.1f},{0.429*g*HA:.1f},{0.68*abs(v)*HA:.1f},{0.67*g*HA:.1f},{int(rb>=0.02)},{src},{r[7]}")
     open(f'{OUT}/tables/BCP_II_full_442.csv','a').write("\n".join(rows)+"\n")
     rows2 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au)"]
     oorder = {}
     for r in sorted(IO, key=lambda r: -r[1]):
-        dA, rb, lb, a, b, d1 = r
+        dA, rb, lb, a, b, d1 = r[:6]
         g, v, h = gvh(rb, lb)
         oi = a if Z[a]==8 else b
         ii = a if Z[a]==53 else b
         oorder.setdefault(oi, len(oorder)+1)
         rows2.append(f"{label},O{oorder[oi]}-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f}")
     open(f'{OUT}/tables/BCP_IO_full_442.csv','a').write("\n".join(rows2)+"\n")
+    rows4 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au)"]
+    cord = {}
+    for r in sorted(IC, key=lambda r: -r[1]):
+        dA, rb, lb, a, b, d1 = r[:6]
+        g, v, h = gvh(rb, lb)
+        ci = a if Z[a]==6 else b
+        ii = a if Z[a]==53 else b
+        cord.setdefault(ci, len(cord)+1)
+        rows4.append(f"{label},C{cord[ci]}-I{Iorder[ii]},{dA:.3f},{rb/BOHR3:.3f},{lb/BOHR5:+.3f},{rb:.4f},{g:.4f},{v:.4f},{h:.4f}")
+    open(f'{OUT}/tables/BCP_IC_full_442.csv','a').write("\n".join(rows4)+"\n")
     rows3 = ["System,Bond,d(A),rho(e/A3),lap(e/A5),rho_BCP(e/bohr3),G(au),V(au),H(au)"]
     for r in sorted(MI, key=lambda r: -r[1]):
-        dA, rb, lb, a, b, d1 = r
+        dA, rb, lb, a, b, d1 = r[:6]
         g, v, h = gvh(rb, lb)
         y = a if Z[a]==39 else b
         ii = a if Z[a]==53 else b
