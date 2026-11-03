@@ -174,6 +174,7 @@ def analyse(label, d, tag):
 
 open(f'{OUT}/tables/BCP_II_full_442.csv','w').close()
 open(f'{OUT}/tables/BCP_IO_full_442.csv','w').close()
+open(f'{OUT}/tables/BCP_IC_full_442.csv','w').close()
 open(f'{OUT}/tables/BCP_MI_native_442.csv','w').close()
 for label, d, tag in SYS:
     analyse(label, d, tag)
