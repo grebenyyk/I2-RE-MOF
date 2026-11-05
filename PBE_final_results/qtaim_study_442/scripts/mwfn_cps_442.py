@@ -96,13 +96,16 @@ if __name__ == '__main__':
     a = sys.argv[1:]
     unit_cube, out = a[0], a[1]
     bcpouts, shifts = [], [None, None, None]
+    rho_min = 0.003
     i = 2
     while i < len(a):
         if a[i].startswith('--shift'):
             ax = int(a[i][7]); shifts[ax] = [int(x) for x in a[i + 1].split(',')]; i += 2
+        elif a[i].startswith('--rho-min'):
+            rho_min = float(a[i + 1]); i += 2
         else:
             bcpouts.append(a[i]); i += 1
     for k in range(3):
         if shifts[k] is None:
             shifts[k] = [0]
-    main(bcpouts, unit_cube, out, shifts)
+    main(bcpouts, unit_cube, out, shifts, rho_min=rho_min)
