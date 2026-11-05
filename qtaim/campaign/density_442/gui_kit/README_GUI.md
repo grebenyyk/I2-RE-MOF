@@ -9,9 +9,12 @@ critical points and render publication maps — self-service, no calculations.
 | `val_<tag>.cube` | electron-density field to plot (113 MB, unit cell, renders in seconds) |
 | `rho17_<tag>.cube` | the field the CP tables were made from (only needed to regenerate dots) |
 | `CPs_<tag>.txt` | critical points for the dot overlay (iodine-involving BCPs, ρ ≥ 0.003 a.u.; st 11, vc 15, act 14, actmol 16) |
+| `CPs_<tag>_bonded.txt` | bonded subset only, ρ ≥ 0.02 a.u. (st 8, vc 9, act 8, actmol 4) — no van der Waals contacts |
 | `bcp_raw_<tag>.out`, `refine_<tag>.out` | critic2 CP sources (for regenerating CPs after tiling) |
 | `Y-MOF<tag>.cif` | structure for VESTA (atom order = cube order; **iodines = atoms 73–80 = I1…I8**) |
-| `Y-MOF<tag>_CPs.cif` | same + He pseudo-atoms at the CP positions — open this in **VESTA** to see the dots in the lattice and choose your section |
+| `Y-MOF<tag>_CPs.cif` | structure + He dots at ALL located CPs (incl. weak I···I 4.3–4.5 Å vdW contacts — topologically real (3,−1), chemically non-bonding) |
+| `Y-MOF<tag>_CPs_bonded.cif` | structure + He dots at the bonded subset only (ρ ≥ 0.02 a.u. ⇔ H < 0) — use this if you want to see only polyiodide/Y-I bonding |
+| `cifs_with_cps.py` | rebuild these CIFs from any CPs.txt |
 | `tile_cube.py`, `mwfn_cps_442.py`, `tile_cps.sh` | make a chain-spanning "big" cube + matching dots locally |
 | `settings_kit.ini` | Multiwfn settings for this workflow (isilent=0 → graph windows pop up; iuserfunc=−3 → fn 100 = your cube) |
 | `gui_442.sh` | run the GUI on the server itself via `ssh -X` |
@@ -48,10 +51,15 @@ Load the CP dots first if you want them (once per session, before step 4):
 Telltale it worked: the map's post-menu gains options `4` and `6`.
 
 ## Choosing the section
-- **VESTA picker:** open `Y-MOFst_CPs.cif` in VESTA — iodines with their I1…I8
+- **VESTA picker:** open `Y-MOFst_CPs_bonded.cif` (bonded dots only) or
+  `Y-MOFst_CPs.cif` (all contacts) in VESTA — iodines with their I1…I8
   labels plus He dots at the CPs. Rotate, decide which three atoms define the
   plane you want, then use those indices in Multiwfn (I_k = cube atom 72+k; CP
   dots in the CIF are labelled CP001…).
+  Why so many dots in the "all" file: QTAIM produces a (3,−1) CP wherever two
+  atomic basins touch — iodine basins still touch at 4.3–4.5 Å (ρ ≈ 0.004 a.u.,
+  H > 0: closed-shell vdW, no bonding). The ρ ≥ 0.02 / H < 0 subset is the
+  chemically meaningful one.
 - Try the planes used for the delivered masters:
   st → `73,74,155` (I1, I2, I3 of the next chain period; on locally tiled cube)
   vc → `73,74,77` (I1, I2, I5 — I₂ + both borderline links, chains edge-on)
