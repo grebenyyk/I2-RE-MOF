@@ -75,6 +75,8 @@ RY_TO_CM = 3634.77
 # must be excluded -- otherwise it leaks spurious intensity into chain-bending
 # modes (the st 103 cm-1 band was such an artifact: act 12 -> 2.5 once excluded).
 BOND_CUTOFF = 3.25
+# per-system FD smearing (env override; act_mol_rd runs at 0.03 after its SCF floor)
+FD_DEGAUSS = float(__import__("os").environ.get("FD_DEGAUSS", "0.02"))
 
 def sys_dir(sys): return f"{BASE}/{sys}"
 def raman_dir(sys): return f"{BASE}/{sys}/raman"
@@ -204,7 +206,7 @@ def gen_displaced(sys):
                 # in ~42 iters and correctly resolves the 0.01 A displacement.
             })
             emit_block("SYSTEM", fh, {
-                "degauss": 0.02,   # CRITICAL: degauss=0.01 (loaded value) causes Fermi-level bisection
+                "degauss": FD_DEGAUSS,   # CRITICAL: degauss=0.01 (loaded value) causes Fermi-level bisection
                                     # DEADLOCK on displacements that collapse the Gamma-point gap below
                                     # the smearing width (verified: I074_zp, I075_yn, I075_zp hang at 0%
                                     # CPU in QE's Fermi search). degauss=0.03 cures it (converges in ~40
@@ -310,7 +312,8 @@ def is_conv(sys, tag):
     if not os.path.exists(p): return False
     return "convergence has been achieved" in open(p,errors="ignore").read()
 
-def queue_scfs(sys, poll=20, max_runtime_s=7200):
+def queue_scfs(sys, poll=20, max_runtime_s=None):
+    max_runtime_s = max_runtime_s or int(__import__("os").environ.get("MAX_SCF_S", "7200"))
     """Run all not-yet-done displaced SCFs, one per GPU. Restartable.
     GPU set is controlled by env var RAMAN_GPUS (comma-separated, default '0,1').
     Set RAMAN_GPUS=1 to confine to GPU1 only (e.g. when GPU0 is shared with another job)."""
@@ -393,6 +396,11 @@ def queue_scfs(sys, poll=20, max_runtime_s=7200):
                 dt = time.time()-t0
                 if ok:
                     open(f"{rdir}/disp_{base}.done","w").write("ok")
+                    # disk hygiene: a completed displaced SCF's .save is pure scratch
+                    # (~4 GB at 442); the Hessian parses forces from the .out text.
+                    import shutil as _sh
+                    for od in (f"{sys_dir(sys)}/tmp_disp_{base}", f"{sys_dir(sys)}/tmp_robust_{base}"):
+                        _sh.rmtree(od, ignore_errors=True)
                 else:
                     # SCF failed to converge (Fermi bisection deadlock or metallic stall).
                     # Auto-retry ONCE with larger degauss (0.05 Ry) which cures the Fermi deadlock.
@@ -574,7 +582,7 @@ def main():
     if len(sys.argv)<3:
         print(__doc__); sys.exit(1)
     cmd = sys.argv[1]; sysname = sys.argv[2]
-    assert sysname in ("Y_str","Y_act","Y_actc","Gd_str","Tb_str","Gd_act","Tb_act","Gd_deep","Tb_deep","Y_deep"), "unknown sys"
+    assert sysname in ("st_poly_lS5","vc_poly_lS3","act_poly_lS2","act_mol_rd","adduct"), "unknown sys (442 set)"
     if cmd=="gen":
         gen_displaced(sysname)
         # NOTE: seed_outdirs is no longer needed (from_scratch mode ignores saved wavefunctions).

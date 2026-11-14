@@ -11,13 +11,27 @@ tag = sys.argv[1]
 d = f'{BASE}/{tag}'
 out = f'{d}/rerelax_{tag}.out'
 txt = open(out, errors='ignore').read()
-assert 'JOB DONE' in txt, f'{tag}: re-relax not finished'
-tail = txt[txt.index('Begin final coordinates'):]
-cm = re.search(r'CELL_PARAMETERS \(angstrom\)\s*\n\s*(.+)\n\s*(.+)\n\s*(.+)\n', tail)
-cell = [m.split() for m in cm.groups()]
-pm = re.search(r'ATOMIC_POSITIONS \(crystal\)\s*\n((?:\s*\S+\s+[-\d\.]+\s+[-\d\.]+\s+[-\d\.]+\s+[01]\s+[01]\s+[01].*\n)+)', tail)
-pos = [l.split() for l in pm.group(1).splitlines()]
-assert len(pos) == 80
+clean = 'JOB DONE' in txt and 'Begin final coordinates' in txt
+pos_block = ''
+if clean:
+    tail = txt[txt.index('Begin final coordinates'):]
+    cm = re.search(r'CELL_PARAMETERS \(angstrom\)\s*\n\s*(.+)\n\s*(.+)\n\s*(.+)\n', tail)
+    cell = [m.split() for m in cm.groups()] if cm else None  # frozen-cell runs print no cell
+    pm = re.search(r'ATOMIC_POSITIONS \(crystal\)\s*\n((?:\s*\S+\s+[-\d\.]+\s+[-\d\.]+\s+[-\d\.]+(?:\s+[01]\s+[01]\s+[01])?.*\n)+)', tail)
+    if pm is None:
+        clean = False                                        # fall back to save-restart
+        print(f'{tag}: NOTE - no final ATOMIC_POSITIONS; using save-restart')
+    else:
+        pos = [l.split()[:4] for l in pm.group(1).splitlines()]
+        assert len(pos) == 80, f'final block has {len(pos)} atoms'
+else:
+    # stopped before clean completion (noise-floor manual stop): geometry comes
+    # from the re-relax .save via restart_mode='restart'; input positions are
+    # written for reference but QE reads the save's geometry on restart.
+    print(f'{tag}: NOTE - no clean finish; geometry from tmp_rerelax save (restart)')
+    cell = None
+    src_save0 = f'{d}/tmp_rerelax/raman442_{tag}_rerelax.save'
+    assert __import__('os').path.isdir(src_save0), f'missing save: {src_save0}'
 
 src_save = f'{d}/tmp_rerelax/raman442_{tag}_rerelax.save'
 assert os.path.isdir(src_save), f'missing re-relax save: {src_save}'
@@ -39,11 +53,27 @@ species = 'ATOMIC_SPECIES' + open(f'{d}/rerelax_{tag}.in').read().split('ATOMIC_
 with open(f'{d}/scf_loaded.in', 'w') as f:
     f.write(head)
     f.write(species)
-    f.write('CELL_PARAMETERS angstrom\n')
-    for r in cell:
-        f.write('  ' + '  '.join(r) + '\n')
-    f.write('ATOMIC_POSITIONS crystal\n')
-    for q in pos:
-        f.write('  %s  %s  %s  %s\n' % (q[0], q[1], q[2], q[3]))
+    if clean:
+        if cell is not None:
+            f.write('CELL_PARAMETERS angstrom\n')
+            for r in cell:
+                f.write('  ' + '  '.join(r) + '\n')
+        else:  # frozen-cell run: reuse the rerelax input's cell (unchanged)
+            seg0 = open(f'{d}/rerelax_{tag}.in').read()
+            f.write('CELL_PARAMETERS angstrom\n')
+            f.write(seg0.split('CELL_PARAMETERS angstrom\n')[1].split('ATOMIC_POSITIONS')[0])
+        f.write('ATOMIC_POSITIONS crystal\n')
+        for q in pos:
+            f.write('  %s  %s  %s  %s\n' % (q[0], q[1], q[2], q[3]))   # flags omitted: scf ignores if_pos
+    else:
+        # restart_mode reads geometry from the save; the card is still required,
+        # so write the re-relax START positions as placeholder (ignored on restart)
+        if 'ATOMIC_POSITIONS' not in open(f'{d}/rerelax_{tag}.in').read().split('CELL_PARAMETERS')[1]:
+            pass
+        seg = open(f'{d}/rerelax_{tag}.in').read()
+        f.write('CELL_PARAMETERS angstrom\n')
+        f.write(seg.split('CELL_PARAMETERS angstrom\n')[1].split('ATOMIC_POSITIONS')[0])
+        f.write('ATOMIC_POSITIONS crystal\n')
+        f.write(seg.split('ATOMIC_POSITIONS crystal\n')[1].split('K_POINTS')[0])
     f.write('K_POINTS automatic\n  4 4 2 0 0 0\n')
-print(f'{tag}: scf_loaded.in written (final geometry, restart from re-relax save)')
+print(f'{tag}: scf_loaded.in written ({"final geometry" if clean else "save-restart geometry"}, restart from re-relax save)')
