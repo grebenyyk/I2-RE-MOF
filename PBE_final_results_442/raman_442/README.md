@@ -49,3 +49,27 @@ Nodes died twice mid-campaign; all queues resumed from `.done` markers.
 `campaign/raman_442/`: `gen_rerelax_442.py`, `gen_scf_loaded_442.py`,
 `raman_driver_442.py` (gen/run/hessian/raman; RAMAN_GPUS, FD_DEGAUSS,
 MAX_SCF_S env), `make_deliverables_442.py`, `adduct_test/`.
+
+## Addendum — the adduct cell (dissociation/re-attachment), 2026-11-15
+Test of the alternative reading of the experimental 202–203 + 167 bands as
+donor-perturbed molecular I₂. One act-mol I₂ pulled to a carboxylate O
+(2.3 Å closest contact after the rigid pull) — the molecule **dissociated**:
+I8 accepted by the O region, I7 released. The released iodines then attacked
+neighboring intact molecules, forming **two branched I₃-motifs** (I8–I1–I2:
+2.82/2.89 Å; I7–I6–I3: 2.91/2.93 Å) around hub iodines I1 and I6; one molecule
+(I4–I5, 2.70 Å) stayed intact. Split state near-degenerate with intact
+(−11 kJ/cell). Computed spectrum (0.04): **207.9 (100, intact)**,
+**175.7 (95) + 149.7 (80)** = asymmetric stretches of the two I₃-motifs,
+125.7/104.6 (33/27, symmetric), nothing below 63.
+
+Reading: the wall route does not give a stable O···I–I adduct — it gives
+**dissociation → I₃-motif nucleation**, i.e. the first step of chain assembly.
+The I₃-motif pair (175.7/149.7, broadened by the floating-iodine site
+distribution) covers the experimental ~167 band; the intact molecule covers
+202–203. The two experimental bands are therefore consistent with early-stage
+conversion: intact I₂ + nucleated I₃ motifs, with chains appearing as
+conversion proceeds (89–158 envelope, above).
+
+Both experimental bands are thus assigned: **202–203 = intact molecular I₂;
+~167 = I–I bonds of I₃-like nucleation units (or equivalently chain-bridging
+I₂ — the same σ*-populated electronic class, ρ_BCP ~0.06 vs 0.50 intact)**.

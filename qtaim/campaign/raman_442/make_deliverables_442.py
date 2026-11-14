@@ -16,7 +16,8 @@ os.makedirs(OUT, exist_ok=True)
 SYS = [('st_poly_lS5', 'I2@Y-MOFst (chains)', '0.03'),
        ('vc_poly_lS3', 'I2@Y-MOFvc (chains + I$_2$)', '0.02'),
        ('act_poly_lS2', 'I2@Y-MOFact (branched chains)', '0.04'),
-       ('act_mol_rd', 'I2@Y-MOFact(mol.) (molecular I$_2$)', '0.04')]
+       ('act_mol_rd', 'I2@Y-MOFact(mol.) (molecular I$_2$)', '0.04'),
+       ('adduct', 'I$_2$ + carboxylate O (dissociation/re-attachment)', '0.04')]
 
 # ---- mode table ----
 rows = []
@@ -35,7 +36,7 @@ with open(f'{OUT}/raman_modes_442.csv', 'w', newline='') as fh:
 print(f'raman_modes_442.csv: {len(rows)} modes')
 
 # ---- spectra figure ----
-fig, axes = plt.subplots(4, 1, figsize=(8.2, 9.4), sharex=True)
+fig, axes = plt.subplots(len(SYS), 1, figsize=(8.2, 11.4), sharex=True)
 X = np.linspace(0, 240, 1200)
 GAMMA = 6.0
 for ax, (tag, label, dg) in zip(axes, SYS):
@@ -43,7 +44,7 @@ for ax, (tag, label, dg) in zip(axes, SYS):
     a = np.load(f'{C}/{tag}/raman/raman_activities.npy')
     y = np.zeros_like(X)
     for fx, ax_ in zip(f, a):
-        if ax_ < 0.5 or fx < 5:
+        if ax_ < 0.5 or fx < 15:
             continue
         y += ax_ * np.exp(-((X - fx) ** 2) / (2 * GAMMA ** 2))
     ax.fill_between(X, y, color='#2b6cb0', alpha=0.55, lw=0)
