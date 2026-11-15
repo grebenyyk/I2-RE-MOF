@@ -73,3 +73,32 @@ conversion proceeds (89–158 envelope, above).
 Both experimental bands are thus assigned: **202–203 = intact molecular I₂;
 ~167 = I–I bonds of I₃-like nucleation units (or equivalently chain-bridging
 I₂ — the same σ*-populated electronic class, ρ_BCP ~0.06 vs 0.50 intact)**.
+
+## Addendum 2 — density analysis of the adduct cell (2026-11-15)
+Production density footing on the final adduct geometry (60/800/442/mv 0.01/
+conv 1e-8; empty reference reused from act-mol — framework verified identical
+to 5e-7; plot 0/17/8 on the 160×180×300 grid; critic2 v1.4.309).
+
+**Bader CT (Δρ = loaded − empty − I₂-only, loaded-system basins; net integral
+8.8×10⁻⁶ e ≡ conserved):** ALL eight iodines gain population — I1 +0.125,
+I2 +0.087, I3 +0.143, I4 +0.027, I5 +0.062, I6 +0.108, **I7 (released) +0.127,
+I8 (O-bound) +0.070** e. **No ion pair**: both dissociation fragments are
+donor-stabilized (wall O⁻ + neighbouring I₂ feed their σ* orbitals) while the
+population is shared. Hubs of the two I₃-motifs gain the most (I1 +0.125,
+I6 +0.108 — each carries two σ* bonds).
+
+**BCPs (pair-seeding missed iodine pairs across cell boundaries — recovered by
+explicit midpoint seeding; all five verified by gradient paths):**
+
+| bond | d (Å) | ρ_BCP (e/Bohr⁻³) | ∇²ρ | role |
+|---|---|---|---|---|
+| I4–I5 | 2.700 | 0.0736 | −0.023 | intact molecule (≡ act-mol 0.0741) |
+| I1–I8 | 2.821 | 0.0597 | +0.015 | I₃-motif 1 |
+| I1–I2 | 2.889 | 0.0527 | +0.028 | I₃-motif 1 |
+| I6–I7 | 2.909 | 0.0517 | +0.024 | I₃-motif 2 |
+| I6–I3 | 2.926 | 0.0501 | +0.025 | I₃-motif 2 |
+| I7···I8 | 5.513 | 0.0006 | ~0 | split-pair remnant (not bonded) |
+
+The I₃-motif bonds carry **positive ∇²ρ with substantial ρ** — the dative/CT
+bond signature, matching their σ* population. Files: `BCP_adduct.csv`,
+`CT_adduct.csv` (all 80 atoms), source `campaign/density_442/adduct/`.
