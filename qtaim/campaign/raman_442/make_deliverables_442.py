@@ -58,10 +58,6 @@ for ax, (tag, label, dg) in zip(axes, PANELS):
     ax.text(-0.115, 0.5, label, transform=ax.transAxes, ha='center', va='center', fontsize=10)
     ax.set_ylim(0, 130)
     ax.set_yticks([])
-    ax.axvspan(199, 214, color='#c05621', alpha=0.13, lw=0)
-    ax.axvspan(160, 174, color='#38a169', alpha=0.13, lw=0)
-axes[0].text(206.5, 118, 'I$_2$(mol.)', ha='center', fontsize=8, color='#c05621')
-axes[0].text(167, 118, 'bridged I$_2$', ha='center', fontsize=8, color='#38a169')
 axes[-1].set_xlabel('Raman shift (cm$^{-1}$)', fontsize=10)
 axes[0].set_title('Computed I-sublattice Raman spectra of I$_2$@Y-MOF (FD Hessian, 4×4×2)\n'
                   'sticks broadened by 6 cm$^{-1}$; shaded guides: experimental bands',
