@@ -36,35 +36,39 @@ with open(f'{OUT}/raman_modes_442.csv', 'w', newline='') as fh:
 print(f'raman_modes_442.csv: {len(rows)} modes')
 
 # ---- spectra figure ----
-fig, axes = plt.subplots(len(SYS), 1, figsize=(8.2, 11.4), sharex=True)
+PANELS = [('st_poly_lS5', 'Y-MOF$_{st}$\n(chains)', '0.03'),
+          ('vc_poly_lS3', 'Y-MOF$_{vc}$\n(chains + I$_2$)', '0.02'),
+          ('act_poly_lS2', 'Y-MOF$_{act}$\n(branched chains)', '0.04'),
+          ('act_mol_rd', 'Y-MOF$_{act}$(mol.)\n(molecular I$_2$)', '0.04'),
+          ('adduct', 'carboxylate-O test\n(dissoc./re-att.)', '0.04')]
+fig, axes = plt.subplots(len(PANELS), 1, figsize=(8.6, 12.2), sharex=True)
 X = np.linspace(0, 240, 1200)
 GAMMA = 6.0
-for ax, (tag, label, dg) in zip(axes, SYS):
+for ax, (tag, label, dg) in zip(axes, PANELS):
     f = np.load(f'{C}/{tag}/raman/freqs.npy')
     a = np.load(f'{C}/{tag}/raman/raman_activities.npy')
     y = np.zeros_like(X)
-    for fx, ax_ in zip(f, a):
-        if ax_ < 0.5 or fx < 15:
+    for fx, act_ in zip(f, a):
+        if act_ < 0.5 or fx < 15:
             continue
-        y += ax_ * np.exp(-((X - fx) ** 2) / (2 * GAMMA ** 2))
+        y += act_ * np.exp(-((X - fx) ** 2) / (2 * GAMMA ** 2))
+    y *= 88.0 / y.max()          # normalize broadened curve: no frame overflow
     ax.fill_between(X, y, color='#2b6cb0', alpha=0.55, lw=0)
     ax.plot(X, y, color='#2b6cb0', lw=1.0)
-    ax.set_ylabel(label, fontsize=9)
-    ax.set_ylim(0, 108)
+    ax.text(-0.115, 0.5, label, transform=ax.transAxes, ha='center', va='center', fontsize=10)
+    ax.set_ylim(0, 130)
     ax.set_yticks([])
-    for band, lo, hi, col in [('I$_2$(mol.)', 199, 214, '#c05621'),
-                              ('bridged I$_2$', 160, 174, '#38a169')]:
-        ax.axvspan(lo, hi, color=col, alpha=0.13, lw=0)
-        ax.text((lo + hi) / 2, 100, band, ha='center', fontsize=7.5, color=col)
-for lab in ax.get_yticklabels():
-    pass
+    ax.axvspan(199, 214, color='#c05621', alpha=0.13, lw=0)
+    ax.axvspan(160, 174, color='#38a169', alpha=0.13, lw=0)
+axes[0].text(206.5, 118, 'I$_2$(mol.)', ha='center', fontsize=8, color='#c05621')
+axes[0].text(167, 118, 'bridged I$_2$', ha='center', fontsize=8, color='#38a169')
 axes[-1].set_xlabel('Raman shift (cm$^{-1}$)', fontsize=10)
 axes[0].set_title('Computed I-sublattice Raman spectra of I$_2$@Y-MOF (FD Hessian, 4×4×2)\n'
                   'sticks broadened by 6 cm$^{-1}$; shaded guides: experimental bands',
                   fontsize=10.5)
 fig.text(0.99, 0.005, 'smearing: st 0.03 / vc 0.02 / act, act(mol.) 0.04 Ry; '
          'relative activities, bond-polarizability model', ha='right', fontsize=7, color='0.35')
-fig.tight_layout(rect=[0, 0.015, 1, 1])
+fig.subplots_adjust(left=0.19, right=0.985, top=0.94, bottom=0.05, hspace=0.18)
 fig.savefig(f'{OUT}/raman_spectra_442.png', dpi=220)
 fig.savefig(f'{OUT}/raman_spectra_442.pdf')
 print('raman_spectra_442.png/.pdf written')
