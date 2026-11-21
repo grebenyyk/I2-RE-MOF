@@ -53,3 +53,34 @@ act / act(mol) / adduct 0.04 Ry (each Hessian internally consistent; see main
 README). Geometries = the iodine sublattices re-optimized at these footings on
 the 4×4×2-relaxed frameworks; framework identical to act-mol in the adduct cell
 (verified 5×10⁻⁷).
+
+## Addendum — decomposition of the two additional states (2026-11-16)
+Frozen-fragment decomposition extended to the act molecular state and the
+adduct test cell, at the same footing as the three chain variants
+(50/400 Ry, 4×4×2, degauss 0.02, conv 10⁻⁶; framework identical to
+Y-MOFact(poly), so ΔE_def carries over; sublattice/loaded SPs this work,
+empty and gas references the validated Γ SCFs):
+
+| System | ΔE_assembly | ΔE_anchor | ΔE_def | ΔE_ads | Σ check |
+|---|---|---|---|---|---|
+| Y-MOFact(mol) | −9.65 | −56.42 | −1.24 | −67.30 | = SP02 −67.30 ✓ |
+| Y-MOFadduct(test) | −3.44 | −58.64 | −1.24 | −63.32 | direct −63.34 ✓ |
+
+**Reading.** The molecular state's ΔE_assembly (−9.65) is dominated by
+I₂⋯I₂ dispersion between the four pore molecules (there is no polyiodide
+bonding in act-mol) and is nearly identical to the chain assembly of
+Y-MOFact(poly) (−10.61): within numerical precision, iodine–iodine cohesion
+in the act pore is conversion-invariant — what distinguishes the chain and
+molecular states is the anchoring term (−48.2 for the chain vs −56.4 for
+dispersed molecules; dispersed molecules contact more carboxylate surface).
+The adduct test configuration trades assembly (−9.6 → −3.4) for stronger
+anchoring (−56.4 → −58.6), sitting ≈ +4 kJ per I₂ above the molecular
+minimum at this footing. Caveat: at the Raman footing (0.04 Ry) the same
+two configurations order the opposite way (split lower by ≈ 11 kJ/cell) —
+the intact-molecular and dissociated states are near-degenerate within the
+smearing sensitivity, and the Bader/BCP analysis of the dissociated
+configuration (Addendum 2) applies as a configuration, not a competing
+thermodynamic minimum.
+
+Files: sublattice/loaded SPs `campaign/decomp_442/dc442_isubl_{act_mol_rd,adduct}.in/.out`,
+`dc442_loaded_adduct.in/.out`.

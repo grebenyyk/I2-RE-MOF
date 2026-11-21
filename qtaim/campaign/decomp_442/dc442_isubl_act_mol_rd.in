@@ -1,0 +1,52 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'dc442_isubl_act_mol_rd'
+  outdir = './tmp_dc442_isubl_act_mol_rd'
+  pseudo_dir = '/workspace/qe-7.5/pseudo'
+  tprnfor = .true.
+  tstress = .true.
+  etot_conv_thr = 1.0d-5
+  forc_conv_thr = 5.0d-3
+  nstep = 200
+/
+&SYSTEM
+  ibrav = 0
+  nat = 8
+  ntyp = 1
+  ecutwfc = 50
+  ecutrho = 400
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.02
+  nspin = 1
+  input_dft = 'pbe'
+  vdw_corr = 'grimme-d3'
+  dftd3_version = 4
+/
+&ELECTRONS
+  conv_thr = 1.0d-6
+  diagonalization = 'david'
+  diago_david_ndim = 2
+  mixing_mode = 'local-TF'
+  mixing_beta = 0.2
+  mixing_ndim = 16
+  electron_maxstep = 300
+/
+
+ATOMIC_SPECIES
+  I    126.904  I.pbe-n-kjpaw_psl.1.0.0.UPF
+CELL_PARAMETERS angstrom
+8.9347999684  0.0000000000  0.0000000000
+  0.0000000000  9.6607971399  0.0000000000
+  -3.7625604191  0.0000000000  16.5958280490
+ATOMIC_POSITIONS crystal
+  I  0.055995850800 0.866589755000 0.166009757200
+  I  0.174573453100 0.690580409200 0.286900315900
+  I  0.552360211300 0.371691283600 0.838750285600
+  I  0.521226683000 0.607815682400 0.149889917800
+  I  0.657035984500 0.787412868100 0.265533794000
+  I  0.588426747600 0.229465947900 0.707879625300
+  I  0.089840341000 0.267894786000 0.710620036900
+  I  0.046128938300 0.128045104500 0.840806560600
+K_POINTS automatic
+  4 4 2 0 0 0
