@@ -98,6 +98,8 @@ for ph in range(NF):
                    s=120 if hl else 70, c='#d62728' if hl else '#6a3fb5',
                    edgecolors='k', lw=.4, depthshade=False)
     for i, (p, k, _) in enumerate(placed):
+        ax.text(icart[i,0] + 0.55, icart[i,1] + 0.55, icart[i,2],
+                f'I{k - 71}', fontsize=7.5, color='0.15')
         if (k in movers) and (i // 8 == 1):           # arrows: central copy movers
             d = diod[k - 72]*np.sin(t)
             if np.linalg.norm(d) > 0.01:
