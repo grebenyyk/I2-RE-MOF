@@ -17,7 +17,7 @@ C = '/workspace/dimitry/calc/qe/i2_mof/qtaim/campaign/raman_442/vc_poly_lS3'
 OUT = '/workspace/dimitry/calc/qe/i2_mof/PBE_final_results_442/raman_442'
 TARGET = 167.8
 AMP = 0.35
-NF = 13
+NF = 25
 BOND_PAIRS = [(72, 73), (73, 74), (73, 75), (74, 75),      # chain A triangle I1-I2-I3-I4
               (76, 77), (77, 78), (77, 79), (78, 79),      # chain B triangle I5-I6-I7-I8
               (72, 76)]                                     # the bridging I1-I5 molecule
@@ -45,8 +45,8 @@ _mov = np.argsort(np.linalg.norm(diod, axis=1))[-2:].tolist()
 movers = {72 + i for i in _mov}
 print('moving iodines (table labels):', [f'I{i-71}' for i in sorted(movers)])
 
-# ---- image-spanning layout: walk the bonded graph, MIC each new atom ----
-shifts = {72: np.zeros(3, dtype=int)}                       # iodine idx -> cell shift
+# ---- image-spanning layout: connected motif over the bonded graph ----
+shifts = {72: np.zeros(3, dtype=int)}                       # iodine idx (cube numbering) -> cell shift
 adj = {}
 for a, b in BOND_PAIRS:
     adj.setdefault(a, []).append(b)
@@ -61,49 +61,56 @@ while queue:
         n = np.round(raw @ M @ Minv).astype(int)   # nearest lattice vector (frac)
         shifts[b] = shifts[a] - n
         queue.append(b)
-disp_pos = {k: (fr[k] + shifts.get(k, np.zeros(3, dtype=int))) @ M for k in range(72, 80)}
-d_eig = {k: diod[k - 72] for k in range(72, 80)}                     # image = parent atom's eigenvector
 
-# framework dots: home cell + each spanned image cell
-fw_pts = []
-fw_idx = [k for k in range(len(els)) if els[k] != 'I']
-uniq_shifts = {tuple(v) for v in shifts.values()}
-for sh in uniq_shifts:
-    sh = np.array(sh)
-    for k in fw_idx:
-        fw_pts.append((fr[k] + sh) @ M)
-fw_pts = np.array(fw_pts)
+# ---- replicate over several cells so the chains are visible ----
+A1 = M[0]; C3 = M[2]
+TRANSLATIONS = []
+for n1 in (-1, 0, 1):
+    for n3 in (0, 1):
+        TRANSLATIONS.append(n1 * A1 + n3 * C3)
+placed = []                                                # (cartesian pos, iodine idx, translation vector)
+for t in TRANSLATIONS:
+    for k in range(72, 80):
+        p = (fr[k] + shifts[k]) @ M + t
+        placed.append((p, k, t))
+P = np.array([p for p, _, _ in placed])
 
-fig = plt.figure(figsize=(7.2, 6.4))
+# ---- distance-based bond detection among placed iodines ----
+bond_lines = []
+for i in range(len(placed)):
+    for j in range(i + 1, len(placed)):
+        d = np.linalg.norm(P[i] - P[j])
+        if d < 3.45:
+            bond_lines.append((i, j))
+
+fig = plt.figure(figsize=(7.4, 10.8))
 ax = fig.add_subplot(111, projection='3d')
 frames = []
 for ph in range(NF):
     t = 2*np.pi*ph/NF
     ax.cla()
-    ax.scatter(fw_pts[:,0], fw_pts[:,1], fw_pts[:,2], s=14, c='0.55', depthshade=False)
-    icart = {k: disp_pos[k] + d_eig[k]*np.sin(t) for k in disp_pos}
-    for k in disp_pos:
-        hl = k in movers and abs(np.sin(t)) > 0.05
-        ax.scatter(icart[k][0], icart[k][1], icart[k][2],
-                   s=210 if hl else 150, c='#d62728' if hl else '#6a3fb5',
-                   edgecolors='k', lw=.6, depthshade=False)
-    for k in disp_pos:
-        d = d_eig[k]*np.sin(t)
-        n = np.linalg.norm(d)
-        if n > 0.005:
-            ax.quiver(icart[k][0], icart[k][1], icart[k][2], d[0]*6, d[1]*6, d[2]*6,
-                      color='#e05a2b', lw=2.4, arrow_length_ratio=0.25)
-    for a, b in BOND_PAIRS:
-        ax.plot(*zip(icart[a], icart[b]), color='#2e8b57', lw=1.4, alpha=.85)
+    icart = np.array([p + diod[k - 72]*np.sin(t) for p, k, _ in placed])
+    for i, j in bond_lines:
+        ax.plot(*zip(icart[i], icart[j]), color='#2e8b57', lw=1.3, alpha=.85)
+    for i, (p, k, _) in enumerate(placed):
+        hl = (k in movers) and (i // 8 == 1)          # highlight movers in the central copy
+        ax.scatter(icart[i,0], icart[i,1], icart[i,2],
+                   s=120 if hl else 70, c='#d62728' if hl else '#6a3fb5',
+                   edgecolors='k', lw=.4, depthshade=False)
+    for i, (p, k, _) in enumerate(placed):
+        if (k in movers) and (i // 8 == 1):           # arrows: central copy movers
+            d = diod[k - 72]*np.sin(t)
+            if np.linalg.norm(d) > 0.01:
+                ax.quiver(icart[i,0], icart[i,1], icart[i,2], d[0]*4, d[1]*4, d[2]*4,
+                          color='#e05a2b', lw=2.2, arrow_length_ratio=0.25)
     ax.set_title(f'Y-MOFvc(poly): {f[ix]:.1f} cm$^{{-1}}$ — bridging I1–I5 stretch\n'
-                 f'red = moving I1/I5; arrows = displacements (exaggerated); '
-                 f'green = bonded I-I pairs; the motif spans a cell edge', fontsize=9.5)
+                 f'red = moving I1/I5 (central copy); arrows = displacements (exaggerated); '
+                 f'green = bonded I-I pairs', fontsize=9.5)
     ax.set_axis_off()
     ax.view_init(elev=12, azim=-60)
     fn = f'/tmp/gif_{ph:02d}.png'
     fig.savefig(fn, dpi=110)
     frames.append(Image.open(fn).convert('P', palette=Image.ADAPTIVE))
 frames[0].save(f'{OUT}/vc_167.8_bridged_I2_stretch.gif', save_all=True,
-               append_images=frames[1:], duration=90, loop=0)
-print(f'GIF written ({NF} frames); shifts: ' +
-      ', '.join(f'I{k+1}:{tuple(v)}' for k, v in shifts.items()))
+               append_images=frames[1:], duration=60, loop=0)
+print(f'GIF written ({NF} frames, 6 copies, {len(bond_lines)} bonds)')
