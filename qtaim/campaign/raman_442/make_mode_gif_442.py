@@ -16,7 +16,7 @@ from PIL import Image
 C = '/workspace/dimitry/calc/qe/i2_mof/qtaim/campaign/raman_442/vc_poly_lS3'
 OUT = '/workspace/dimitry/calc/qe/i2_mof/PBE_final_results_442/raman_442'
 TARGET = 167.8
-AMP = 0.35
+AMP = 0.175
 NF = 25
 BOND_PAIRS = [(72, 73), (73, 74), (73, 75), (74, 75),      # chain A triangle I1-I2-I3-I4
               (76, 77), (77, 78), (77, 79), (78, 79),      # chain B triangle I5-I6-I7-I8
@@ -103,9 +103,7 @@ for ph in range(NF):
             if np.linalg.norm(d) > 0.01:
                 ax.quiver(icart[i,0], icart[i,1], icart[i,2], d[0]*4, d[1]*4, d[2]*4,
                           color='#e05a2b', lw=2.2, arrow_length_ratio=0.25)
-    ax.set_title(f'Y-MOFvc(poly): {f[ix]:.1f} cm$^{{-1}}$ — bridging I1–I5 stretch\n'
-                 f'red = moving I1/I5 (central copy); arrows = displacements (exaggerated); '
-                 f'green = bonded I-I pairs', fontsize=9.5)
+    ax.set_title(f'Y-MOFvc(poly): {f[ix]:.1f} cm$^{{-1}}$ — bridging I1–I5 stretch', fontsize=10)
     ax.set_axis_off()
     ax.view_init(elev=12, azim=-60)
     fn = f'/tmp/gif_{ph:02d}.png'
