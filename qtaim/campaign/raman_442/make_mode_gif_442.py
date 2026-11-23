@@ -44,6 +44,10 @@ else:
 
 fig = plt.figure(figsize=(7.2, 6.4))
 ax = fig.add_subplot(111, projection='3d')
+# movers fixed ONCE from the eigenvector (phase-independent): at the
+# equilibrium-crossing frames the per-frame amplitudes vanish into noise and
+# the highlight would flicker onto the symmetry-equivalent chain iodines.
+movers = set(np.argsort(np.linalg.norm(dcart.reshape(8, 3), axis=1))[-2:].tolist())
 frames = []
 for ph in range(NF):
     t = 2*np.pi*ph/NF
@@ -52,8 +56,6 @@ for ph in range(NF):
     fw = els != 'I'
     ax.scatter(cart[fw,0], cart[fw,1], cart[fw,2], s=14, c='0.55', depthshade=False)
     icart = cart[72:] + disp[72:]
-    amps = np.linalg.norm(disp[72:], axis=1)
-    movers = np.argsort(amps)[-2:]                      # the two dominant movers
     for k in range(8):
         hl = k in movers
         ax.scatter(icart[k,0], icart[k,1], icart[k,2],
