@@ -98,8 +98,8 @@ for ph in range(NF):
                    s=120 if hl else 70, c='#d62728' if hl else '#6a3fb5',
                    edgecolors='k', lw=.4, depthshade=False)
     for i, (p, k, _) in enumerate(placed):
-        ax.text(icart[i,0], icart[i,1], icart[i,2], f'I{k - 71}',
-                fontsize=6.5, color='white', ha='center', va='center', zorder=10)
+        ax.text(icart[i,0] + 0.32, icart[i,1] + 0.32, icart[i,2], f'I{k - 71}',
+                fontsize=7, color='0.1', ha='center', va='center', zorder=10)
         if (k in movers) and (i // 8 == 1):           # arrows: central copy movers
             d = diod[k - 72]*np.sin(t)
             if np.linalg.norm(d) > 0.01:
@@ -107,12 +107,11 @@ for ph in range(NF):
                           color='#e05a2b', lw=2.2, arrow_length_ratio=0.25)
     ax.set_title(f'Y-MOFvc(poly): {f[ix]:.1f} cm$^{{-1}}$ — bridging I1–I5 stretch', fontsize=10)
     ax.set_axis_off()
-    span = icart.max(0) - icart.min(0)
-    cx, cy, cz = icart.mean(0)
-    m = 0.62 * max(span)
-    ax.set_xlim(cx - m/2, cx + m/2)
-    ax.set_ylim(cy - m/2, cy + m/2)
-    ax.set_zlim(cz - m/2, cz + m/2)
+    lo, hi = P.min(0), P.max(0)
+    pad = np.array([1.3, 1.3, 1.0])
+    ax.set_xlim(lo[0] - pad[0], hi[0] + pad[0])
+    ax.set_ylim(lo[1] - pad[1], hi[1] + pad[1])
+    ax.set_zlim(lo[2] - pad[2], hi[2] + pad[2])
     ax.view_init(elev=12, azim=-60)
     fn = f'/tmp/gif_{ph:02d}.png'
     fig.savefig(fn, dpi=110)
